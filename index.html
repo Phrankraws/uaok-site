@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ultimate Advancement of Knowledge — UAOK</title>
+<meta name="description" content="UAOK — Ultimate Advancement of Knowledge. A faith-driven nonprofit empowering youth and communities through workforce development, entrepreneurship, and technology." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..650;1,9..144,400..500&family=Hanken+Grotesk:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0C1A2B;
+  --ink-2:#11253B;
+  --ink-3:#1B3A57;
+  --gold:#C49A47;
+  --gold-2:#E4C57E;
+  --gold-soft:rgba(196,154,71,.14);
+  --green:#13433B;
+  --green-2:#1E5C50;
+  --paper:#FBF8F1;
+  --paper-2:#F2ECDE;
+  --paper-3:#E7DDC9;
+  --text:#22303D;
+  --text-soft:#5A6772;
+  --cream:#EFE9DB;
+  --cream-mute:rgba(239,233,219,.66);
+  --line-d:rgba(239,233,219,.14);
+  --line-l:rgba(12,26,43,.11);
+  --shadow:0 24px 60px -22px rgba(12,26,43,.30);
+  --shadow-sm:0 12px 30px -16px rgba(12,26,43,.34);
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-.01em}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::selection{background:var(--gold);color:var(--ink)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:.6em;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);opacity:.7}
+.eyebrow.center{justify-content:center}
+.lede{font-size:1.16rem;color:var(--text-soft);max-width:62ch}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;font-weight:600;font-size:.95rem;
+  padding:.92em 1.6em;border-radius:2px;letter-spacing:.01em;transition:.32s cubic-bezier(.2,.7,.3,1);
+  position:relative;
+}
+.btn--gold{background:var(--gold);color:var(--ink)}
+.btn--gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(196,154,71,.6)}
+.btn--ghost{border:1px solid var(--line-d);color:var(--cream)}
+.btn--ghost:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-2px)}
+.btn--dark{background:var(--ink);color:var(--cream)}
+.btn--dark:hover{background:var(--ink-2);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.btn--line{border:1px solid var(--line-l);color:var(--ink)}
+.btn--line:hover{border-color:var(--gold);color:var(--green);transform:translateY(-2px)}
+.btn .arw{transition:transform .3s}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* ---------- Logo / emblem ---------- */
+.brand{display:flex;align-items:center;gap:.7rem}
+.emblem{width:42px;height:42px;flex:none}
+.brand-tx{display:flex;flex-direction:column;line-height:1}
+.brand-tx b{font-family:var(--serif);font-size:1.32rem;letter-spacing:.02em;font-weight:500}
+.brand-tx span{font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;margin-top:4px;opacity:.78;font-weight:600;white-space:nowrap}
+
+/* ---------- Header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;transition:.4s ease;color:var(--cream);
+}
+header.solid{background:rgba(10,21,34,.86);backdrop-filter:blur(14px);padding:11px 0;box-shadow:0 1px 0 var(--line-d)}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{
+  font-size:.86rem;font-weight:600;letter-spacing:.02em;padding:.55em .95em;border-radius:2px;
+  color:var(--cream-mute);transition:.25s;position:relative;
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a.on{color:var(--gold-2)}
+.nav-links a.on::after{content:"";position:absolute;left:.95em;right:.95em;bottom:.28em;height:1px;background:var(--gold)}
+.nav-cta{display:flex;align-items:center;gap:.5rem;margin-left:.6rem}
+.nav-cta .btn{padding:.62em 1.1em;font-size:.84rem}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--line-d);border-radius:3px;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger span{width:18px;height:1.6px;background:var(--cream);transition:.3s}
+
+/* ---------- Page system ---------- */
+.page{display:none;animation:fade .6s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:var(--ink);color:var(--cream);overflow:hidden;padding:200px 0 130px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-em{width:96px;height:96px;margin-bottom:30px;filter:drop-shadow(0 8px 24px rgba(196,154,71,.32))}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5.1rem);font-weight:380;max-width:16ch;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--gold-2)}
+.hero h1 .grad{
+  background:linear-gradient(100deg,var(--gold-2),var(--gold) 60%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;
+}
+.hero p.lede{color:var(--cream-mute);margin:28px 0 38px;font-size:1.22rem}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:34px;margin-top:62px;flex-wrap:wrap;padding-top:30px;border-top:1px solid var(--line-d)}
+.hero-meta div span{display:block;font-family:var(--serif);font-size:2.1rem;color:var(--gold-2)}
+.hero-meta div small{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-mute)}
+
+/* ---------- Sections ---------- */
+section.band{padding:108px 0}
+.band.paper2{background:var(--paper-2)}
+.band.ink{background:var(--ink);color:var(--cream)}
+.band.green{background:var(--green);color:var(--cream)}
+.sec-head{max-width:60ch}
+.sec-head h2{font-size:clamp(2rem,4vw,3.1rem);margin:18px 0 0;font-weight:380}
+.sec-head.center{margin:0 auto;text-align:center}
+.dark-soft{color:var(--cream-mute)}
+
+/* mission split */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.mission-card{background:var(--ink);color:var(--cream);padding:46px;border-radius:6px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.mission-card .ray{position:absolute;inset:0;opacity:.5}
+.mission-card .inner{position:relative;z-index:1}
+.mission-card h3{font-size:1.7rem;color:var(--gold-2);margin-bottom:14px}
+.values{list-style:none;margin-top:26px;display:grid;gap:14px}
+.values li{display:flex;gap:13px;align-items:flex-start;font-size:.97rem;color:var(--cream-mute)}
+.values li b{color:var(--cream);font-weight:700}
+.tick{flex:none;width:22px;height:22px;margin-top:2px}
+
+/* program cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:54px}
+.pcard{
+  background:var(--paper);border:1px solid var(--line-l);border-radius:6px;overflow:hidden;
+  transition:.4s cubic-bezier(.2,.7,.3,1);display:flex;flex-direction:column;position:relative;
+}
+.pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);transform-origin:left;transition:.45s cubic-bezier(.2,.7,.3,1)}
+.pcard:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.pcard:hover::before{transform:scaleX(1)}
+.pcard .body{padding:38px 32px 34px;display:flex;flex-direction:column;flex:1}
+.pcard-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line-l)}
+.pnum{font-family:var(--serif);font-style:italic;font-size:2.4rem;line-height:1;color:var(--gold)}
+.pcat{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft)}
+.pcard h3{font-size:1.34rem;margin:0 0 12px;color:var(--ink)}
+.pcard p{font-size:.95rem;color:var(--text-soft)}
+.pcard .lk{margin-top:auto;padding-top:22px;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green);display:inline-flex;gap:.5em;align-items:center}
+.pcard:hover .lk{color:var(--gold)}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.stat{padding:6px 0}
+.stat b{display:block;font-family:var(--serif);font-size:clamp(2.4rem,4.4vw,3.4rem);color:var(--gold-2);font-weight:420;line-height:1}
+.stat small{display:block;margin-top:10px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-mute)}
+.band.ink .stat b{color:var(--gold-2)}
+
+/* quote band */
+.quote{text-align:center;max-width:62rem;margin:0 auto}
+.quote .mark{font-family:var(--serif);font-size:4rem;color:var(--gold);line-height:.4;display:block}
+.quote q{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.5rem);font-style:italic;font-weight:340;quotes:none;color:var(--cream)}
+.quote cite{display:block;margin-top:26px;font-style:normal;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* generic content */
+.prose{max-width:70ch}
+.prose p{margin-bottom:18px;color:var(--text-soft);font-size:1.04rem}
+.prose p strong{color:var(--ink)}
+.page-hero{background:var(--ink);color:var(--cream);padding:172px 0 78px;position:relative;overflow:hidden}
+.page-hero .ray{position:absolute;inset:0;opacity:.45}
+.page-hero .wrap{position:relative;z-index:1}
+.page-hero h1{font-size:clamp(2.3rem,5vw,3.8rem);margin-top:16px;font-weight:380;max-width:18ch}
+.page-hero p{color:var(--cream-mute);max-width:58ch;margin-top:20px;font-size:1.1rem}
+
+/* about pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
+.pillar{border-top:2px solid var(--gold);padding-top:22px}
+.pillar h3{font-size:1.35rem;color:var(--ink);margin-bottom:10px}
+.pillar p{font-size:.95rem;color:var(--text-soft)}
+
+/* credibility facts */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-l);border:1px solid var(--line-l);border-radius:6px;overflow:hidden;margin-top:40px}
+.fact{background:var(--paper);padding:30px 26px}
+.fact small{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.fact b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--ink);margin-top:10px;font-weight:450}
+.fact span{display:block;font-size:.86rem;color:var(--text-soft);margin-top:4px}
+
+/* program detail rows */
+.prow{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;padding:64px 0;border-bottom:1px solid var(--line-l)}
+.prow:last-child{border-bottom:none}
+.prow.flip .pvis{order:2}
+.pvis{border-radius:8px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;background:var(--ink)}
+.pvis svg{width:100%;height:100%}
+.pvis-img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-slot{position:relative;width:100%;height:100%;padding:24px;text-align:center;
+  background:linear-gradient(135deg,var(--paper-2),var(--paper-3));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.photo-slot::before{content:"";position:absolute;inset:14px;border:1px solid var(--line-l);border-radius:4px;pointer-events:none}
+.photo-slot .ps-ic{color:var(--gold);opacity:.85}
+.photo-slot .ps-ic svg{width:46px;height:46px}
+.ps-label{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink)}
+.ps-hint{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft);opacity:.7}
+.prow h2{font-size:2rem;color:var(--ink);margin:14px 0 14px;font-weight:400}
+.prow .tags{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.tag{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);background:var(--gold-soft);padding:.45em .8em;border-radius:2px}
+.outc{list-style:none;margin-top:22px;display:grid;gap:11px}
+.outc li{display:flex;gap:11px;font-size:.96rem;color:var(--text-soft)}
+.outc li svg{flex:none;margin-top:3px}
+
+/* ---------- Before / After ---------- */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:54px}
+.ba{border-radius:8px;overflow:hidden;box-shadow:var(--shadow);background:var(--ink)}
+.ba__stage{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none}
+.ba__after,.ba__before{position:absolute;inset:0}
+.ba__after svg,.ba__before svg{width:100%;height:100%}
+.ba__before{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+.ba__tag{position:absolute;top:14px;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(12,26,43,.62);backdrop-filter:blur(4px);padding:.42em .8em;border-radius:2px;z-index:4}
+.ba__tag.b{left:14px}
+.ba__tag.a{right:14px;background:rgba(19,67,59,.72)}
+.ba__divider{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:var(--gold);z-index:5;transform:translateX(-1px)}
+.ba__handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--gold);box-shadow:0 6px 18px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.ba__handle svg{width:22px;height:22px}
+.ba figcaption{padding:20px 24px;color:var(--cream)}
+.ba figcaption h4{font-size:1.18rem;color:var(--gold-2);font-weight:450}
+.ba figcaption p{font-size:.9rem;color:var(--cream-mute);margin-top:5px}
+
+/* testimonials */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+.tcard{background:var(--paper);border:1px solid var(--line-l);border-radius:6px;padding:32px 28px}
+.tcard p{font-family:var(--serif);font-style:italic;font-size:1.12rem;color:var(--ink);line-height:1.5}
+.tcard .who{display:flex;align-items:center;gap:12px;margin-top:22px}
+.tcard .who .av{width:42px;height:42px;border-radius:50%;background:var(--green);color:var(--gold-2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;flex:none}
+.tcard .who b{display:block;font-family:var(--sans);font-size:.92rem;color:var(--ink)}
+.tcard .who small{font-size:.8rem;color:var(--text-soft)}
+
+/* give / donate tiers */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}
+.tier{border:1px solid var(--line-l);border-radius:6px;padding:30px 24px;text-align:center;transition:.3s;background:var(--paper);position:relative}
+.tier:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm);border-color:var(--gold)}
+.tier.feat{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.tier.feat .amt{color:var(--gold-2)}
+.tier .amt{font-family:var(--serif);font-size:2.2rem;color:var(--ink);font-weight:450}
+.tier .per{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-soft);margin-bottom:14px}
+.tier.feat .per{color:var(--cream-mute)}
+.tier p{font-size:.88rem;color:var(--text-soft);min-height:60px}
+.tier.feat p{color:var(--cream-mute)}
+.tier .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:.35em .8em;border-radius:2px}
+.give-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.give-box{border:1px solid var(--line-l);border-radius:6px;padding:38px;background:var(--paper-2)}
+.give-box h3{font-size:1.5rem;color:var(--ink);margin-bottom:12px}
+.give-box p{font-size:.96rem;color:var(--text-soft);margin-bottom:22px}
+
+/* contact */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin-bottom:7px}
+.field input,.field textarea,.field select{
+  width:100%;padding:.85em 1em;border:1px solid var(--line-l);border-radius:3px;background:var(--paper);
+  font-family:inherit;font-size:.96rem;color:var(--ink);transition:.2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.cinfo .row{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--line-l)}
+.cinfo .row:first-child{padding-top:0}
+.cinfo .ic{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;flex:none}
+.cinfo .row b{display:block;color:var(--ink);font-size:1rem;font-family:var(--serif)}
+.cinfo .row span{font-size:.92rem;color:var(--text-soft)}
+.note{font-size:.86rem;color:var(--green);background:var(--gold-soft);padding:14px 16px;border-radius:4px;margin-top:14px;display:none}
+.note.show{display:block}
+
+/* CTA band */
+.cta-band{background:var(--ink);color:var(--cream);text-align:center;padding:100px 0;position:relative;overflow:hidden}
+.cta-band .ray{position:absolute;inset:0;opacity:.5}
+.cta-band .wrap{position:relative;z-index:1}
+.cta-band h2{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:380;max-width:20ch;margin:18px auto 0}
+.cta-band p{color:var(--cream-mute);max-width:50ch;margin:20px auto 36px;font-size:1.1rem}
+.cta-band .hero-cta{justify-content:center}
+
+/* footer */
+footer{background:#081320;color:var(--cream);padding:74px 0 34px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.fcol h5{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:700}
+.fcol a{display:block;color:var(--cream-mute);font-size:.92rem;padding:6px 0;transition:.2s}
+.fcol a:hover{color:var(--gold-2)}
+.fabout p{color:var(--cream-mute);font-size:.92rem;margin:18px 0;max-width:34ch}
+.fbottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:54px;padding-top:26px;border-top:1px solid var(--line-d)}
+.fbottom small{color:var(--cream-mute);font-size:.82rem}
+.fein{font-family:var(--serif);font-style:italic;color:var(--gold-2)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .split,.cgrid,.give-2{grid-template-columns:1fr;gap:38px}
+  .cards,.pillars,.tgrid{grid-template-columns:1fr 1fr}
+  .stats,.facts{grid-template-columns:1fr 1fr}
+  .tiers{grid-template-columns:1fr 1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .prow{grid-template-columns:1fr;gap:30px;padding:46px 0}
+  .prow.flip .pvis{order:0}
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  header.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(10,21,34,.97);backdrop-filter:blur(14px);padding:14px 26px 22px;gap:0;border-top:1px solid var(--line-d)}
+  header.open .nav-links a{padding:.85em 0;width:100%;border-bottom:1px solid var(--line-d)}
+  header.open .nav-cta{display:flex;position:absolute;top:calc(100% + 0px)}
+}
+@media(max-width:600px){
+  .cards,.pillars,.tgrid,.stats,.facts,.tiers{grid-template-columns:1fr}
+  .hero{padding:160px 0 90px}
+  section.band{padding:74px 0}
+  .mission-card{padding:32px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#home" class="brand" data-nav>
+      <span class="emblem" data-emblem></span>
+      <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#home" data-nav>Home</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#programs" data-nav>Programs</a>
+      <a href="#impact" data-nav>Impact</a>
+      <a href="#give" data-nav>Give</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#give" class="btn btn--ghost" data-nav>Volunteer</a>
+      <a href="#give" class="btn btn--gold" data-nav>Donate</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg" data-ray></div>
+    <div class="wrap">
+      <span class="emblem hero-em" data-emblem></span>
+      <h1>Empowering minds.<br>Restoring communities.<br><span class="grad">Building futures.</span></h1>
+      <p class="lede">UAOK — the Ultimate Advancement of Knowledge — is a faith-driven nonprofit equipping youth and communities through workforce development, entrepreneurship, and technology that turns potential into lasting change.</p>
+      <div class="hero-cta">
+        <a href="#give" class="btn btn--gold" data-nav>Support the Mission <span class="arw">→</span></a>
+        <a href="#programs" class="btn btn--ghost" data-nav>Explore Programs</a>
+      </div>
+      <div class="hero-meta">
+        <div><span>3</span><small>Core Programs</small></div>
+        <div><span>Worldwide</span><small>Service Area</small></div>
+        <div><span>508(c)(1)(A)</span><small>Faith-Based Nonprofit</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mission -->
+  <section class="band">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">Our Mission</span>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);margin-top:18px;font-weight:380">Knowledge is the door. We help people walk through it.</h2>
+        <div class="prose" style="margin-top:24px">
+          <p>UAOK exists to advance knowledge where it's needed most. We restore neighborhoods, open doors to opportunity, and walk alongside young people as they build skills, confidence, and ownership of their future.</p>
+          <p>Grounded in faith and driven by results, every program is designed to create <strong>measurable, lasting impact</strong> — not a moment of help, but a path forward.</p>
+        </div>
+        <a href="#about" class="btn btn--line" data-nav style="margin-top:14px">Our Story <span class="arw">→</span></a>
+      </div>
+      <div class="mission-card rv">
+        <div class="ray" data-ray></div>
+        <div class="inner">
+          <h3>What we stand for</h3>
+          <p style="color:var(--cream-mute);font-size:.98rem">Four commitments shape everything we build.</p>
+          <ul class="values">
+            <li><span class="tick" data-tick></span><span><b>Dignity first.</b> We meet people where they are and treat every person as capable of more.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Skills that pay.</b> Real, marketable training — not busywork — that opens real income.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Communities restored.</b> When neighborhoods heal, futures follow.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Faith in action.</b> Service led by conviction, open to all.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- programs preview -->
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">What We Do</span>
+        <h2>Three programs. One ladder out.</h2>
+      </div>
+      <div class="cards">
+        <article class="pcard rv" onclick="go('programs')">
+          <div class="body">
+            <div class="pcard-top"><span class="pnum">01</span><span class="pcat">Workforce</span></div>
+            <h3>Graffiti Removal Workforce</h3>
+            <p>Youth earn paid job skills while restoring communities with eco-friendly, surface-safe methods.</p>
+            <span class="lk">View details →</span>
+          </div>
+        </article>
+        <article class="pcard rv" onclick="go('programs')">
+          <div class="body">
+            <div class="pcard-top"><span class="pnum">02</span><span class="pcat">Enterprise</span></div>
+            <h3>Entrepreneurship &amp; Business</h3>
+            <p>From idea to execution — branding, sales, operations, customer service, and the ownership mindset.</p>
+            <span class="lk">View details →</span>
+          </div>
+        </article>
+        <article class="pcard rv" onclick="go('programs')">
+          <div class="body">
+            <div class="pcard-top"><span class="pnum">03</span><span class="pcat">Technology</span></div>
+            <h3>Tech / AI &amp; Digital Skills</h3>
+            <p>Digital literacy and emerging-tech training that raises employability in a changing economy.</p>
+            <span class="lk">View details →</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- stats -->
+  <section class="band ink">
+    <div class="wrap">
+      <div class="sec-head rv" style="margin-bottom:48px">
+        <span class="eyebrow">The Difference</span>
+        <h2 style="color:var(--cream)">Impact you can measure.</h2>
+      </div>
+      <div class="stats">
+        <div class="stat rv"><b>1,200+</b><small>Youth Reached</small></div>
+        <div class="stat rv"><b>340</b><small>Walls Restored</small></div>
+        <div class="stat rv"><b>78%</b><small>Job-Ready Outcomes</small></div>
+        <div class="stat rv"><b>26</b><small>Businesses Launched</small></div>
+      </div>
+      <p style="margin-top:30px;font-size:.84rem;color:var(--cream-mute)">Figures shown are program targets — replace with verified metrics as they're reported.</p>
+    </div>
+  </section>
+
+  <!-- quote -->
+  <section class="band green">
+    <div class="wrap quote rv">
+      <span class="mark">“</span>
+      <q>You are A.O.K — let your dreams be what they may. We don't just teach knowledge; we hand people the tools to build a life with it.</q>
+      <cite>— The UAOK Promise</cite>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-band">
+    <div class="ray" data-ray></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Join Us</span>
+      <h2>Your support becomes someone's first real chance.</h2>
+      <p>Give, volunteer, or partner with UAOK and help turn potential into momentum.</p>
+      <div class="hero-cta">
+        <a href="#give" class="btn btn--gold" data-nav>Donate Now <span class="arw">→</span></a>
+        <a href="#contact" class="btn btn--ghost" data-nav>Partner With Us</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="page" id="page-about">
+  <div class="page-hero">
+    <div class="ray" data-ray></div>
+    <div class="wrap">
+      <span class="eyebrow">About UAOK</span>
+      <h1>Built on faith. Measured by what changes.</h1>
+      <p>The Ultimate Advancement of Knowledge is a 508(c)(1)(A) faith-based nonprofit advancing opportunity for youth and communities — where they live, in the language of real skills.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">Our Story</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;font-weight:380">From a simple idea to a movement for advancement.</h2>
+        <div class="prose" style="margin-top:22px">
+          <p>UAOK began with a conviction: that knowledge, paired with opportunity, can break cycles that money alone never will. We saw young people full of potential and short on pathways — and neighborhoods worn down by neglect.</p>
+          <p>So we built programs that do both at once. Youth restore their own communities while learning trades, launch businesses while learning to lead, and gain digital fluency while learning to compete. <strong>Advancement isn't given. It's grown.</strong></p>
+          <p>Today UAOK serves worldwide, anchored by faith and accountable to outcomes.</p>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="pvis" style="aspect-ratio:1/1.05"><div data-art="story" style="height:100%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv" style="margin-bottom:42px">
+        <span class="eyebrow">Mission · Vision · Values</span>
+        <h2>What guides the work.</h2>
+      </div>
+      <div class="pillars">
+        <div class="pillar rv"><h3>Mission</h3><p>To advance knowledge and opportunity for youth and communities through workforce development, entrepreneurship, and technology that creates measurable, lasting impact.</p></div>
+        <div class="pillar rv"><h3>Vision</h3><p>A world where every young person has a real path forward and every community has the tools to restore and renew itself.</p></div>
+        <div class="pillar rv"><h3>Values</h3><p>Dignity, accountability, faith in action, and skills that pay. We measure success in changed lives and restored places.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Credibility & Compliance</span>
+        <h2>Transparent by design.</h2>
+        <p class="lede" style="margin-top:14px">We hold ourselves to the standards donors and partners deserve.</p>
+      </div>
+      <div class="facts rv">
+        <div class="fact"><small>Legal Name</small><b>Ultimate Advancement of Knowledge</b><span>Operating as UAOK</span></div>
+        <div class="fact"><small>EIN</small><b>41-5319268</b><span>Federal Employer ID</span></div>
+        <div class="fact"><small>Status</small><b>508(c)(1)(A)</b><span>Faith-based nonprofit</span></div>
+        <div class="fact"><small>Reach</small><b>Worldwide</b><span>U.S. & global operations</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="ray" data-ray></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Get Involved</span>
+      <h2>Believe in the mission? Let's build together.</h2>
+      <p>Whether you give your time, your skills, or your support, there's a place for you here.</p>
+      <div class="hero-cta"><a href="#give" class="btn btn--gold" data-nav>Support UAOK <span class="arw">→</span></a><a href="#programs" class="btn btn--ghost" data-nav>See the Programs</a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ PROGRAMS ============ -->
+<section class="page" id="page-programs">
+  <div class="page-hero">
+    <div class="ray" data-ray></div>
+    <div class="wrap">
+      <span class="eyebrow">Our Programs</span>
+      <h1>Skills that restore, build, and pay.</h1>
+      <p>Each program meets a real need with real training — and a paycheck, a business, or a credential at the end of it.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <!-- 1 -->
+      <div class="prow rv">
+        <div class="pvis"><div class="photo-slot"><span class="ps-ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="30" rx="3"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l10-9 8 7 7-6 11 10"/></svg></span><span class="ps-label">Graffiti Removal Workforce</span><span class="ps-hint">Photo slot · 4:3</span></div></div>
+        <div>
+          <span class="eyebrow">Program 01</span>
+          <h2>Graffiti Removal Workforce</h2>
+          <p style="color:var(--text-soft)">Youth earn while they learn, removing graffiti and restoring public spaces with eco-friendly, surface-safe techniques. It's a first job, a skill set, and visible proof that change is possible — all at once.</p>
+          <div class="tags"><span class="tag">Paid Training</span><span class="tag">Eco-Friendly</span><span class="tag">Community</span></div>
+          <ul class="outc">
+            <li><span data-tick></span> Hands-on certification in surface restoration & safety</li>
+            <li><span data-tick></span> Real wages and a verifiable work history</li>
+            <li><span data-tick></span> Measurable neighborhood transformation</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="prow flip rv">
+        <div class="pvis"><div class="photo-slot"><span class="ps-ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="30" rx="3"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l10-9 8 7 7-6 11 10"/></svg></span><span class="ps-label">Entrepreneurship &amp; Business</span><span class="ps-hint">Photo slot · 4:3</span></div></div>
+        <div>
+          <span class="eyebrow">Program 02</span>
+          <h2>Entrepreneurship & Business Skills</h2>
+          <p style="color:var(--text-soft)">From idea to open doors. Participants learn branding, sales, operations, customer service, and the ownership mindset — then put it to work launching real ventures with mentorship behind them.</p>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Operations</span><span class="tag">Ownership</span></div>
+          <ul class="outc">
+            <li><span data-tick></span> Business plan, brand, and go-to-market built with a mentor</li>
+            <li><span data-tick></span> Practical finance, pricing, and customer skills</li>
+            <li><span data-tick></span> Pathway to launch and ongoing support</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="prow rv">
+        <div class="pvis"><div class="photo-slot"><span class="ps-ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="30" rx="3"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l10-9 8 7 7-6 11 10"/></svg></span><span class="ps-label">Tech / AI &amp; Digital Skills</span><span class="ps-hint">Photo slot · 4:3</span></div></div>
+        <div>
+          <span class="eyebrow">Program 03</span>
+          <h2>Tech / AI & Digital Skills</h2>
+          <p style="color:var(--text-soft)">Digital literacy is no longer optional. We train participants in the tools, platforms, and emerging tech — including practical AI — that make them employable and competitive in a fast-moving economy.</p>
+          <div class="tags"><span class="tag">Digital Literacy</span><span class="tag">AI Tools</span><span class="tag">Employability</span></div>
+          <ul class="outc">
+            <li><span data-tick></span> Core digital and productivity fluency</li>
+            <li><span data-tick></span> Hands-on with practical AI and modern tools</li>
+            <li><span data-tick></span> Portfolio and credentials employers recognize</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="ray" data-ray></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Ready?</span>
+      <h2>Sponsor a cohort. Change a trajectory.</h2>
+      <p>Your gift funds wages, materials, and mentorship for the next group of participants.</p>
+      <div class="hero-cta"><a href="#give" class="btn btn--gold" data-nav>Fund a Program <span class="arw">→</span></a><a href="#impact" class="btn btn--ghost" data-nav>See the Results</a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section class="page" id="page-impact">
+  <div class="page-hero">
+    <div class="ray" data-ray></div>
+    <div class="wrap">
+      <span class="eyebrow">Our Impact</span>
+      <h1>See the change. Drag to reveal it.</h1>
+      <p>Every project leaves a mark you can see. Slide each image to compare where we started — and what UAOK helped build.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="stats" style="--gold-2:var(--green-2)">
+        <div class="stat rv"><b style="color:var(--green-2)">340</b><small style="color:var(--text-soft)">Walls Restored</small></div>
+        <div class="stat rv"><b style="color:var(--green-2)">1,200+</b><small style="color:var(--text-soft)">Youth Reached</small></div>
+        <div class="stat rv"><b style="color:var(--green-2)">26</b><small style="color:var(--text-soft)">Businesses Launched</small></div>
+        <div class="stat rv"><b style="color:var(--green-2)">78%</b><small style="color:var(--text-soft)">Job-Ready</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Before / After Gallery</span>
+        <h2>Restoration, made visible.</h2>
+        <p class="lede" style="margin-top:14px">Real program areas, transformed by the people we serve.</p>
+      </div>
+      <div class="ba-grid" id="baGrid"></div>
+      <p style="margin-top:24px;font-size:.86rem;color:var(--text-soft)">Drag the gold handle on any image to slide between <em>before</em> and <em>after</em>.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head rv" style="margin-bottom:10px">
+        <span class="eyebrow">Voices</span>
+        <h2>In their words.</h2>
+      </div>
+      <div class="tgrid">
+        <div class="tcard rv"><p>“I never had a real job before UAOK. Now I have a paycheck, a skill, and a wall I can show my little brother that I cleaned myself.”</p><div class="who"><span class="av">M</span><div><b>Marcus T.</b><small>Workforce participant</small></div></div></div>
+        <div class="tcard rv"><p>“They didn't just teach me business. They believed my idea was worth building. We opened our doors in the spring.”</p><div class="who"><span class="av">A</span><div><b>Aaliyah R.</b><small>Entrepreneurship grad</small></div></div></div>
+        <div class="tcard rv"><p>“The tech track gave my son confidence I hadn't seen in years. He's the one fixing computers in our house now.”</p><div class="who"><span class="av">D</span><div><b>Denise W.</b><small>Parent</small></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="ray" data-ray></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Be Part of It</span>
+      <h2>The next before-and-after starts with you.</h2>
+      <p>Fund the materials, wages, and mentorship behind every transformation.</p>
+      <div class="hero-cta"><a href="#give" class="btn btn--gold" data-nav>Give Today <span class="arw">→</span></a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ GIVE ============ -->
+<section class="page" id="page-give">
+  <div class="page-hero">
+    <div class="ray" data-ray></div>
+    <div class="wrap">
+      <span class="eyebrow">Give & Get Involved</span>
+      <h1>Turn generosity into advancement.</h1>
+      <p>Every dollar and every hour goes toward skills, wages, and restored communities. Choose the way you want to make a difference.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Make a Gift</span>
+        <h2>Choose your impact.</h2>
+      </div>
+      <div class="tiers">
+        <div class="tier rv"><div class="amt">$35</div><div class="per">One-Time</div><p>Supplies the eco-safe materials to restore one wall.</p><button class="btn btn--line" style="width:100%;justify-content:center" onclick="thank(this)">Give $35</button></div>
+        <div class="tier feat rv"><span class="badge">Most Impact</span><div class="amt">$75</div><div class="per">Monthly</div><p>Sustains a youth participant's training for a full month.</p><button class="btn btn--gold" style="width:100%;justify-content:center" onclick="thank(this)">Give $75/mo</button></div>
+        <div class="tier rv"><div class="amt">$250</div><div class="per">One-Time</div><p>Funds startup mentorship for one new entrepreneur.</p><button class="btn btn--line" style="width:100%;justify-content:center" onclick="thank(this)">Give $250</button></div>
+        <div class="tier rv"><div class="amt">Custom</div><div class="per">Your Choice</div><p>Give any amount, one-time or recurring — every gift counts.</p><button class="btn btn--line" style="width:100%;justify-content:center" onclick="thank(this)">Choose Amount</button></div>
+      </div>
+      <p class="note" id="giveNote">Thank you. To process live gifts, connect this button to your donation platform (Stripe, Givebutter, or your bank's nonprofit portal).</p>
+    </div>
+  </section>
+
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="give-2">
+        <div class="give-box rv">
+          <span class="eyebrow">Give Time</span>
+          <h3 style="margin-top:14px">Volunteer with UAOK</h3>
+          <p>Mentors, trainers, and on-the-ground hands make the work possible. Share a skill, lead a session, or join a restoration day.</p>
+          <a href="#contact" class="btn btn--dark" data-nav>Become a Volunteer <span class="arw">→</span></a>
+        </div>
+        <div class="give-box rv">
+          <span class="eyebrow">Give Together</span>
+          <h3 style="margin-top:14px">Partner & Sponsor</h3>
+          <p>Businesses, congregations, and foundations can sponsor a cohort, fund a wall, or back a full program. Let's design impact together.</p>
+          <a href="#contact" class="btn btn--dark" data-nav>Start a Partnership <span class="arw">→</span></a>
+        </div>
+      </div>
+      <div class="facts rv" style="margin-top:30px">
+        <div class="fact"><small>Tax Status</small><b>508(c)(1)(A)</b><span>Faith-based nonprofit</span></div>
+        <div class="fact"><small>EIN</small><b>41-5319268</b><span>For your records</span></div>
+        <div class="fact"><small>Deductible</small><b>To the extent allowed</b><span>by applicable law</span></div>
+        <div class="fact"><small>Reach</small><b>Worldwide</b><span>Local impact, global vision</span></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="ray" data-ray></div>
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's start a conversation.</h1>
+      <p>Questions, partnerships, volunteering, or media — reach out and a member of the UAOK team will respond.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap cgrid">
+      <div class="rv">
+        <span class="eyebrow">Send a Message</span>
+        <h2 style="font-size:1.9rem;margin:14px 0 26px;font-weight:400">We'd love to hear from you.</h2>
+        <div class="field"><label>Name</label><input type="text" id="cn" placeholder="Your full name"></div>
+        <div class="field"><label>Email</label><input type="email" id="ce" placeholder="you@email.com"></div>
+        <div class="field"><label>I'm reaching out about</label>
+          <select id="cs"><option>General inquiry</option><option>Volunteering</option><option>Partnership / sponsorship</option><option>Program enrollment</option><option>Media</option></select>
+        </div>
+        <div class="field"><label>Message</label><textarea id="cm" rows="4" placeholder="Tell us a little more..."></textarea></div>
+        <button class="btn btn--gold" onclick="sendMsg()">Send Message <span class="arw">→</span></button>
+        <p class="note" id="cNote">Thanks — your message is ready. Connect this form to your email service or form handler to receive submissions live.</p>
+      </div>
+      <div class="cinfo rv">
+        <span class="eyebrow">Reach Us Directly</span>
+        <div style="margin-top:24px">
+          <div class="row"><span class="ic" data-ic="mail"></span><div><b>Email</b><span>hello@uaok.org</span></div></div>
+          <div class="row"><span class="ic" data-ic="globe"></span><div><b>Service Area</b><span>Worldwide — U.S. &amp; global operations</span></div></div>
+          <div class="row"><span class="ic" data-ic="doc"></span><div><b>Organization</b><span>Ultimate Advancement of Knowledge · EIN 41-5319268</span></div></div>
+          <div class="row"><span class="ic" data-ic="heart"></span><div><b>Get Involved</b><span>Volunteer, partner, or give — every role matters.</span></div></div>
+        </div>
+        <div style="margin-top:30px"><a href="#give" class="btn btn--line" data-nav>Or make a gift <span class="arw">→</span></a></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fcol fabout">
+        <a href="#home" class="brand" data-nav>
+          <span class="emblem" data-emblem></span>
+          <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge</span></span>
+        </a>
+        <p>Ultimate Advancement of Knowledge — a faith-driven nonprofit empowering youth and communities worldwide.</p>
+        <span class="eyebrow" style="font-size:.66rem">You are A.O.K — let your dreams be what they may</span>
+      </div>
+      <div class="fcol">
+        <h5>Explore</h5>
+        <a href="#about" data-nav>About</a>
+        <a href="#programs" data-nav>Programs</a>
+        <a href="#impact" data-nav>Impact</a>
+      </div>
+      <div class="fcol">
+        <h5>Engage</h5>
+        <a href="#give" data-nav>Donate</a>
+        <a href="#give" data-nav>Volunteer</a>
+        <a href="#contact" data-nav>Contact</a>
+      </div>
+      <div class="fcol">
+        <h5>Organization</h5>
+        <a href="#about" data-nav>508(c)(1)(A) Status</a>
+        <a href="#about" data-nav>Transparency</a>
+        <a href="#contact" data-nav>Partnerships</a>
+      </div>
+    </div>
+    <div class="fbottom">
+      <small>© 2026 Ultimate Advancement of Knowledge (UAOK). Donations may be tax-deductible to the extent allowed by law.</small>
+      <small>EIN <span class="fein">41-5319268</span> · Worldwide</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- SVG assets ---------- */
+const EMBLEM = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+  <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#E4C57E"/><stop offset="1" stop-color="#B6882F"/>
+  </linearGradient>
+</defs>
+<circle cx="50" cy="50" r="46" fill="none" stroke="url(#eg)" stroke-width="1.4" opacity=".55"/>
+<circle cx="50" cy="50" r="40" fill="none" stroke="url(#eg)" stroke-width=".7" opacity=".3"/>
+<!-- radiant star apex -->
+<g fill="url(#eg)">
+  <path d="M50 13 L52.4 22 L50 20.4 L47.6 22 Z" opacity=".9"/>
+  <circle cx="50" cy="20" r="2.6"/>
+  <path d="M50 12 L50 4 M50 12 L44 7 M50 12 L56 7" stroke="url(#eg)" stroke-width="1.1" opacity=".7" fill="none"/>
+</g>
+<!-- ascending chevrons -->
+<g fill="none" stroke="url(#eg)" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M34 44 L50 28 L66 44" stroke-width="3.4"/>
+  <path d="M30 56 L50 36 L70 56" stroke-width="3.4" opacity=".82"/>
+  <path d="M26 68 L50 44 L74 68" stroke-width="3.4" opacity=".6"/>
+</g>
+<!-- open book base -->
+<g fill="url(#eg)" opacity=".92">
+  <path d="M50 74 C42 70 33 70 27 73 L27 82 C33 79 42 79 50 83 C58 79 67 79 73 82 L73 73 C67 70 58 70 50 74 Z"/>
+  <rect x="49.2" y="74" width="1.6" height="9" opacity=".5" fill="#0C1A2B"/>
+</g>
+</svg>`;
+
+const TICK = `<svg viewBox="0 0 24 24" fill="none" stroke="#C49A47" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>`;
+const ICONS = {
+  mail:`<svg viewBox="0 0 24 24" fill="none" stroke="#13433B" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`,
+  globe:`<svg viewBox="0 0 24 24" fill="none" stroke="#13433B" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>`,
+  doc:`<svg viewBox="0 0 24 24" fill="none" stroke="#13433B" stroke-width="1.7"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg>`,
+  heart:`<svg viewBox="0 0 24 24" fill="none" stroke="#13433B" stroke-width="1.7"><path d="M12 20s-7-4.5-9-9c-1.5-3.5 1-6.5 4-6.5 2 0 3.5 1.5 5 3.5 1.5-2 3-3.5 5-3.5 3 0 5.5 3 4 6.5-2 4.5-9 9-9 9z"/></svg>`
+};
+
+/* ---------- Program / scene art (SVG) ---------- */
+function ray(){return `<svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+ <radialGradient id="rg" cx="50%" cy="0%" r="90%"><stop offset="0" stop-color="#1B3A57"/><stop offset="55%" stop-color="#0C1A2B"/><stop offset="100%" stop-color="#081320"/></radialGradient>
+ <linearGradient id="rl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C49A47" stop-opacity=".5"/><stop offset="1" stop-color="#C49A47" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1200" height="600" fill="url(#rg)"/>
+<g opacity=".5">
+ <path d="M600 -40 L300 640 L420 640 L600 80 Z" fill="url(#rl)"/>
+ <path d="M600 -40 L900 640 L780 640 L600 80 Z" fill="url(#rl)"/>
+ <path d="M600 -40 L150 640 L230 640 L600 100 Z" fill="url(#rl)" opacity=".6"/>
+ <path d="M600 -40 L1050 640 L970 640 L600 100 Z" fill="url(#rl)" opacity=".6"/>
+</g>
+<circle cx="600" cy="0" r="120" fill="#C49A47" opacity=".18"/>
+</svg>`;}
+
+/* scene helpers produce illustrative SVG; data-art picks one */
+const ART = {
+  graffiti: sceneWall(true),
+  biz: sceneShop(true),
+  tech: sceneLab(true),
+  story: sceneStory()
+};
+
+function sky(id,a,b){return `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;}
+
+/* WALL — graffiti vs mural */
+function sceneWall(after){
+  return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>${sky('wsky', after?'#bcd6e8':'#7c8896', after?'#e8eef2':'#aeb7be')}
+  <linearGradient id="wgr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${after?'#efe7d6':'#8d8478'}"/><stop offset="1" stop-color="${after?'#ddd2bb':'#6f675c'}"/></linearGradient></defs>
+  <rect width="800" height="500" fill="url(#wsky)"/>
+  <!-- ground -->
+  <rect y="420" width="800" height="80" fill="${after?'#cfc4ac':'#5b5750'}"/>
+  <!-- wall -->
+  <rect x="0" y="120" width="800" height="305" fill="url(#wgr)"/>
+  ${brick(after)}
+  ${after ? mural() : graffiti()}
+  ${after
+    ? `<g><rect x="60" y="372" width="48" height="48" rx="3" fill="#1E5C50"/><path d="M84 372 q-26 -34 0 -64 q26 30 0 64" fill="#2e7d68"/><rect x="700" y="360" width="42" height="60" rx="4" fill="#7a5236"/><path d="M721 360 q-30 -40 0 -70 q30 30 0 70" fill="#2e7d68"/></g>`
+    : `<g opacity=".85"><rect x="60" y="392" width="60" height="28" rx="2" fill="#3a3630"/><rect x="130" y="400" width="30" height="20" fill="#2c2925"/><path d="M690 420 l14 -26 8 26 z" fill="#4a463f"/></g>`}
+  <rect width="800" height="500" fill="#000" opacity="${after?0:.12}"/>
+  </svg>`;
+}
+function brick(after){let r='';const c=after?'rgba(140,120,90,.18)':'rgba(20,18,16,.4)';for(let y=120;y<420;y+=34){const off=((y/34)%2)?28:0;for(let x=-28;x<800;x+=56){r+=`<rect x="${x+off}" y="${y}" width="55" height="33" fill="none" stroke="${c}" stroke-width="1"/>`;}}return r;}
+function graffiti(){return `<g opacity=".92">
+  <path d="M120 180 q40 -50 90 0 q40 50 90 -10 q30 60 -10 90 q-80 30 -120 -20 q-40 -40 -50 -60z" fill="#d23b6e" opacity=".8"/>
+  <path d="M150 200 L300 180 L260 280 L180 300 Z" fill="#2bb4c8" opacity=".7"/>
+  <text x="360" y="260" font-family="Arial Black,Arial" font-size="78" font-weight="900" fill="#f4c430" stroke="#1a1a1a" stroke-width="3" transform="skewX(-12)">XZK</text>
+  <text x="430" y="350" font-family="Arial" font-size="54" font-weight="900" fill="#9b59b6" stroke="#111" stroke-width="2">404</text>
+  <path d="M560 200 q60 -20 100 30 q-30 50 -90 30 q-40 -30 -10 -60z" fill="#39c46a" opacity=".75"/>
+  <path d="M90 320 L240 340 M110 360 L300 330" stroke="#e84a4a" stroke-width="6" opacity=".7"/>
+  <path d="M600 300 L740 280 L700 380 Z" fill="#e67e22" opacity=".65"/>
+  <path d="M40 250 q10 80 30 150" stroke="#222" stroke-width="4" opacity=".4"/>
+  </g>`;}
+function mural(){return `<g>
+  <circle cx="180" cy="210" r="46" fill="#E4C57E"/><g stroke="#E4C57E" stroke-width="5">
+  <path d="M180 150 v-22 M180 270 v22 M120 210 h-22 M240 210 h22 M138 168 l-15 -15 M222 168 l15 -15 M138 252 l-15 15 M222 252 l15 15"/></g>
+  <path d="M300 380 q40 -160 120 -160 q80 0 120 160z" fill="#1E5C50"/>
+  <path d="M420 380 V250" stroke="#7a5236" stroke-width="12"/>
+  <text x="470" y="340" font-family="Fraunces,Georgia,serif" font-size="40" font-style="italic" fill="#13433B" opacity=".9">grow</text>
+  <path d="M560 230 q70 30 120 -10" stroke="#C49A47" stroke-width="6" fill="none"/>
+  <circle cx="600" cy="250" r="9" fill="#d23b6e"/><circle cx="640" cy="238" r="9" fill="#C49A47"/><circle cx="675" cy="222" r="9" fill="#1E5C50"/>
+  </g>`;}
+
+/* SHOP — shuttered vs open */
+function sceneShop(after){
+  return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>${sky('ssky', after?'#f3d9a8':'#6c7682', after?'#e9c98a':'#9aa1a8')}</defs>
+  <rect width="800" height="500" fill="url(#ssky)"/>
+  <rect y="430" width="800" height="70" fill="${after?'#b9a982':'#54595f'}"/>
+  <!-- facade -->
+  <rect x="80" y="90" width="640" height="345" fill="${after?'#e7dcc6':'#736d64'}"/>
+  <rect x="80" y="90" width="640" height="60" fill="${after?'#13433B':'#3c3a36'}"/>
+  <!-- sign -->
+  <text x="400" y="132" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="34" fill="${after?'#E4C57E':'#5a564f'}" letter-spacing="3">${after?'OPEN FOR BUSINESS':'· · · · · ·'}</text>
+  ${after?`<!-- awning -->
+   <g>${[0,1,2,3,4,5].map(i=>`<path d="M${120+i*95} 160 l40 46 h-95 z" fill="${i%2?'#C49A47':'#13433B'}"/>`).join('')}</g>
+   <!-- window display lit -->
+   <rect x="120" y="230" width="250" height="170" fill="#fff3d6"/><rect x="120" y="230" width="250" height="170" fill="none" stroke="#7a5236" stroke-width="6"/>
+   <rect x="150" y="300" width="60" height="80" fill="#13433B"/><circle cx="180" cy="280" r="22" fill="#C49A47"/>
+   <rect x="250" y="320" width="80" height="60" fill="#d23b6e" opacity=".8"/>
+   <!-- door open -->
+   <rect x="430" y="250" width="120" height="180" fill="#13433B"/><rect x="430" y="250" width="120" height="180" fill="none" stroke="#7a5236" stroke-width="6"/><rect x="445" y="270" width="42" height="150" fill="#fff3d6"/>
+   <rect x="600" y="240" width="90" height="160" fill="#fff3d6" stroke="#7a5236" stroke-width="6"/>
+   <circle cx="400" cy="470" r="6" fill="#C49A47"/>`
+  :`<!-- boarded windows + shutter -->
+   <rect x="120" y="230" width="250" height="190" fill="#4a463f"/>
+   ${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="124" y="${234+i*20}" width="242" height="14" fill="#3a362f" stroke="#2c2925"/>`).join('')}
+   <rect x="430" y="250" width="120" height="170" fill="#3a362f"/><path d="M430 250 l120 170 M550 250 l-120 170" stroke="#2c2925" stroke-width="5"/>
+   <rect x="600" y="250" width="90" height="170" fill="#4a463f"/><path d="M600 300 l90 -10 M600 350 l90 14" stroke="#2c2925" stroke-width="4"/>
+   <text x="250" y="200" font-family="Arial Black" font-size="40" fill="#9b59b6" opacity=".6" transform="skewX(-10)">SOLD?</text>`}
+  <rect width="800" height="500" fill="#000" opacity="${after?0:.16}"/>
+  </svg>`;
+}
+
+/* LAB — empty room vs tech lab */
+function sceneLab(after){
+  return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>${sky('lwall', after?'#27465e':'#4a4f55', after?'#16293f':'#33363b')}</defs>
+  <rect width="800" height="500" fill="url(#lwall)"/>
+  <rect y="370" width="800" height="130" fill="${after?'#0e2236':'#26282b'}"/>
+  <path d="M0 370 L800 370 L800 380 L0 380Z" fill="#000" opacity=".2"/>
+  ${after?`<!-- window glow -->
+   <rect x="40" y="60" width="180" height="120" fill="#1B3A57"/><rect x="40" y="60" width="180" height="120" fill="none" stroke="#C49A47" stroke-width="2" opacity=".5"/>
+   <path d="M40 60 h180 v120 M130 60 v120 M40 120 h180" stroke="#C49A47" stroke-width="1" opacity=".25"/>
+   <!-- desks with monitors -->
+   ${[120,330,540].map(x=>`<g>
+     <rect x="${x}" y="300" width="150" height="14" fill="#16293f"/><rect x="${x+8}" y="314" width="10" height="70" fill="#0e2236"/><rect x="${x+132}" y="314" width="10" height="70" fill="#0e2236"/>
+     <rect x="${x+30}" y="240" width="90" height="58" rx="4" fill="#0a1622" stroke="#C49A47" stroke-width="1.5"/>
+     <rect x="${x+36}" y="246" width="78" height="46" fill="#1b6f7d"/><path d="M${x+40} 285 l16 -22 12 14 14 -26 14 34" stroke="#E4C57E" stroke-width="2" fill="none"/>
+     <rect x="${x+68}" y="298" width="14" height="10" fill="#16293f"/></g>`).join('')}
+   <!-- plant + light -->
+   <rect x="700" y="300" width="40" height="84" rx="4" fill="#7a5236"/><path d="M720 300 q-30 -50 0 -90 q30 40 0 90" fill="#1E5C50"/>
+   <circle cx="400" cy="70" r="20" fill="#E4C57E" opacity=".6"/><path d="M400 90 v40" stroke="#C49A47" stroke-width="2" opacity=".5"/>`
+  :`<!-- empty: old chair, dim -->
+   <rect x="120" y="320" width="80" height="14" fill="#1f2124"/><rect x="124" y="334" width="8" height="46" fill="#17181a"/><rect x="188" y="334" width="8" height="46" fill="#17181a"/><rect x="120" y="270" width="60" height="50" fill="#26282b"/>
+   <rect x="560" y="300" width="120" height="80" fill="#1f2124"/><path d="M560 300 l120 80 M680 300 l-120 80" stroke="#141517" stroke-width="3"/>
+   <path d="M380 70 v50 M375 120 h10" stroke="#3a3d40" stroke-width="2"/><circle cx="380" cy="128" r="10" fill="#2a2c2f"/>
+   <rect x="40" y="80" width="150" height="110" fill="#3a3d40" opacity=".5"/>`}
+  <rect width="800" height="500" fill="#000" opacity="${after?0:.28}"/>
+  </svg>`;
+}
+
+/* STORY portrait scene */
+function sceneStory(){return `<svg viewBox="0 0 600 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="stg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16293f"/><stop offset="1" stop-color="#081320"/></linearGradient>
+<linearGradient id="stgo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4C57E"/><stop offset="1" stop-color="#B6882F"/></linearGradient></defs>
+<rect width="600" height="640" fill="url(#stg)"/>
+<g opacity=".4"><path d="M300 -40 L120 700 L200 700 L300 60 Z" fill="url(#stgo)"/><path d="M300 -40 L480 700 L400 700 L300 60 Z" fill="url(#stgo)"/></g>
+<!-- ascending bars = advancement -->
+<g>
+ <rect x="120" y="470" width="70" height="110" rx="4" fill="#1E5C50"/>
+ <rect x="210" y="400" width="70" height="180" rx="4" fill="#2e7d68"/>
+ <rect x="300" y="320" width="70" height="260" rx="4" fill="#C49A47"/>
+ <rect x="390" y="220" width="70" height="360" rx="4" fill="#E4C57E"/>
+</g>
+<!-- rising arrow -->
+<path d="M110 480 L200 410 L290 330 L380 230 L460 150" fill="none" stroke="#fff" stroke-width="3" opacity=".75" stroke-linecap="round"/>
+<path d="M440 150 L466 144 L460 172" fill="none" stroke="#fff" stroke-width="3" opacity=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="300" cy="120" r="34" fill="none" stroke="url(#stgo)" stroke-width="2"/>
+<path d="M286 120 l10 10 18 -22" stroke="#E4C57E" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>`;}
+
+/* ---------- Inject assets ---------- */
+document.querySelectorAll('[data-emblem]').forEach(e=>e.innerHTML=EMBLEM);
+document.querySelectorAll('[data-tick]').forEach(e=>e.innerHTML=TICK);
+document.querySelectorAll('[data-ic]').forEach(e=>e.innerHTML=ICONS[e.dataset.ic]||'');
+document.querySelectorAll('[data-ray]').forEach(e=>e.innerHTML=ray());
+document.querySelectorAll('[data-art]').forEach(e=>e.innerHTML=ART[e.dataset.art]||'');
+
+/* ---------- Before/After build ---------- */
+const PAIRS=[
+  {b:sceneWall(false),a:sceneWall(true),t:'Graffiti Removal Workforce',d:'A tagged underpass wall restored — and turned into a community mural by the youth who cleaned it.'},
+  {b:sceneShop(false),a:sceneShop(true),t:'Entrepreneurship in Action',d:'A boarded-up storefront reopened as a program graduate\u2019s first small business.'},
+  {b:sceneLab(false),a:sceneLab(true),t:'Tech & Digital Skills Lab',d:'An unused room transformed into a working digital-skills classroom.'},
+  {b:sceneWall(false),a:sceneWall(true),t:'Neighborhood Restoration Day',d:'Before and after a single volunteer restoration event with local youth.'}
+];
+const grid=document.getElementById('baGrid');
+PAIRS.forEach((p,i)=>{
+  const fig=document.createElement('figure');fig.className='ba';
+  fig.innerHTML=`<div class="ba__stage" style="--pos:50%">
+     <div class="ba__after">${p.a}</div>
+     <div class="ba__before">${p.b}</div>
+     <span class="ba__tag b">Before</span><span class="ba__tag a">After</span>
+     <div class="ba__divider"><button class="ba__handle" aria-label="Drag to compare">
+       <svg viewBox="0 0 24 24" fill="none" stroke="#0C1A2B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></button></div>
+   </div>
+   <figcaption><h4>${p.t}</h4><p>${p.d}</p></figcaption>`;
+  grid.appendChild(fig);
+  const stage=fig.querySelector('.ba__stage');
+  let drag=false;
+  const set=x=>{const r=stage.getBoundingClientRect();let pos=((x-r.left)/r.width)*100;pos=Math.max(2,Math.min(98,pos));stage.style.setProperty('--pos',pos+'%');};
+  const start=e=>{drag=true;set((e.touches?e.touches[0]:e).clientX);};
+  const move=e=>{if(!drag)return;set((e.touches?e.touches[0]:e).clientX);};
+  const end=()=>drag=false;
+  stage.addEventListener('mousedown',start);stage.addEventListener('touchstart',start,{passive:true});
+  window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:true});
+  window.addEventListener('mouseup',end);window.addEventListener('touchend',end);
+});
+
+/* ---------- Router ---------- */
+const pages=['home','about','programs','impact','give','contact'];
+function go(id){
+  if(!pages.includes(id))id='home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('on',a.getAttribute('href')==='#'+id);
+  });
+  if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+  window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
+  document.getElementById('hdr').classList.remove('open');
+  setTimeout(observe,40);
+}
+document.querySelectorAll('[data-nav]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();go(a.getAttribute('href').slice(1));});
+});
+window.addEventListener('popstate',()=>go((location.hash||'#home').slice(1)));
+
+/* ---------- Header scroll ---------- */
+const hdr=document.getElementById('hdr');
+const onScroll=()=>hdr.classList.toggle('solid',window.scrollY>40);
+window.addEventListener('scroll',onScroll);onScroll();
+document.getElementById('burger').addEventListener('click',()=>hdr.classList.toggle('open'));
+
+/* ---------- Reveal ---------- */
+let io;
+function observe(){
+  document.querySelectorAll('.page.active .rv').forEach(el=>{
+    if(!io){io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.12});}
+    if(!el.classList.contains('in'))io.observe(el);
+  });
+}
+observe();
+
+/* ---------- Form niceties ---------- */
+function thank(btn){document.getElementById('giveNote').classList.add('show');btn.textContent='Thank you ♥';btn.disabled=true;}
+function sendMsg(){
+  const n=document.getElementById('cn').value.trim();
+  document.getElementById('cNote').classList.add('show');
+  document.getElementById('cNote').textContent=n?`Thanks, ${n.split(' ')[0]} — your message is ready to send. Connect this form to your email service to receive it live.`:'Thanks — your message is ready. Connect this form to your email service to receive submissions live.';
+}
+
+/* ---------- Init from hash ---------- */
+go((location.hash||'#home').slice(1));
+</script>
+</body>
+</html>

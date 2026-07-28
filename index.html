@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ultimate Advancement of Knowledge Church — UAOK</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta name="description" content="Ultimate Advancement of Knowledge Church (UAOK) — a Christian, Baptist family advancing knowledge, faith, and love. Sundays at 11 AM, online and in person." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -311,6 +313,41 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
 @media(max-width:960px){.app-hero{grid-template-columns:1fr;gap:34px}.feat-grid,.shots{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.feat-grid,.shots{grid-template-columns:1fr}}
 
+/* ===== PORTAL ===== */
+.portal{position:relative;min-height:100vh;display:flex;align-items:center;color:var(--cream);overflow:hidden;padding:140px 0 80px}
+.portal-bg{position:absolute;inset:0;z-index:0}
+.portal-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portal-bg .hero-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,29,.82),rgba(8,18,29,.92))}
+.portal canvas{position:absolute;inset:0;z-index:2}
+.portal-inner{position:relative;z-index:3;text-align:center}
+.portal-logo{width:min(250px,56vw);margin:0 auto 16px;filter:drop-shadow(0 8px 30px rgba(196,154,71,.3))}
+.portal-inner h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:340;margin:12px 0 0}
+.portal-inner h1 em{font-style:italic;color:var(--gold-2)}
+.portal-inner>p{color:var(--cream-mute);margin:16px 0 42px;font-size:1.05rem}
+.portal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:left}
+.pcard-e{display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(196,154,71,.12),rgba(240,234,219,.03));border:1px solid var(--line-d);border-radius:10px;padding:28px 24px;transition:.38s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden}
+.pcard-e::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);transform-origin:left;transition:.4s}
+.pcard-e:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(196,154,71,.4)}
+.pcard-e:hover::before{transform:scaleX(1)}
+.pcard-e .pc-ic{width:42px;height:42px;color:var(--gold-2);margin-bottom:16px}
+.pc-tag{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.pcard-e h3{font-family:var(--serif);font-size:1.28rem;color:var(--cream);margin:8px 0 10px;font-weight:450;line-height:1.16}
+.pcard-e p{font-size:.89rem;color:var(--cream-mute);flex:1}
+.pc-go{margin-top:18px;font-weight:700;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-2)}
+@media(max-width:960px){.portal-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.portal-grid{grid-template-columns:1fr}}
+.tag-pill{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.45em .85em;border-radius:2px;background:var(--gold-soft);color:var(--gold-2);margin-top:14px}
+/* photo placeholders */
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.ph-cell .ph-slot{aspect-ratio:4/3;border-radius:8px;border:1px solid var(--line-l);background:linear-gradient(135deg,var(--paper-2),var(--paper-3));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:18px;position:relative}
+.ph-cell .ph-slot::before{content:"";position:absolute;inset:12px;border:1px solid var(--line-l);border-radius:4px}
+.ph-cell .ph-slot .pi{width:36px;height:36px;color:var(--gold);opacity:.85;position:relative}
+.ph-cell .ph-slot small{position:relative;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft)}
+.ph-cap{font-family:var(--serif);font-size:1.08rem;color:var(--ink);margin-top:13px}
+.ph-cell p{font-size:.9rem;color:var(--text-soft);margin-top:4px}
+@media(max-width:860px){.ph-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ph-grid{grid-template-columns:1fr}}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(22px);transition:.8s cubic-bezier(.2,.7,.3,1)}
 .rv.in{opacity:1;transform:none}
@@ -358,28 +395,64 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
 <!-- ===== HEADER ===== -->
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#home" class="brand" data-nav>
+    <a href="#portal" class="brand" data-nav>
       <span class="emblem" data-emblem></span>
-      <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge Church</span></span>
+      <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge</span></span>
     </a>
-    <nav class="nav-links">
-      <a href="#home" data-nav>Home</a>
-      <a href="#about" data-nav>About</a>
-      <a href="#leadership" data-nav>Leadership</a>
-      <a href="#visit" data-nav>Visit</a>
-      <a href="#apps" data-nav>Apps</a>
-      <a href="#giving" data-nav>Giving</a>
-      <a href="#contact" data-nav>Contact</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="#" class="btn btn--ghost" id="watchTop"><span class="live-dot"></span> Watch Live</a>
-      <a href="#giving" class="btn btn--gold" data-nav>Give</a>
-    </div>
+    <nav class="nav-links" id="navLinks"></nav>
+    <div class="nav-cta" id="navCta"></div>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main>
+
+<!-- ===== PORTAL ===== -->
+<section class="page" id="page-portal">
+  <div class="portal">
+    <div class="portal-bg">
+      <video autoplay muted loop playsinline preload="auto" poster="poster.jpg"><source src="splash.mp4" type="video/mp4"></video>
+      <div class="hero-tint"></div>
+    </div>
+    <canvas id="portalCanvas"></canvas>
+    <div class="wrap portal-inner">
+      <img class="portal-logo" src="uaok-logo.png" alt="Ultimate Advancement of Knowledge">
+      <span class="eyebrow center">The UAOK Family of Organizations</span>
+      <h1>One mission. <em>Four hands</em> at work.</h1>
+      <p>Choose an organization to continue.</p>
+      <div class="portal-grid">
+        <a class="pcard-e rv" href="#home" data-nav>
+          <svg class="pc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5v12M18 11h12"/><path d="M10 21h28v18a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3z"/><path d="M18 42V30h12v12"/></svg>
+          <span class="pc-tag">Faith &amp; Community</span>
+          <h3>Non-Profit Ministry</h3>
+          <p>Our Christian, Baptist church — worship, discipleship, and outreach that lift lives and communities.</p>
+          <span class="pc-go">Enter →</span>
+        </a>
+        <a class="pcard-e rv" href="#ip" data-nav>
+          <svg class="pc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6a13 13 0 0 0-8 23v6h16v-6a13 13 0 0 0-8-23z"/><path d="M18 41h12M20 44h8"/></svg>
+          <span class="pc-tag">Innovation &amp; Technology</span>
+          <h3>Intellectual Property LLC</h3>
+          <p>Apps, AI software, and the brands, copyrights, and trademarks that advance knowledge.</p>
+          <span class="pc-go">Enter →</span>
+        </a>
+        <a class="pcard-e rv" href="#community" data-nav>
+          <svg class="pc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="16" r="6"/><circle cx="33" cy="18" r="5"/><path d="M6 40c0-7 5-11 11-11s11 4 11 11M31 29c6 0 9 4 9 11"/></svg>
+          <span class="pc-tag">Opportunity &amp; Growth</span>
+          <h3>Community Development LLC</h3>
+          <p>Consulting, workforce development, and education that build people and futures.</p>
+          <span class="pc-go">Enter →</span>
+        </a>
+        <a class="pcard-e rv" href="#property" data-nav>
+          <svg class="pc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22L24 9l16 13"/><path d="M11 20v20h26V20"/><path d="M20 40V28h8v12"/></svg>
+          <span class="pc-tag">Stewardship &amp; Assets</span>
+          <h3>Property Holdings LLC</h3>
+          <p>Real estate, land, and assets stewarded to sustain the mission for generations.</p>
+          <span class="pc-go">Enter →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== HOME ===== -->
 <section class="page active" id="page-home">
@@ -640,92 +713,78 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
   </section>
 </section>
 
-<!-- ===== APPS ===== -->
-<section class="page" id="page-apps">
+<!-- ===== INTELLECTUAL PROPERTY LLC ===== -->
+<section class="page" id="page-ip">
   <div class="page-hero">
     <div class="rays" data-rays></div>
     <div class="wrap">
-      <span class="eyebrow">Our Apps</span>
-      <h1>Technology built to serve people.</h1>
-      <p>Tools we've developed to make working life simpler, fairer, and more connected — part of our commitment to advancing knowledge through technology.</p>
+      <span class="eyebrow">UAOK Intellectual Property LLC</span>
+      <h1>Ideas, engineered and protected.</h1>
+      <p>The innovation arm of the UAOK family — developing and safeguarding the software, brands, and creative works that carry the mission forward.</p>
+      <span class="tag-pill">Innovation &amp; Technology</span>
     </div>
   </div>
 
   <section class="band paper">
-    <div class="wrap">
-      <div class="app-tabs rv">
-        <button class="app-tab on" data-apptab="pickup">Pick Up</button>
-        <button class="app-tab" disabled>More coming soon</button>
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">Overview</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;font-weight:360">Where knowledge becomes technology.</h2>
+        <div class="prose" style="margin-top:22px">
+          <p>UAOK Intellectual Property LLC develops, owns, and manages the technology and creative assets of the UAOK family — from mobile apps and AI software to the websites, logos, copyrights, and trademarks behind every venture.</p>
+          <p>Our work turns ideas into tools people use and value that the organization can steward for the long term.</p>
+        </div>
       </div>
+      <div class="rv">
+        <div class="glass" style="background:var(--ink)">
+          <h3>Our Portfolio</h3>
+          <ul class="values">
+            <li><span class="tick" data-tick></span><span><b>Software &amp; apps.</b> GSC Tracker, Pick Up, Gun Show Trader, and AI tools.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Digital brands.</b> Websites and logos across the UAOK family.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Protected works.</b> Copyrights and trademarks, formally held.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- PICK UP -->
-      <div class="app-panel on" id="apptab-pickup">
-        <div class="app-hero">
-          <div class="rv">
-            <span class="eyebrow">Shift Trading &amp; Crew Tools</span>
-            <h2>Pick Up</h2>
-            <p class="app-sub">Pick Up puts your schedule back in your hands. Built for crew members and shift workers, it makes trading, giving away, and picking up shifts effortless — while tracking every hour you work and keeping your team connected in one place.</p>
-            <div class="app-chips">
-              <span class="chip">Shift Trade</span><span class="chip">Buddy Bid</span><span class="chip">Hour Tracking</span><span class="chip">Crew Chat</span><span class="chip">Rewards</span>
-            </div>
-            <div class="stores">
-              <a href="#" class="store" data-store="ios"><span class="soon">Soon</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
-                <span class="st"><small>Download on the</small><b>App Store</b></span></a>
-              <a href="#" class="store" data-store="android"><span class="soon">Soon</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9z"/></svg>
-                <span class="st"><small>Get it on</small><b>Google Play</b></span></a>
-            </div>
-            <p class="store-note">Pick Up is in final development. Store listings are coming soon — check back for the launch.</p>
-          </div>
-          <div class="rv">
-            <div class="app-mark"><img src="pickup-logo.jpg" alt="Pick Up app logo"></div>
-          </div>
-        </div>
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">What We Build &amp; Hold</span><h2>A growing portfolio of ideas.</h2></div>
+      <div class="feat-grid">
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="34" height="24" rx="3"/><path d="M14 40h20M20 33v7M28 33v7M14 17l5 5-5 5M25 27h8"/></svg><h4>GSC Tracker</h4><p>A tracking and reporting platform built to keep projects, progress, and performance in view. <em>Details to be finalized.</em></p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="5" width="20" height="38" rx="4"/><path d="M22 38h4"/></svg><h4>Pick Up App</h4><p>A shift-trading and crew-management app for shift workers — trade, track hours, and stay connected. Featured below.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18h32l-3 22H11z"/><path d="M16 18v-3a8 8 0 0 1 16 0v3"/></svg><h4>Gun Show Trader</h4><p>A marketplace platform connecting the gun-show community of vendors and attendees. <em>Description to be confirmed.</em></p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="7"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l-4-4M38 10l-4 4M10 38l4-4"/></svg><h4>AI Software</h4><p>Custom AI tools that automate work and put advanced technology within reach of the mission.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c5 5 5 31 0 36M24 6c-5 5-5 31 0 36"/></svg><h4>Websites</h4><p>Design and development of professional websites across the UAOK family of organizations.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="9"/><path d="M24 6l3 6-3 3-3-3zM24 42l3-6-3-3-3 3zM6 24l6 3 3-3-3-3zM42 24l-6 3-3-3 3-3z"/></svg><h4>Logos</h4><p>Original brand marks and visual identities created and owned within the portfolio.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6h16l8 8v28H12z"/><path d="M28 6v8h8M18 26h12M18 33h12"/></svg><h4>Copyrights</h4><p>Original creative and written works, formally protected and held by the LLC.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M18 19c0-3 2.5-5 6-5s6 2 6 5-2.5 4.5-6 4.5M24 30v.5"/></svg><h4>Trademarks</h4><p>Registered names and marks that protect the identity of every UAOK venture.</p></div>
+      </div>
+    </div>
+  </section>
 
-        <div class="sec-head rv" style="margin-top:78px">
-          <span class="eyebrow">What It Does</span>
-          <h2 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">Everything your crew needs, in one app.</h2>
+  <!-- Featured: Pick Up -->
+  <section class="band ink">
+    <div class="wrap">
+      <div class="app-hero">
+        <div class="rv">
+          <span class="eyebrow">Featured Product</span>
+          <h2 style="color:var(--cream);font-size:clamp(2rem,4vw,3rem);font-weight:360;margin:14px 0 4px">Pick Up</h2>
+          <p class="app-sub" style="color:var(--cream-mute)">Pick Up puts your schedule back in your hands. Built for crew members and shift workers, it makes trading, giving away, and picking up shifts effortless — while tracking every hour you work and keeping your team connected.</p>
+          <div class="app-chips"><span class="chip">Shift Trade</span><span class="chip">Buddy Bid</span><span class="chip">Hour Tracking</span><span class="chip">Crew Chat</span><span class="chip">Rewards</span></div>
+          <div class="stores">
+            <a href="#" class="store"><span class="soon">Soon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span class="st"><small>Download on the</small><b>App Store</b></span></a>
+            <a href="#" class="store"><span class="soon">Soon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9z"/></svg><span class="st"><small>Get it on</small><b>Google Play</b></span></a>
+          </div>
+          <p class="store-note" style="color:var(--cream-mute)">In final development — store listings coming soon.</p>
         </div>
-        <div class="feat-grid">
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16h22l-5-5M38 32H16l5 5"/></svg>
-            <h4>Shift Trade</h4><p>Swap shifts directly with other crew members. Post what you have, find what you need, and trade with a tap.</p>
-          </div>
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="17" r="6"/><circle cx="32" cy="19" r="5"/><path d="M8 38c0-6 4.5-10 10-10s10 4 10 10M32 29c5 0 8 3.5 8 9"/></svg>
-            <h4>Buddy Bid</h4><p>Find a buddy and bid your schedules together, so you and your partner end up flying the same line.</p>
-          </div>
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="16" width="32" height="24" rx="3"/><path d="M8 24h32M24 16V40M18 16c-4 0-6-6 0-6s6 6 6 6-2-6-6-6"/></svg>
-            <h4>Giveaway</h4><p>Need a day off? Give a shift away to the crew pool and let someone who wants the hours pick it up.</p>
-          </div>
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="26" r="15"/><path d="M24 18v8l6 4M18 6h12"/></svg>
-            <h4>Opus Hour Tracking</h4><p>Log start and end times, absences, overtime, and pay periods — then see exactly what you earned.</p>
-          </div>
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h32v22H26l-9 7v-7H8z"/><path d="M16 20h16M16 27h10"/></svg>
-            <h4>Crew Chat Room</h4><p>Stay connected with your team. Coordinate trades, ask questions, and keep the whole crew in the loop.</p>
-          </div>
-          <div class="feat rv">
-            <svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l5.5 11.5L42 19l-9 8.8 2.2 12.2L24 34.2 12.8 40 15 27.8 6 19l12.5-1.5z"/></svg>
-            <h4>Incentives &amp; Rewards</h4><p>Earn and redeem rewards as you use the app, with alerts so you never miss an opportunity.</p>
-          </div>
-        </div>
-
-        <div class="sec-head rv" style="margin-top:78px">
-          <span class="eyebrow">Inside the App</span>
-          <h2 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">A clean, fast experience.</h2>
-        </div>
-        <div class="shots">
-          <figure class="shot rv"><img src="pickup-shot-home.jpg" alt="Pick Up app home screen with quick access tiles">
-            <figcaption><b>Quick Access</b><span>Everything one tap from home.</span></figcaption></figure>
-          <figure class="shot rv"><img src="pickup-shot-trades.jpg" alt="Pick Up app type of trades screen">
-            <figcaption><b>Type of Trades</b><span>Buddy Bid, Shift Trade, or Giveaway.</span></figcaption></figure>
-          <figure class="shot rv"><img src="pickup-shot-opus.jpg" alt="Pick Up app Opus hour tracking screen">
-            <figcaption><b>Opus</b><span>Hours, overtime, and pay at a glance.</span></figcaption></figure>
-        </div>
+        <div class="rv"><div class="app-mark"><img src="pickup-logo.jpg" alt="Pick Up app logo"></div></div>
+      </div>
+      <div class="shots">
+        <figure class="shot rv"><img src="pickup-shot-home.jpg" alt="Pick Up home screen"><figcaption><b>Quick Access</b><span>Everything one tap from home.</span></figcaption></figure>
+        <figure class="shot rv"><img src="pickup-shot-trades.jpg" alt="Pick Up type of trades"><figcaption><b>Type of Trades</b><span>Buddy Bid, Shift Trade, or Giveaway.</span></figcaption></figure>
+        <figure class="shot rv"><img src="pickup-shot-opus.jpg" alt="Pick Up Opus hour tracking"><figcaption><b>Opus</b><span>Hours, overtime, and pay at a glance.</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -733,9 +792,129 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
   <section class="cta">
     <div class="rays" data-rays></div>
     <div class="wrap rv">
-      <span class="eyebrow center">Stay Updated</span>
-      <h2>Be first to know when Pick Up launches.</h2>
-      <p>Get in touch and we'll let you know the moment it hits the App Store and Google Play.</p>
+      <span class="eyebrow center">Licensing &amp; Partnerships</span>
+      <h2>Interested in our technology?</h2>
+      <p>Reach out about products, licensing, or partnership opportunities.</p>
+      <div class="hero-cta"><a href="#contact" class="btn btn--gold" data-nav>Contact Us <span class="arw">→</span></a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ===== COMMUNITY DEVELOPMENT LLC ===== -->
+<section class="page" id="page-community">
+  <div class="page-hero">
+    <div class="rays" data-rays></div>
+    <div class="wrap">
+      <span class="eyebrow">UAOK Community Development LLC</span>
+      <h1>Building people. Building futures.</h1>
+      <p>The development arm of the UAOK family — creating opportunity through consulting, workforce programs, and education that change trajectories.</p>
+      <span class="tag-pill">Opportunity &amp; Growth</span>
+    </div>
+  </div>
+
+  <section class="band paper">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">Overview</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;font-weight:360">Opportunity, delivered on the ground.</h2>
+        <div class="prose" style="margin-top:22px">
+          <p>UAOK Community Development LLC partners with agencies, employers, and communities to deliver consulting, government contracts, and workforce programs that put people to work and help them grow.</p>
+          <p>From youth employment to professional training, we turn potential into skills, and skills into livelihoods.</p>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="glass" style="background:var(--ink)">
+          <h3>How We Help</h3>
+          <ul class="values">
+            <li><span class="tick" data-tick></span><span><b>Consulting &amp; contracts.</b> Advisory work and government partnerships.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Jobs &amp; workforce.</b> Youth employment and workforce development.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Training &amp; education.</b> Programs that build lasting skills.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">What We Do</span><h2>Services that move communities forward.</h2></div>
+      <div class="feat-grid">
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l4 8 9 1-6.5 6.5L32 30l-8-4-8 4 1.5-8.5L11 15l9-1z"/><path d="M14 42h20"/></svg><h4>Consulting</h4><p>Strategic advisory that helps organizations plan, fund, and deliver community impact.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 42V14l14-8 14 8v28M10 42h28M18 42V28h12v14M16 18h4M28 18h4"/></svg><h4>Government Contracts</h4><p>Delivering on public-sector agreements with accountability and measurable results.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="8"/><path d="M10 40c0-8 6-13 14-13s14 5 14 13"/></svg><h4>Youth Employment</h4><p>First jobs, mentorship, and real work experience that set young people up to succeed.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34l18-9 18 9M24 25V13M24 13l-8 4M24 13l8 4M14 30v6a10 5 0 0 0 20 0v-6"/></svg><h4>Workforce Development</h4><p>Pathways that prepare people for in-demand careers and keep them advancing.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="32" height="24" rx="3"/><path d="M16 40h16M20 34v6M28 34v6M16 18l5 4-5 4M25 26h8"/></svg><h4>Training</h4><p>Hands-on, job-ready training in trades, technology, and professional skills.</p></div>
+        <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8L6 16l18 8 18-8z"/><path d="M14 20v9c0 3 5 5 10 5s10-2 10-5v-9M42 16v10"/></svg><h4>Educational Programs</h4><p>Curriculum and learning experiences that advance knowledge for every age.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="rays" data-rays></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Work With Us</span>
+      <h2>Let's build something that lasts.</h2>
+      <p>Agencies, employers, and partners — reach out to explore working together.</p>
+      <div class="hero-cta"><a href="#contact" class="btn btn--gold" data-nav>Contact Us <span class="arw">→</span></a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ===== PROPERTY HOLDINGS LLC ===== -->
+<section class="page" id="page-property">
+  <div class="page-hero">
+    <div class="rays" data-rays></div>
+    <div class="wrap">
+      <span class="eyebrow">UAOK Property Holdings LLC</span>
+      <h1>Stewarding the ground the mission stands on.</h1>
+      <p>The asset arm of the UAOK family — holding and caring for the property, land, and resources that sustain every organization.</p>
+      <span class="tag-pill">Stewardship &amp; Assets</span>
+    </div>
+  </div>
+
+  <section class="band paper">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">Overview</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;font-weight:360">Assets held for the long run.</h2>
+        <div class="prose" style="margin-top:22px">
+          <p>UAOK Property Holdings LLC owns and manages the real estate and physical assets of the UAOK family — church and ministry buildings, rental property, land, storage facilities, and ministry vehicles.</p>
+          <p>Careful stewardship of these assets keeps the mission stable, funded, and ready to grow.</p>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="glass" style="background:var(--ink)">
+          <h3>What We Hold</h3>
+          <ul class="values">
+            <li><span class="tick" data-tick></span><span><b>Buildings.</b> Church, ministry, and rental property.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Land.</b> Developed sites and vacant land.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Operations.</b> Storage facilities, ministry vehicles, and other LLC assets.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band paper2">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">Our Portfolio</span><h2>Property &amp; assets under stewardship.</h2></div>
+      <div class="ph-grid">
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 42V16l16-9 16 9v26M8 42h32M18 42V30h12v12M14 20h4M30 20h4"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Ministry Buildings</p><p>Houses of worship and ministry facilities.</p></div>
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v10M19 11h10"/><path d="M10 22h28v20H10z"/><path d="M19 42V31h10v11"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Church Property</p><p>Sanctuary and gathering spaces for the congregation.</p></div>
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 42V20l12-7 12 7M30 42V26l8-5 4 3v18M6 42h36M13 42V33h6v9"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Rental Property</p><p>Residential and commercial units generating income.</p></div>
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 38h40M8 38l6-16 8 6 6-12 12 22"/><circle cx="34" cy="14" r="3"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Vacant Land</p><p>Undeveloped parcels held for future growth.</p></div>
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="14" width="34" height="24" rx="2"/><path d="M7 22h34M15 14V9a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v5"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Storage Facilities</p><p>Secure storage supporting ministry operations.</p></div>
+        <div class="ph-cell rv"><div class="ph-slot"><span class="pi"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30h30v6H6zM36 22h6l4 8v6H36z"/><circle cx="14" cy="38" r="3"/><circle cx="38" cy="38" r="3"/></svg></span><small>Photo coming soon</small></div><p class="ph-cap">Ministry Vehicles</p><p>Vans and vehicles that keep the mission moving.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="rays" data-rays></div>
+    <div class="wrap rv">
+      <span class="eyebrow center">Inquiries</span>
+      <h2>Leasing, land, or partnership questions?</h2>
+      <p>Get in touch with our property team.</p>
       <div class="hero-cta"><a href="#contact" class="btn btn--gold" data-nav>Contact Us <span class="arw">→</span></a></div>
     </div>
   </section>
@@ -822,36 +1001,37 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
   <div class="wrap">
     <div class="fgrid">
       <div class="fcol fabout">
-        <a href="#home" class="brand" data-nav>
+        <a href="#portal" class="brand" data-nav>
           <span class="emblem" data-emblem></span>
-          <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge Church</span></span>
+          <span class="brand-tx"><b>UAOK</b><span>Ultimate Advancement of Knowledge</span></span>
         </a>
-        <p>A Christian, Baptist family advancing knowledge, faith, and love. Worship with us Sundays at 11 AM.</p>
+        <p>A family of purpose-driven organizations advancing knowledge, faith, opportunity, and community.</p>
         <span class="eyebrow" style="font-size:.64rem">You are A.O.K — let your dreams be what they may</span>
       </div>
       <div class="fcol">
-        <h5>Explore</h5>
-        <a href="#about" data-nav>About</a>
-        <a href="#leadership" data-nav>Leadership</a>
+        <h5>Organizations</h5>
+        <a href="#home" data-nav>Non-Profit Ministry</a>
+        <a href="#ip" data-nav>Intellectual Property LLC</a>
+        <a href="#community" data-nav>Community Development LLC</a>
+        <a href="#property" data-nav>Property Holdings LLC</a>
+      </div>
+      <div class="fcol">
+        <h5>Ministry</h5>
         <a href="#visit" data-nav>Plan Your Visit</a>
-        <a href="#apps" data-nav>Apps</a>
+        <a href="#giving" data-nav>Give</a>
+        <a href="#" class="js-watch">Watch Live</a>
+        <a href="#leadership" data-nav>Leadership</a>
       </div>
       <div class="fcol">
         <h5>Connect</h5>
-        <a href="#giving" data-nav>Give</a>
-        <a href="#" id="watchFoot">Watch Live</a>
         <a href="#contact" data-nav>Contact</a>
-      </div>
-      <div class="fcol">
-        <h5>Gather</h5>
-        <a href="#visit" data-nav>Sundays · 11 AM</a>
-        <a href="#visit" data-nav>Online &amp; In-Person</a>
         <a href="#contact" data-nav>info@uaok.org</a>
+        <a href="#visit" data-nav>Sundays · 11 AM</a>
       </div>
     </div>
     <div class="fbottom">
-      <small>© 2026 Ultimate Advancement of Knowledge Church (UAOK). Gifts may be tax-deductible to the extent allowed by law.</small>
-      <small>EIN <span class="fein">41-5319268</span> · Christian · Baptist</small>
+      <small>© 2026 Ultimate Advancement of Knowledge. Each organization is operated as a separate entity.</small>
+      <small>Ministry EIN <span class="fein">41-5319268</span> · A 508(c)(1)(A) faith-based nonprofit</small>
     </div>
   </div>
 </footer>
@@ -914,29 +1094,61 @@ if(reduce){document.querySelectorAll('video.bg,video.hero-bg').forEach(v=>{try{v
 /* ---------- splash dismiss ---------- */
 const splash=document.getElementById('splash');
 let dismissed=false;
-function dismiss(){if(dismissed)return;dismissed=true;splash.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>{splash.remove();startHero();},1000);}
+function dismiss(){if(dismissed)return;dismissed=true;splash.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>{splash.remove();go((location.hash||'#portal').slice(1));},1000);}
 document.getElementById('enterBtn').addEventListener('click',dismiss);
 splash.addEventListener('click',dismiss);
 setTimeout(dismiss, reduce?200:4200);
 
 let heroStarted=false;
-function startHero(){if(heroStarted)return;heroStarted=true;particles(document.getElementById('heroCanvas'),46);observe();}
+function startHero(){if(!heroStarted){heroStarted=true;particles(document.getElementById('heroCanvas'),46);}}
+let portalStarted=false;
+function startPortal(){if(!portalStarted){portalStarted=true;particles(document.getElementById('portalCanvas'),50);}}
+
+/* ---------- dynamic navigation ---------- */
+const navLinks=document.getElementById('navLinks'), navCta=document.getElementById('navCta');
+const MINISTRY=['home','about','leadership','visit','giving','contact'];
+const ENTITY_OF={portal:'portal',home:'ministry',about:'ministry',leadership:'ministry',visit:'ministry',giving:'ministry',contact:'ministry',ip:'ip',community:'community',property:'property'};
+const ENTITY_LINKS=[['#home','Ministry'],['#ip','Intellectual Property'],['#community','Community Dev'],['#property','Property']];
+const NAV={
+  portal:{links:ENTITY_LINKS,cta:''},
+  ministry:{links:[['#home','Home'],['#about','About'],['#leadership','Leadership'],['#visit','Visit'],['#giving','Giving'],['#contact','Contact']],
+    cta:'<a href="#" class="btn btn--ghost js-watch"><span class="live-dot"></span> Watch Live</a><a href="#giving" class="btn btn--gold" data-nav>Give</a>'},
+  ip:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
+  community:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
+  property:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'}
+};
+function setNav(entity,id){
+  const cfg=NAV[entity]||NAV.portal;
+  navLinks.innerHTML=cfg.links.map(([h,l])=>`<a href="${h}" data-nav>${l}</a>`).join('');
+  navCta.innerHTML=cfg.cta;
+  const active=(entity==='ministry')?('#'+id):('#'+id);
+  navLinks.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')===active));
+}
 
 /* ---------- router ---------- */
-const pages=['home','about','leadership','visit','apps','giving','contact'];
+const pages=['portal','home','about','leadership','visit','ip','community','property','giving','contact'];
 function go(id){
-  if(!pages.includes(id))id='home';
+  if(!pages.includes(id))id='portal';
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+  setNav(ENTITY_OF[id]||'portal',id);
   if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
   window.scrollTo({top:0,behavior:'auto'});
   document.getElementById('hdr').classList.remove('open');
-  if(id==='home'&&heroStarted)particles(document.getElementById('heroCanvas'),46);
+  if(id==='home')startHero();
+  if(id==='portal')startPortal();
   setTimeout(observe,40);
 }
-document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go(a.getAttribute('href').slice(1));}));
-window.addEventListener('popstate',()=>go((location.hash||'#home').slice(1)));
+/* delegated navigation + watch + store handling */
+document.addEventListener('click',e=>{
+  const nav=e.target.closest('[data-nav]');
+  if(nav){e.preventDefault();go(nav.getAttribute('href').slice(1));return;}
+  const w=e.target.closest('.js-watch,[id^="watch"]');
+  if(w){e.preventDefault();alert('Coming Soon');return;}
+  const s=e.target.closest('.store');
+  if(s&&s.getAttribute('href')==='#'){e.preventDefault();alert('Coming Soon');return;}
+});
+window.addEventListener('popstate',()=>go((location.hash||'#portal').slice(1)));
 
 /* ---------- header ---------- */
 const hdr=document.getElementById('hdr');
@@ -953,28 +1165,14 @@ function observe(){
   });
 }
 
-/* ---------- watch live + give + amounts + form ---------- */
-const WATCH_MSG="Coming Soon";
-['watchTop','watchHero','watchCta','watchVisit','watchVisit2','watchFoot'].forEach(id=>{const b=document.getElementById(id);if(b)b.addEventListener('click',e=>{e.preventDefault();alert(WATCH_MSG);});});
+/* ---------- give + form ---------- */
 document.querySelectorAll('.give-card .amt').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.give-card .amt').forEach(x=>x.classList.remove('sel'));a.classList.add('sel');}));
 document.getElementById('giveBtn').addEventListener('click',e=>{e.preventDefault();document.getElementById('giveNote').classList.add('show');});
-/* app tabs */
-document.querySelectorAll('.app-tab[data-apptab]').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.app-tab').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.app-panel').forEach(x=>x.classList.remove('on'));
-  t.classList.add('on');
-  const p=document.getElementById('apptab-'+t.dataset.apptab);if(p)p.classList.add('on');
-  observe();
-}));
-/* store buttons — replace href with the real listing URL when live */
-document.querySelectorAll('.store').forEach(s=>s.addEventListener('click',e=>{
-  if(s.getAttribute('href')==='#'){e.preventDefault();alert('Coming Soon');}
-}));
 
 function sendMsg(){const n=(document.getElementById('cn').value||'').trim();const el=document.getElementById('cNote');el.classList.add('show');el.textContent=n?('Thank you, '+n.split(' ')[0]+' — your message is ready to send. Connect this form to an email service to receive it live.'):'Thanks — your message is ready. Connect this form to an email service to receive submissions live.';}
 
 /* ---------- init ---------- */
-go((location.hash||'#home').slice(1));
+go((location.hash||'#portal').slice(1));
 if(reduce){document.body.classList.remove('locked');}
 </script>
 </body>

@@ -611,56 +611,6 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
     </div>
   </section>
 
-  <section class="cta">
-    <div class="rays" data-rays></div>
-    <div class="wrap rv">
-      <span class="eyebrow center">Meet Our Leaders</span>
-      <h2>Shepherds who serve with love.</h2>
-      <p>Get to know Pastor Michael and First Lady Cassandra Ross.</p>
-      <div class="hero-cta"><a href="#leadership" class="btn btn--gold" data-nav>Meet the Leadership <span class="arw">→</span></a></div>
-    </div>
-  </section>
-</section>
-
-<!-- ===== LEADERSHIP ===== -->
-<section class="page" id="page-leadership">
-  <div class="page-hero">
-    <div class="rays" data-rays></div>
-    <div class="wrap">
-      <span class="eyebrow">Our Leadership</span>
-      <h1>Called to shepherd. Devoted to serve.</h1>
-      <p>Ultimate Advancement of Knowledge Church is led by a couple whose lives are given to the Gospel and to God's people.</p>
-    </div>
-  </div>
-
-  <section class="band paper">
-    <div class="wrap">
-      <div class="couple rv">
-        <img src="pastors.jpg" alt="Pastor Michael Ross and First Lady Cassandra Ross">
-      </div>
-      <p class="couple-cap rv">Pastor Michael &amp; First Lady Cassandra Ross</p>
-      <div class="couple-bios">
-        <div class="bio rv">
-          <span class="role">Senior Pastor</span>
-          <h3>Pastor Michael Ross</h3>
-          <p>Pastor Michael leads UAOK with conviction, warmth, and a heart for teaching the Word. His preaching calls the church higher — to deeper faith, greater knowledge, and bolder love. He shepherds the congregation alongside his wife, First Lady Cassandra Ross.</p>
-        </div>
-        <div class="bio rv">
-          <span class="role">First Lady</span>
-          <h3>Cassandra Ross</h3>
-          <p>First Lady Cassandra Ross serves the church family with grace, strength, and hospitality. She pours into the women, families, and ministries of UAOK, walking beside Pastor Michael in leading a congregation defined by love.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band ink-2">
-    <div class="wrap quote rv">
-      <span class="mk">“</span>
-      <q>And I will give you shepherds after my own heart, who will feed you with knowledge and understanding.</q>
-      <cite>— Jeremiah 3:15</cite>
-    </div>
-  </section>
 </section>
 
 <!-- ===== VISIT ===== -->
@@ -1022,7 +972,6 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
         <a href="#visit" data-nav>Plan Your Visit</a>
         <a href="#giving" data-nav>Give</a>
         <a href="#" class="js-watch">Watch Live</a>
-        <a href="#leadership" data-nav>Leadership</a>
       </div>
       <div class="fcol">
         <h5>Connect</h5>
@@ -1108,12 +1057,12 @@ function startPortal(){if(!portalStarted){portalStarted=true;particles(document.
 
 /* ---------- dynamic navigation ---------- */
 const navLinks=document.getElementById('navLinks'), navCta=document.getElementById('navCta');
-const MINISTRY=['home','about','leadership','visit','giving','contact'];
-const ENTITY_OF={portal:'portal',home:'ministry',about:'ministry',leadership:'ministry',visit:'ministry',giving:'ministry',contact:'ministry',ip:'ip',community:'community',property:'property'};
+const MINISTRY=['home','about','visit','giving','contact'];
+const ENTITY_OF={portal:'portal',home:'ministry',about:'ministry',visit:'ministry',giving:'ministry',contact:'ministry',ip:'ip',community:'community',property:'property'};
 const ENTITY_LINKS=[['#home','Ministry'],['#ip','Intellectual Property'],['#community','Community Dev'],['#property','Property']];
 const NAV={
   portal:{links:ENTITY_LINKS,cta:''},
-  ministry:{links:[['#home','Home'],['#about','About'],['#leadership','Leadership'],['#visit','Visit'],['#giving','Giving'],['#contact','Contact']],
+  ministry:{links:[['#home','Home'],['#about','About'],['#visit','Visit'],['#giving','Giving'],['#contact','Contact']],
     cta:'<a href="#" class="btn btn--ghost js-watch"><span class="live-dot"></span> Watch Live</a><a href="#giving" class="btn btn--gold" data-nav>Give</a>'},
   ip:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
   community:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
@@ -1128,7 +1077,7 @@ function setNav(entity,id){
 }
 
 /* ---------- router ---------- */
-const pages=['portal','home','about','leadership','visit','ip','community','property','giving','contact'];
+const pages=['portal','home','about','visit','ip','community','property','giving','contact'];
 function go(id){
   if(!pages.includes(id))id='portal';
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));

@@ -102,6 +102,12 @@ header.solid{background:rgba(8,18,29,.86);backdrop-filter:blur(14px);padding:11p
 .nav-links a{font-size:.85rem;font-weight:600;letter-spacing:.02em;padding:.55em .9em;border-radius:2px;color:var(--cream-mute);transition:.25s;position:relative}
 .nav-links a:hover{color:var(--cream)}
 .nav-links a.on{color:var(--gold-2)}
+.nav-dd{position:relative;display:inline-flex}
+.dd-caret{display:inline-block;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:0 0 3px 7px;opacity:.7}
+.dd-menu{display:none;position:absolute;top:100%;left:0;min-width:230px;padding:8px;background:rgba(8,18,29,.97);backdrop-filter:blur(14px);border:1px solid var(--line-d);border-radius:4px;box-shadow:0 18px 40px -18px rgba(0,0,0,.6);z-index:60}
+.dd-menu::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.nav-dd:hover .dd-menu,.nav-dd:focus-within .dd-menu{display:block}
+.dd-menu a{display:block;white-space:nowrap}
 .nav-links a.on::after{content:"";position:absolute;left:.9em;right:.9em;bottom:.28em;height:1px;background:var(--gold)}
 .nav-cta{display:flex;align-items:center;gap:.5rem;margin-left:.6rem}
 .nav-cta .btn{padding:.6em 1.05em;font-size:.82rem}
@@ -238,8 +244,8 @@ section.band{padding:104px 0;position:relative}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:54px}
 .field{margin-bottom:18px}
 .field label{display:block;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin-bottom:7px}
-.field input,.field textarea{width:100%;padding:.85em 1em;border:1px solid var(--line-l);border-radius:3px;background:var(--paper);font-family:inherit;font-size:.96rem;color:var(--ink);transition:.2s}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.field input,.field textarea,.field select{width:100%;padding:.85em 1em;border:1px solid var(--line-l);border-radius:3px;background:var(--paper);font-family:inherit;font-size:.96rem;color:var(--ink);transition:.2s}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
 .cinfo .row{display:flex;gap:15px;padding:20px 0;border-bottom:1px solid var(--line-l)}
 .cinfo .row:first-child{padding-top:0}
 .cinfo .ic{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;flex:none}
@@ -364,6 +370,9 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
   .burger{display:flex}
   header.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(8,18,29,.97);backdrop-filter:blur(14px);padding:14px 26px 20px;gap:0;border-top:1px solid var(--line-d)}
   header.open .nav-links a{padding:.85em 0;width:100%;border-bottom:1px solid var(--line-d)}
+  header.open .nav-dd{flex-direction:column;width:100%}
+  header.open .dd-menu{display:block;position:static;min-width:0;padding:0 0 0 18px;background:none;border:0;box-shadow:none;backdrop-filter:none}
+  header.open .dd-caret{display:none}
 }
 @media(max-width:600px){
   .tri,.steps,.facts{grid-template-columns:1fr}
@@ -694,6 +703,7 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
           <h3>Our Portfolio</h3>
           <ul class="values">
             <li><span class="tick" data-tick></span><span><b>Software &amp; apps.</b> GSC Tracker, Pick Up, Gun Show Trader, and AI tools.</span></li>
+            <li><span class="tick" data-tick></span><span><b>Event Planning Services (EPS).</b> Custom web invitations for every kind of celebration.</span></li>
             <li><span class="tick" data-tick></span><span><b>Digital brands.</b> Websites and logos across the UAOK family.</span></li>
             <li><span class="tick" data-tick></span><span><b>Protected works.</b> Copyrights and trademarks, formally held.</span></li>
           </ul>
@@ -709,6 +719,7 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="34" height="24" rx="3"/><path d="M14 40h20M20 33v7M28 33v7M14 17l5 5-5 5M25 27h8"/></svg><h4>GSC Tracker</h4><p>A tracking and reporting platform built to keep projects, progress, and performance in view. <em>Details to be finalized.</em></p></div>
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="5" width="20" height="38" rx="4"/><path d="M22 38h4"/></svg><h4>Pick Up App</h4><p>A shift-trading and crew-management app for shift workers — trade, track hours, and stay connected. Featured below.</p></div>
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18h32l-3 22H11z"/><path d="M16 18v-3a8 8 0 0 1 16 0v3"/></svg><h4>Gun Show Trader</h4><p>A marketplace platform connecting the gun-show community of vendors and attendees. <em>Description to be confirmed.</em></p></div>
+        <a href="eps.html" class="feat rv" style="display:block"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="32" height="24" rx="3"/><path d="M8 17l16 11 16-11M24 6v4M16 9l2 3M32 9l-2 3"/></svg><h4>Event Planning Services</h4><p>EPS designs custom web invitations with RSVP, countdowns, video shout-outs, and QR tickets. <em>See the service →</em></p></a>
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="7"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l-4-4M38 10l-4 4M10 38l4-4"/></svg><h4>AI Software</h4><p>Custom AI tools that automate work and put advanced technology within reach of the mission.</p></div>
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c5 5 5 31 0 36M24 6c-5 5-5 31 0 36"/></svg><h4>Websites</h4><p>Design and development of professional websites across the UAOK family of organizations.</p></div>
         <div class="feat rv"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="9"/><path d="M24 6l3 6-3 3-3-3zM24 42l3-6-3-3-3 3zM6 24l6 3 3-3-3-3zM42 24l-6 3-3-3 3-3z"/></svg><h4>Logos</h4><p>Original brand marks and visual identities created and owned within the portfolio.</p></div>
@@ -741,6 +752,24 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
         <figure class="shot rv"><img src="pickup-shot-trades.jpg" alt="Pick Up type of trades"><figcaption><b>Type of Trades</b><span>Buddy Bid, Shift Trade, or Giveaway.</span></figcaption></figure>
         <figure class="shot rv"><img src="pickup-shot-opus.jpg" alt="Pick Up Opus hour tracking"><figcaption><b>Opus</b><span>Hours, overtime, and pay at a glance.</span></figcaption></figure>
       </div>
+    </div>
+  </section>
+
+  <!-- Featured: Event Planning Services -->
+  <section class="band paper">
+    <div class="wrap split">
+      <div class="rv">
+        <span class="eyebrow">New Service · EPS</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;font-weight:360">Event Planning Services</h2>
+        <div class="prose" style="margin-top:22px">
+          <p>Custom web invitations for birthdays, weddings, showers, graduations, retirements, and community events. Guests open one link to see the details, RSVP, count down to the day, and send video and photo shout-outs. Hosts manage everything from a private dashboard.</p>
+        </div>
+        <div class="hero-cta" style="margin-top:22px;justify-content:flex-start"><a href="eps.html" class="btn btn--gold">Explore EPS <span class="arw">→</span></a></div>
+      </div>
+      <div class="rv"><div style="display:flex;gap:14px;justify-content:center">
+        <img src="eps-sample-superhero.jpg" alt="Sample superhero birthday web invitation" loading="lazy" style="width:44%;max-width:210px;border-radius:14px;box-shadow:0 24px 50px -24px rgba(10,22,34,.5)">
+        <img src="eps-sample-elegant.jpg" alt="Sample elegant wedding web invitation" loading="lazy" style="width:44%;max-width:210px;border-radius:14px;box-shadow:0 24px 50px -24px rgba(10,22,34,.5);margin-top:34px">
+      </div></div>
     </div>
   </section>
 
@@ -929,11 +958,17 @@ footer{background:#07111c;color:var(--cream);padding:70px 0 32px}
       <div class="rv">
         <span class="eyebrow">Send a Message</span>
         <h2 style="font-size:1.9rem;margin:14px 0 26px;font-weight:400">Say hello.</h2>
-        <div class="field"><label>Name</label><input type="text" id="cn" placeholder="Your name"></div>
-        <div class="field"><label>Email</label><input type="email" id="ce" placeholder="you@email.com"></div>
+        <div class="field"><label>Name</label><input type="text" id="cn" placeholder="Your name" autocomplete="name"></div>
+        <div class="field"><label>Email</label><input type="email" id="ce" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="field"><label>Phone <span style="opacity:.6;font-weight:400">(optional)</span></label><input type="tel" id="cp" placeholder="(555) 555-5555" autocomplete="tel"></div>
+        <div class="field"><label>Topic</label><select id="ct">
+          <option>General</option><option>Event Planning Services</option><option>Ministry</option>
+          <option>Intellectual Property</option><option>Community Development</option><option>Property Holdings</option><option>Giving</option>
+        </select></div>
         <div class="field"><label>Message</label><textarea id="cm" rows="4" placeholder="How can we pray for you or help?"></textarea></div>
-        <button class="btn btn--gold" onclick="sendMsg()">Send Message <span class="arw">→</span></button>
-        <p class="note" id="cNote">Thanks — your message is ready. Connect this form to an email service to receive submissions live.</p>
+        <input type="text" id="cw" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <button class="btn btn--gold" id="cBtn" onclick="sendMsg()">Send Message <span class="arw">→</span></button>
+        <p class="note" id="cNote"></p>
       </div>
       <div class="cinfo rv">
         <span class="eyebrow">Reach Us</span>
@@ -1079,7 +1114,9 @@ const NAV={
 };
 function setNav(entity,id){
   const cfg=NAV[entity]||NAV.portal;
-  navLinks.innerHTML=cfg.links.map(([h,l])=>`<a href="${h}" data-nav>${l}</a>`).join('');
+  navLinks.innerHTML=cfg.links.map(([h,l])=>h==='#ip'
+    ?`<span class="nav-dd"><a href="${h}" data-nav>${l}<span class="dd-caret" aria-hidden="true"></span></a><span class="dd-menu"><a href="eps.html">Event Planning Services</a></span></span>`
+    :`<a href="${h}" data-nav>${l}</a>`).join('');
   navCta.innerHTML=cfg.cta;
   const active=(entity==='ministry')?('#'+id):('#'+id);
   navLinks.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')===active));
@@ -1129,9 +1166,28 @@ function observe(){
 document.querySelectorAll('.give-card .amt').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.give-card .amt').forEach(x=>x.classList.remove('sel'));a.classList.add('sel');}));
 document.getElementById('giveBtn').addEventListener('click',e=>{e.preventDefault();document.getElementById('giveNote').classList.add('show');});
 
-function sendMsg(){const n=(document.getElementById('cn').value||'').trim();const el=document.getElementById('cNote');el.classList.add('show');el.textContent=n?('Thank you, '+n.split(' ')[0]+' — your message is ready to send. Connect this form to an email service to receive it live.'):'Thanks — your message is ready. Connect this form to an email service to receive submissions live.';}
+const MSG_URL='https://mega-app-production-8fd8.up.railway.app/track/message';
+const EPS_HINT='Tell us about your event: the type (birthday, wedding, graduation...), the date, about how many guests, and anything special you want on the invitation.';
+function applyTopic(){const t=new URLSearchParams(location.search).get('topic');if(t==='eps'){const sel=document.getElementById('ct');sel.value='Event Planning Services';document.getElementById('cm').placeholder=EPS_HINT;}}
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='ct')document.getElementById('cm').placeholder=e.target.value==='Event Planning Services'?EPS_HINT:'How can we pray for you or help?';});
+async function sendMsg(){
+  const v=id=>(document.getElementById(id).value||'').trim();
+  const el=document.getElementById('cNote'),btn=document.getElementById('cBtn');
+  const body={name:v('cn'),email:v('ce'),phone:v('cp'),topic:v('ct'),message:v('cm'),website:v('cw')};
+  el.classList.add('show');
+  if(!body.name||!body.message||!(body.email||body.phone)){el.textContent='Please add your name, a message, and an email or phone number so we can reply.';return;}
+  btn.disabled=true;el.textContent='Sending…';
+  try{
+    const r=await fetch(MSG_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)});
+    const d=await r.json().catch(()=>({}));
+    if(r.ok&&d.ok){el.textContent='Thank you, '+body.name.split(' ')[0]+'! Your message was sent. We\'ll get back to you soon.';['cn','ce','cp','cm'].forEach(id=>document.getElementById(id).value='');}
+    else el.textContent=d.error||(r.status===429?'Too many messages at once. Please try again in a few minutes.':'Sorry, that didn\'t send. Please email us at info@uaok.org.');
+  }catch(e){el.textContent='Sorry, that didn\'t send. Please email us at info@uaok.org.';}
+  btn.disabled=false;
+}
 
 /* ---------- init ---------- */
+applyTopic();
 go((location.hash||'#portal').slice(1));
 if(reduce){document.body.classList.remove('locked');}
 </script>

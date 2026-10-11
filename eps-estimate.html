@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Build Your Estimate — Event Planning Services | UAOK</title>
+<meta name="description" content="Pick the features for your web invitation and see your estimated price as you go. Then send it to UAOK Event Planning Services for review." />
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400&family=Hanken+Grotesk:wght@300..800&display=swap" rel="stylesheet">
+<style>
+/* Layout: a step-by-step builder on the left, a live paper invoice pinned on the right (bottom bar on phones).
+   Same look as uaok.org/eps (paper ground, ink header, rose accent). Prices come from the UAOK CRM. */
+:root{
+  --ink:#0A1622;--ink-2:#14273B;--gold:#C49A47;--gold-2:#E7CB83;
+  --rose:#C25E7B;--rose-2:#EFA3B6;--rose-soft:rgba(217,115,143,.13);
+  --paper:#FBF8F1;--paper-2:#F2ECDE;--paper-3:#E7DDC9;--card:#FFFDF8;
+  --text:#22303D;--soft:#5A6772;--cream:#F0EADB;--cream-mute:rgba(240,234,219,.7);
+  --line:rgba(10,22,34,.12);--line-d:rgba(240,234,219,.16);
+  --ok:#2F7D5B;--warn:#A4661B;--bad:#B23A3A;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:var(--sans);background:var(--paper);color:var(--text);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-.01em;text-wrap:balance;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{background:var(--ink);color:var(--cream);padding-inline:16px}
+.top-in{max-width:1180px;margin:0 auto;padding-block:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--serif);font-size:1.1rem}
+.brand small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-mute)}
+.intro{background:var(--ink);color:var(--cream);padding-inline:16px}
+.intro-in{max-width:1180px;margin:0 auto;padding-block:26px 34px}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2)}
+.intro h1{font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:340;margin-top:10px}
+.intro h1 em{font-style:italic;color:var(--rose-2)}
+.intro p{color:var(--cream-mute);max-width:60ch;margin:12px 0 0}
+
+/* page grid */
+.page{padding-inline:16px;padding-block:28px 120px}
+.grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:36px;align-items:start}
+@media(max-width:940px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+/* stepper */
+.stepper{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.stepper button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:.42em .9em .42em .5em;font-size:.84rem;font-weight:600;color:var(--soft);cursor:pointer;display:flex;align-items:center;gap:.5em}
+.stepper button i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--paper-2);font-size:.75rem;font-family:var(--serif)}
+.stepper button.on{border-color:var(--ink);color:var(--ink)}
+.stepper button.on i{background:var(--ink);color:var(--cream)}
+.stepper button.done i{background:var(--rose);color:#fff}
+
+.step{display:none}
+.step.on{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.step.on{animation:none}}
+.step h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:380}
+.step .lead{color:var(--soft);margin:6px 0 22px;max-width:62ch}
+.block{margin-bottom:28px}
+.block>h3{font-size:1.15rem;font-weight:450;margin-bottom:4px;color:var(--ink)}
+.block>p.hint{font-size:.88rem;color:var(--soft);margin:0 0 12px}
+
+/* fields */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fields .full{grid-column:1/-1}
+@media(max-width:560px){.fields{grid-template-columns:1fr}}
+.f label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.04em;color:var(--ink);margin-bottom:5px}
+.f input,.f select,.f textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.7em .8em;font-size:.95rem}
+.f textarea{min-height:92px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--rose);outline:none;box-shadow:0 0 0 3px var(--rose-soft)}
+.f .err{color:var(--bad);font-size:.78rem;margin-top:4px}
+.f.bad input,.f.bad select{border-color:var(--bad)}
+
+/* option cards */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.opt{position:relative;display:flex;flex-direction:column;gap:6px;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:16px 16px 14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
+.opt:hover{border-color:rgba(194,94,123,.5);transform:translateY(-1px)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt:has(input:checked){border-color:var(--rose);box-shadow:0 0 0 3px var(--rose-soft)}
+.opt:has(input:focus-visible){outline:2px solid var(--rose);outline-offset:2px}
+.opt .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.opt .t{font-family:var(--serif);font-size:1.05rem;color:var(--ink);min-width:0}
+.opt .d{font-size:.84rem;color:var(--soft);padding-right:24px}
+.opt .p{flex:none;font-size:.78rem;font-weight:700;color:var(--rose);font-variant-numeric:tabular-nums}
+.opt .p.inc{color:var(--ok)}
+.opt .tick{position:absolute;bottom:12px;right:12px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center}
+.opt:has(input:checked) .tick{background:var(--rose);border-color:var(--rose)}
+.opt:has(input:checked) .tick::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.opt .needs{font-size:.74rem;color:var(--warn)}
+.ill{height:58px;border-radius:6px;background:var(--paper-2);display:flex;gap:4px;padding:6px;margin-bottom:4px}
+.ill span{flex:1;border-radius:3px}
+.ill .pic{background:linear-gradient(135deg,#E9B8C6,#C49A47)}
+.ill .vid{background:var(--ink);position:relative}
+.ill .vid::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-40%,-50%);border-left:9px solid var(--cream);border-top:6px solid transparent;border-bottom:6px solid transparent}
+
+/* countdown preview */
+.cd{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.cd div{background:var(--ink);color:var(--cream);border-radius:8px;padding:10px 0;width:74px;text-align:center}
+.cd b{display:block;font-family:var(--serif);font-size:1.6rem;font-weight:400;font-variant-numeric:tabular-nums;color:var(--gold-2)}
+.cd small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-mute)}
+.cd-note{font-size:.82rem;color:var(--soft);margin-top:8px}
+
+/* uploads */
+.drop{display:block;border:2px dashed var(--paper-3);border-radius:12px;background:var(--card);padding:28px 18px;text-align:center;cursor:pointer;transition:.2s}
+.drop.over,.drop:hover{border-color:var(--rose);background:var(--rose-soft)}
+.drop b{font-family:var(--serif);font-weight:450;font-size:1.15rem;color:var(--ink);display:block}
+.drop span{font-size:.86rem;color:var(--soft)}
+.files{display:grid;gap:10px;margin-top:14px}
+.file{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}
+.file .th{width:64px;height:64px;border-radius:6px;object-fit:cover;background:var(--ink)}
+.file .nm{font-size:.88rem;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file .sz{font-size:.76rem;color:var(--soft)}
+.file select{margin-top:4px;font-size:.8rem;border:1px solid var(--line);border-radius:5px;background:var(--paper);padding:.25em .4em;max-width:100%}
+.x{border:0;background:none;color:var(--soft);font-size:.8rem;font-weight:700;cursor:pointer;padding:.5em}
+.x:hover{color:var(--bad)}
+
+/* nav buttons */
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:.5em;font-weight:700;font-size:.95rem;padding:.85em 1.4em;border-radius:4px;border:1px solid transparent;cursor:pointer;transition:.2s}
+.btn-ink{background:var(--ink);color:var(--cream)}.btn-ink:hover{background:var(--ink-2)}
+.btn-rose{background:var(--rose);color:#fff}.btn-rose:hover{filter:brightness(1.07)}
+.btn-line{background:transparent;border-color:var(--line);color:var(--ink)}.btn-line:hover{border-color:var(--ink)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* invoice */
+.inv-wrap{position:sticky;top:16px}
+.inv{background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:0 24px 50px -28px rgba(10,22,34,.4);padding:24px 22px 20px;position:relative}
+.inv::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(90deg,var(--rose) 0 18px,var(--gold) 18px 36px)}
+.inv-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.inv-head h2{font-size:1.45rem;font-weight:400}
+.inv-head .meta{text-align:right;font-family:var(--mono);font-size:.7rem;color:var(--soft);line-height:1.6}
+.inv-for{font-size:.82rem;color:var(--soft);padding:10px 0;border-bottom:1px solid var(--line)}
+.inv-for b{color:var(--ink);font-weight:600}
+.lines{list-style:none;margin:0;padding:6px 0}
+@media(min-width:941px){.lines{max-height:calc(100vh - 340px);overflow:auto}}
+.lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:7px 0;font-size:.88rem;border-bottom:1px dotted var(--paper-3)}
+.lines li span:first-child{min-width:0}
+.lines li small{display:block;color:var(--soft);font-size:.74rem}
+.lines li .amt{font-family:var(--mono);font-size:.84rem;color:var(--ink);text-align:right}
+.lines li.inc .amt{color:var(--ok)}
+.lines li.rush .amt,.lines li.rush{color:var(--warn)}
+.lines li.new{animation:flash 1s ease}
+@keyframes flash{from{background:var(--rose-soft)}to{background:transparent}}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;margin-top:4px;border-top:2px solid var(--ink)}
+.tot span{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.tot b{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{margin-top:14px;padding-top:12px;border-top:1px dashed var(--paper-3)}
+.code label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.04em;color:var(--ink);margin-bottom:5px}
+.code-row{display:flex;gap:8px}
+.code-row input{flex:1;min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:.55em .7em;font-family:var(--mono);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}
+.code-row input:focus{border-color:var(--rose);outline:none;box-shadow:0 0 0 3px var(--rose-soft)}
+.code-row button{border:1px solid var(--ink);background:var(--ink);color:var(--cream);border-radius:5px;padding:.55em .9em;font-weight:700;font-size:.82rem;cursor:pointer}
+.code-msg{font-size:.76rem;margin-top:6px}
+.code-msg.ok{color:var(--ok)}.code-msg.bad{color:var(--bad)}
+.code-msg button{border:0;background:none;color:var(--soft);text-decoration:underline;cursor:pointer;font-size:.76rem;padding:0;margin-left:6px}
+.lines li.disc .amt,.lines li.disc{color:var(--ok)}
+.code-demo{font-size:.7rem;color:var(--soft);margin-top:4px}
+.inv-note{font-size:.76rem;color:var(--soft);margin-top:10px}
+.inv-files{font-size:.78rem;color:var(--soft);margin-top:8px}
+.price-tag{display:inline-block;margin-top:12px;font-size:.7rem;font-weight:700;color:var(--warn);background:rgba(164,102,27,.1);border-radius:3px;padding:.3em .6em}
+
+/* phone bar */
+.bar{display:none}
+@media(max-width:940px){
+  .inv-wrap{position:static}
+  .bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:var(--cream);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -10px 30px -12px rgba(10,22,34,.5)}
+  .bar small{display:block;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-mute)}
+  .bar b{font-family:var(--serif);font-size:1.5rem;font-weight:400;font-variant-numeric:tabular-nums}
+  .bar a{color:var(--gold-2);font-weight:700;font-size:.88rem;text-decoration:none}
+}
+
+/* review + done */
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--text);margin-top:6px}
+.agree input{margin-top:4px;accent-color:var(--rose);width:18px;height:18px}
+.recap{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;font-size:.9rem}
+.recap dl{display:grid;grid-template-columns:140px minmax(0,1fr);gap:6px 14px;margin:0}
+.recap dt{color:var(--soft)}.recap dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+@media(max-width:480px){.recap dl{grid-template-columns:1fr}.recap dd{margin-bottom:6px}}
+.done{background:var(--ink);color:var(--cream);border-radius:12px;padding:30px 26px}
+.done h2{color:var(--cream);font-size:1.9rem}
+.done p{color:var(--cream-mute);max-width:56ch}
+.done .ref{font-family:var(--mono);color:var(--gold-2)}
+.done .demo{margin-top:16px;padding:12px 14px;border:1px dashed var(--rose-2);border-radius:8px;font-size:.86rem;color:var(--cream)}
+.banner{max-width:1180px;margin:0 auto 18px;background:var(--rose-soft);border:1px solid rgba(194,94,123,.3);color:var(--ink);border-radius:8px;padding:10px 14px;font-size:.86rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.banner button{border:0;background:none;color:var(--rose);font-weight:700;cursor:pointer;padding:0}
+.top a{color:inherit;text-decoration:none}
+.back{font-size:.85rem;font-weight:600;color:var(--cream-mute)}.back:hover{color:var(--gold-2)}
+.loading{max-width:1180px;margin:0 auto;padding:30px 0;color:var(--soft)}
+.prog{height:6px;border-radius:3px;background:var(--line-d);overflow:hidden;margin-top:4px}
+.prog i{display:block;height:100%;width:0;background:var(--gold-2);transition:width .2s}
+.up-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:.84rem;padding:8px 0;border-top:1px solid var(--line-d)}
+.up-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.up-row b{font-weight:600}.up-row b.ok{color:#8FD3AE}.up-row b.bad{color:#F2A0A0}
+.up-row .prog{grid-column:1/-1}
+.file-msg{font-size:.82rem;color:var(--bad);margin-top:8px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+footer{background:#07111c;color:var(--cream);padding-inline:16px}
+footer .in{max-width:1180px;margin:0 auto;padding-block:28px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.84rem;color:var(--cream-mute)}
+footer a{color:var(--cream-mute);text-decoration:none;margin-left:16px}footer a:hover{color:var(--gold-2)}
+@media(max-width:940px){footer .in{padding-bottom:90px}}
+</style>
+<script defer src="https://mega-app-production-8fd8.up.railway.app/static/js/uaok-track.js" data-site="uaok.org"></script>
+</head>
+<body>
+
+<header class="top"><div class="top-in">
+  <a class="brand" href="eps.html">UAOK · Event Planning Services<small>Web invitations</small></a>
+  <a class="back" href="eps.html">← About EPS</a>
+</div></header>
+
+<section class="intro"><div class="intro-in">
+  <div class="eyebrow">Build your estimate</div>
+  <h1>Design your invitation, <em>see the price</em> as you go.</h1>
+  <p>Pick the features you want. Your estimate updates with every click. When you're done, add your photos or videos and send it to us. We'll review it and confirm your final price before any work starts.</p>
+</div></section>
+
+<main class="page">
+  <div class="loading" id="loading">Loading prices…</div>
+  <div class="grid" id="app" hidden>
+    <form id="f" novalidate>
+      <div class="hp" aria-hidden="true"><label for="hp">Leave this empty</label><input id="hp" name="website" tabindex="-1" autocomplete="off"></div>
+      <nav class="stepper" id="stepper" aria-label="Steps"></nav>
+
+      <!-- 1 -->
+      <section class="step" data-title="Your event">
+        <h2>Tell us about your event</h2>
+        <p class="lead">The basics, so we know who it's for and when it happens.</p>
+        <div class="fields">
+          <div class="f"><label for="evType">Event type</label><select id="evType" name="evType"></select></div>
+          <div class="f"><label for="evDate">Event date</label><input id="evDate" name="evDate" type="date"></div>
+          <div class="f full"><label for="evTitle">Event name</label><input id="evTitle" name="evTitle" placeholder="e.g. Max's 7th Birthday"></div>
+          <div class="f"><label for="evGuests">About how many guests</label><input id="evGuests" name="evGuests" type="number" min="1" inputmode="numeric"></div>
+          <div class="f"><label for="evPlace">City or venue (if you know it)</label><input id="evPlace" name="evPlace"></div>
+          <div class="f"><label for="cName">Your name</label><input id="cName" name="cName" autocomplete="name"></div>
+          <div class="f"><label for="cEmail">Email</label><input id="cEmail" name="cEmail" type="email" autocomplete="email"></div>
+          <div class="f"><label for="cPhone">Phone</label><input id="cPhone" name="cPhone" type="tel" autocomplete="tel"></div>
+        </div>
+        <p class="hint" id="rushHint" style="font-size:.85rem;color:var(--warn);margin-top:12px" hidden></p>
+      </section>
+
+      <!-- 2 -->
+      <section class="step" data-title="Look">
+        <h2>The look</h2>
+        <p class="lead">Every invitation is a mobile-friendly website with a link you can text or post anywhere.</p>
+        <div class="block"><h3>Design</h3><p class="hint">Start from one of our themes, or we design one around your photo or artwork.</p>
+          <div class="opts" data-group="design"></div></div>
+        <div class="block"><h3>Top of the invitation</h3><p class="hint">What guests see first when they open the link.</p>
+          <div class="opts" data-group="top"></div></div>
+      </section>
+
+      <!-- 3 -->
+      <section class="step" data-title="Countdown & shout-outs">
+        <h2>Countdown and shout-outs</h2>
+        <p class="lead">Build excitement before the day, and let guests send love.</p>
+        <div class="block"><h3>Countdown clock</h3><p class="hint">Counts down the days, hours and minutes to your event.</p>
+          <div class="opts" data-group="countdown"></div>
+          <div id="cdBox"><div class="cd" id="cd"></div><div class="cd-note" id="cdNote"></div></div>
+        </div>
+        <div class="block"><h3>Shout-out wall</h3><p class="hint">Guests record or upload a message right on the invitation, and everyone can watch.</p>
+          <div class="opts" data-group="wall"></div></div>
+      </section>
+
+      <!-- 4 -->
+      <section class="step" data-title="Extras">
+        <h2>Extras</h2>
+        <p class="lead">Add as many as you like. Leave them all off and that's fine too.</p>
+        <div class="opts" data-group="extras"></div>
+      </section>
+
+      <!-- 5 -->
+      <section class="step" data-title="Upload">
+        <h2>Add your pictures and videos</h2>
+        <p class="lead">Your invitation art, a photo of the guest of honor, or a "come party with me!" video. You can also send these later.</p>
+        <label class="drop" id="drop" for="up"><b>Click to choose files, or drag them here</b><span>Pictures (JPG, PNG, HEIC) and videos (MP4, MOV). Up to 20 files, 300 MB each. They upload when you send your request.</span></label>
+        <input id="up" type="file" accept="image/*,video/*" multiple hidden>
+        <div class="file-msg" id="fileMsg" hidden></div>
+        <div class="files" id="files"></div>
+      </section>
+
+      <!-- 6 -->
+      <section class="step" data-title="Review & send">
+        <div id="reviewBox">
+          <h2>Review and send</h2>
+          <p class="lead">Check your details. When you send it, we'll review your request and confirm the final price with you.</p>
+          <div class="recap"><dl id="recap"></dl></div>
+          <div class="f" style="margin-top:16px"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" placeholder="Colors, theme ideas, favorite characters, a deadline..."></textarea></div>
+          <label class="agree"><input type="checkbox" id="agree"> <span>I understand this is an estimate. UAOK will confirm the final price before starting, and nothing is charged now.</span></label>
+          <div class="f"><div class="err" id="sendErr" hidden></div></div>
+        </div>
+        <div id="doneBox" hidden></div>
+      </section>
+
+      <div class="nav" id="nav">
+        <button type="button" class="btn btn-line" id="back">Back</button>
+        <button type="button" class="btn btn-ink" id="next">Next</button>
+      </div>
+    </form>
+
+    <aside class="inv-wrap" id="estimate" aria-live="polite">
+      <div class="inv">
+        <div class="inv-head">
+          <h2>Estimate</h2>
+          <div class="meta num">No. <span id="invNo"></span><br><span id="invDate"></span></div>
+        </div>
+        <div class="inv-for" id="invFor"></div>
+        <ul class="lines" id="lines"></ul>
+        <div class="tot"><span>Estimated total</span><b id="total">$0</b></div>
+        <div class="code">
+          <label for="code">Discount code</label>
+          <div class="code-row"><input id="code" autocomplete="off" spellcheck="false" placeholder="Enter code"><button type="button" id="codeBtn">Apply</button></div>
+          <div class="code-msg" id="codeMsg" hidden></div>
+        </div>
+        <div class="inv-note">Final price confirmed after we review your request. Nothing is charged now.</div>
+        <div class="inv-files" id="invFiles"></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer><div class="in"><span>© 2026 UAOK Intellectual Property LLC</span><span><a href="eps.html">Event Planning Services</a><a href="/?topic=eps#contact">Contact us</a><a href="/">UAOK.org</a></span></div></footer>
+
+<div class="bar" id="bar"><div><small>Estimated total</small><b id="barTotal">$0</b></div><a href="#estimate">See estimate</a></div>
+
+<script>
+const API = "https://mega-app-production-8fd8.up.railway.app";
+let BASE, PRICES, GROUPS, EVENT_TYPES, code = null;   // prices are loaded from the UAOK CRM
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const money = n => "$" + n.toLocaleString("en-US", Number.isInteger(n) ? {} : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const label = (g, id) => GROUPS[g].items.find(i => i.id === id);
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const iso = d => d.toISOString().slice(0, 10);
+
+function boot() {
+/* build event types + option cards */
+$("#evType").innerHTML = EVENT_TYPES.map(t => `<option>${t}</option>`).join("");
+document.querySelectorAll(".opts").forEach(box => {
+  const g = box.dataset.group, spec = GROUPS[g];
+  box.innerHTML = spec.items.map(it => `
+    <label class="opt">
+      <input type="${spec.type === "radio" ? "radio" : "checkbox"}" name="${g}" value="${it.id}">
+      ${it.ill ? `<div class="ill">${it.ill.map(c => `<span class="${c}"></span>`).join("")}</div>` : ""}
+      <span class="row"><span class="t">${it.t}</span><span class="p ${it.p ? "" : "inc"}">${it.p ? "+" + money(it.p) : "Included"}</span></span>
+      ${it.d ? `<span class="d">${it.d}</span>` : ""}
+      ${it.needs ? `<span class="needs">Adds QR entry tickets too</span>` : ""}
+      <span class="tick" aria-hidden="true"></span>
+    </label>`).join("");
+});
+
+/* ---------- steps ---------- */
+const steps = [...document.querySelectorAll(".step")];
+let cur = 0, sent = false;
+const visited = new Set([0]);
+function drawStepper() {
+  $("#stepper").innerHTML = steps.map((s, i) =>
+    `<button type="button" data-i="${i}" class="${i === cur ? "on" : ""} ${visited.has(i) && i !== cur ? "done" : ""}"${i === cur ? ' aria-current="step"' : ""}><i>${i + 1}</i>${s.dataset.title}</button>`).join("");
+}
+function show(i) {
+  if (sent) return;
+  cur = Math.max(0, Math.min(steps.length - 1, i)); visited.add(cur);
+  steps.forEach((s, k) => s.classList.toggle("on", k === cur));
+  $("#back").disabled = cur === 0;
+  $("#next").textContent = cur === steps.length - 1 ? "Send for review" : "Next";
+  $("#next").className = "btn " + (cur === steps.length - 1 ? "btn-rose" : "btn-ink");
+  if (cur === steps.length - 1) drawRecap();
+  drawStepper();
+  const top = $("#stepper").getBoundingClientRect().top + scrollY - 12;
+  if (scrollY > top) scrollTo({ top, behavior: "smooth" });
+}
+$("#stepper").addEventListener("click", e => { const b = e.target.closest("button"); if (b && (b.dataset.i <= cur || validStep1())) show(+b.dataset.i); });
+$("#back").onclick = () => show(cur - 1);
+$("#next").onclick = () => {
+  if (cur === 0 && !validStep1()) return;
+  if (cur === steps.length - 1) return send();
+  show(cur + 1);
+};
+
+/* ---------- validation ---------- */
+function mark(id, msg) {
+  const f = $("#" + id).closest(".f");
+  f.classList.toggle("bad", !!msg);
+  let e = f.querySelector(".err");
+  if (!e) { e = document.createElement("div"); e.className = "err"; f.appendChild(e); }
+  e.textContent = msg || ""; e.hidden = !msg;
+  return !msg;
+}
+function validStep1() {
+  const ok = [
+    mark("cName", $("#cName").value.trim() ? "" : "Add your name."),
+    mark("cEmail", $("#cEmail").value.trim() || $("#cPhone").value.trim() ? "" : "Add an email or a phone number so we can reach you."),
+    mark("evDate", !$("#evDate").value || new Date($("#evDate").value + "T00:00") >= today ? "" : "That date has already passed."),
+  ].every(Boolean);
+  if (!ok) show(0);
+  return ok;
+}
+
+/* ---------- estimate ---------- */
+let lastIds = new Set();
+function state() {
+  const fd = new FormData($("#f"));
+  return { design: fd.get("design"), top: fd.get("top"), countdown: fd.get("countdown"), wall: fd.get("wall"), extras: fd.getAll("extras") };
+}
+function daysAway() {
+  const v = $("#evDate").value; if (!v) return null;
+  return Math.round((new Date(v + "T00:00") - today) / 864e5);
+}
+function lines() {
+  const s = state(), out = [{ id: "base", t: BASE.t, s: BASE.s, p: BASE.p }];
+  for (const g of ["design", "top", "countdown", "wall"]) {
+    const it = s[g] && label(g, s[g]);
+    if (it && !(g === "countdown" && it.id === "no") && !(g === "wall" && it.id === "none"))
+      out.push({ id: g + it.id, t: { design: "Design", top: "Top of invitation", countdown: "Countdown clock", wall: "Shout-out wall" }[g], s: it.t, p: it.p });
+  }
+  s.extras.forEach(x => { const it = label("extras", x); out.push({ id: "x" + x, t: it.t, p: it.p }); });
+  if (code) {
+    const sub = out.reduce((a, l) => a + l.p, 0);
+    const amt = Math.min(sub, code.kind === "percent" ? Math.round(sub * code.value) / 100 : code.value);
+    out.push({ id: "disc", t: `Discount (${code.code})`, s: code.label, p: -amt, disc: true });
+  }
+  const d = daysAway();
+  if (d !== null && d >= 0 && d < PRICES.rushDays) out.push({ id: "rush", t: "Rush fee", s: `Event is ${d === 0 ? "today" : d === 1 ? "tomorrow" : "in " + d + " days"}`, p: PRICES.rush, rush: true });
+  return out;
+}
+function draw() {
+  const ls = lines(), total = ls.reduce((a, l) => a + l.p, 0);
+  $("#lines").innerHTML = ls.map(l => `<li class="${l.p ? "" : "inc"} ${l.rush ? "rush" : ""} ${l.disc ? "disc" : ""} ${lastIds.size && !lastIds.has(l.id) ? "new" : ""}"><span>${l.t}${l.s ? `<small>${l.s}</small>` : ""}</span><span class="amt">${l.p < 0 ? "−" + money(-l.p) : l.p ? money(l.p) : "Included"}</span></li>`).join("");
+  lastIds = new Set(ls.map(l => l.id));
+  $("#total").textContent = money(total); $("#barTotal").textContent = money(total);
+  const title = $("#evTitle").value.trim() || $("#evType").value, who = $("#cName").value.trim();
+  const v = $("#evDate").value;
+  $("#invFor").innerHTML = `For <b>${esc(who || "you")}</b> · ${esc(title)}${v ? " · " + new Date(v + "T00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : ""}`;
+  $("#invFiles").textContent = files.length ? `${files.length} file${files.length > 1 ? "s" : ""} attached` : "";
+  const d = daysAway(), rh = $("#rushHint");
+  rh.hidden = !(d !== null && d >= 0 && d < PRICES.rushDays);
+  rh.textContent = `Your event is less than ${PRICES.rushDays} days away, so a ${money(PRICES.rush)} rush fee is added. Pick a later date and it comes off.`;
+  drawCountdown();
+  return total;
+}
+async function applyCode() {
+  const v = $("#code").value.trim().toUpperCase(), m = $("#codeMsg");
+  m.hidden = false;
+  if (!v) { m.className = "code-msg bad"; m.textContent = "Type a code first."; return; }
+  m.className = "code-msg"; m.textContent = "Checking…";
+  let r;
+  try { r = await (await fetch(API + "/eps/code", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ code: v }) })).json(); }
+  catch (e) { m.className = "code-msg bad"; m.textContent = "Couldn't check the code. Check your connection and try again."; return; }
+  if (!r.ok) { code = null; m.className = "code-msg bad"; m.textContent = r.error || "That isn't a valid code."; draw(); return; }
+  code = r; m.className = "code-msg ok"; m.innerHTML = `${esc(r.code)} applied: ${esc(r.label)}. <button type="button" id="codeRm">Remove</button>`;
+  $("#codeRm").onclick = () => { code = null; $("#code").value = ""; m.hidden = true; draw(); };
+  draw();
+}
+$("#codeBtn").onclick = applyCode;
+$("#code").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); applyCode(); } });
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* VIP / paid tickets need QR tickets */
+$("#f").addEventListener("change", e => {
+  if (e.target.name === "extras") {
+    const it = label("extras", e.target.value);
+    if (e.target.checked && it.needs) document.querySelector(`input[name=extras][value=${it.needs}]`).checked = true;
+    if (!e.target.checked && e.target.value === "tickets")
+      GROUPS.extras.items.filter(i => i.needs === "tickets").forEach(i => document.querySelector(`input[name=extras][value=${i.id}]`).checked = false);
+  }
+  draw();
+});
+$("#f").addEventListener("input", draw);
+
+/* ---------- countdown preview ---------- */
+let cdTimer;
+function drawCountdown() {
+  const on = state().countdown === "yes"; $("#cdBox").hidden = !on;
+  clearInterval(cdTimer); if (!on) return;
+  const tick = () => {
+    const v = $("#evDate").value, target = v ? new Date(v + "T14:00") : null;
+    let ms = target ? Math.max(0, target - new Date()) : 0;
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1e3) % 60;
+    $("#cd").innerHTML = [[d, "Days"], [h, "Hours"], [m, "Min"], [sec, "Sec"]].map(([n, l]) => `<div><b>${String(n).padStart(2, "0")}</b><small>${l}</small></div>`).join("");
+    $("#cdNote").textContent = target ? "A live preview, counting down to 2:00 PM on your event day." : "Pick your event date in step 1 to see your countdown.";
+  };
+  tick(); cdTimer = setInterval(tick, 1000);
+}
+
+/* ---------- uploads ---------- */
+const USES = ["Top picture", "Top video", "Guest of honor photo", "Other"];
+let files = [];
+function addFiles(list) {
+  const skipped = [];
+  for (const f of list) {
+    if (files.length >= 20) break;
+    if (!/^image\/|^video\//.test(f.type) && !/\.(heic|heif|mov|mp4|m4v|webm|jpe?g|png|gif|webp)$/i.test(f.name)) { skipped.push(`${f.name} isn't a picture or video`); continue; }
+    if (f.size > 300 * 1024 * 1024) { skipped.push(`${f.name} is over 300 MB (send us a link to it in your notes)`); continue; }
+    const isVid = f.type.startsWith("video/") || /\.(mov|mp4)$/i.test(f.name);
+    files.push({ f, url: URL.createObjectURL(f), isVid, use: isVid ? "Top video" : "Top picture" });
+  }
+  $("#fileMsg").hidden = !skipped.length;
+  $("#fileMsg").textContent = skipped.length ? "Not added: " + skipped.join("; ") + "." : "";
+  drawFiles(); draw();
+}
+const size = b => b > 1e6 ? (b / 1e6).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1e3)) + " KB";
+function drawFiles() {
+  $("#files").innerHTML = files.map((x, i) => `
+    <div class="file">
+      ${x.isVid ? `<video class="th" src="${x.url}" muted playsinline preload="metadata"></video>` : `<img class="th" src="${x.url}" alt="">`}
+      <div style="min-width:0"><div class="nm">${esc(x.f.name)}</div><div class="sz">${x.isVid ? "Video" : "Picture"} · ${size(x.f.size)}</div>
+        <select data-i="${i}" aria-label="What is this file for?">${USES.map(u => `<option ${u === x.use ? "selected" : ""}>${u}</option>`).join("")}</select></div>
+      <button type="button" class="x" data-rm="${i}">Remove</button>
+    </div>`).join("");
+}
+$("#up").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
+$("#files").addEventListener("click", e => { const i = e.target.dataset.rm; if (i !== undefined) { URL.revokeObjectURL(files[i].url); files.splice(+i, 1); drawFiles(); draw(); } });
+$("#files").addEventListener("change", e => { const i = e.target.dataset.i; if (i !== undefined) files[i].use = e.target.value; });
+const drop = $("#drop");
+["dragenter", "dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => addFiles(e.dataTransfer.files));
+
+/* ---------- review + send ---------- */
+function drawRecap() {
+  const s = state(), v = $("#evDate").value;
+  const rows = [
+    ["Event", `${$("#evTitle").value.trim() || "(no name yet)"} · ${$("#evType").value}`],
+    ["Date", v ? new Date(v + "T00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }) : "Not set yet"],
+    ["Guests", $("#evGuests").value || "Not sure yet"],
+    ["Contact", [$("#cName").value, $("#cEmail").value, $("#cPhone").value].filter(Boolean).join(" · ")],
+    ["Top of invitation", s.top ? label("top", s.top).t : "Picture"],
+    ["Features", lines().filter(l => l.id !== "base" && !l.rush && !l.disc).map(l => l.s || l.t).join(", ") || "Just the invitation website"],
+    ["Discount code", code ? `${code.code} (${code.label})` : "None"],
+    ["Files", files.length ? files.map(x => `${x.f.name} (${x.use})`).join(", ") : "None yet. You can send them later."],
+  ];
+  $("#recap").innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join("");
+}
+async function send() {
+  const err = $("#sendErr"), btn = $("#next");
+  if (!validStep1()) return;
+  if (!$("#agree").checked) { err.hidden = false; err.textContent = "Check the box above to send your request."; return; }
+  err.hidden = true; btn.disabled = true; btn.textContent = "Sending…";
+  const s = state(), body = {
+    name: $("#cName").value.trim(), email: $("#cEmail").value.trim(), phone: $("#cPhone").value.trim(),
+    event_type: $("#evType").value, title: $("#evTitle").value.trim(), date: $("#evDate").value,
+    guests: $("#evGuests").value, place: $("#evPlace").value.trim(), notes: $("#notes").value.trim(),
+    code: code ? code.code : "", website: $("#hp").value, ...s,
+  };
+  let r;
+  try {
+    const res = await fetch(API + "/eps/estimate", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(body) });
+    r = await res.json();
+  } catch (e) { r = { ok: false, error: "We couldn't reach our server. Check your connection and try again." }; }
+  if (!r.ok) {
+    err.hidden = false; err.textContent = r.error || "Something went wrong. Please try again.";
+    btn.disabled = false; btn.textContent = "Send for review"; return;
+  }
+  sent = true;
+  $("#reviewBox").hidden = true; $("#nav").hidden = true; $("#doneBox").hidden = false;
+  const first = esc(body.name.split(" ")[0]);
+  $("#doneBox").innerHTML = `<div class="done">
+    <div class="eyebrow">Request received</div>
+    <h2 style="margin-top:8px">Thank you, ${first}!</h2>
+    <p>We got your request for <b>${esc(body.title || body.event_type)}</b> with an estimated total of <b>${money(r.total)}</b>. We'll look it over and reach out within 1–2 business days to confirm your final price. Your request number is <span class="ref">${esc(r.ref)}</span>.</p>
+    <div id="upBox"></div>
+  </div>`;
+  $("#invNo").textContent = r.ref;
+  drawStepper();
+  if (files.length) await uploadAll(r);
+}
+function uploadOne(r, x, row) {
+  return new Promise(done => {
+    const fd = new FormData();
+    fd.append("ref", r.ref); fd.append("token", r.token); fd.append("use", x.use); fd.append("file", x.f, x.f.name);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", API + "/eps/upload");
+    xhr.upload.onprogress = e => { if (e.lengthComputable) row.querySelector("i").style.width = (e.loaded / e.total * 100) + "%"; };
+    xhr.onload = () => { let j = {}; try { j = JSON.parse(xhr.responseText); } catch (e) {} done(j.ok ? "" : (j.error || "Didn't upload")); };
+    xhr.onerror = () => done("Connection lost");
+    xhr.send(fd);
+  });
+}
+async function uploadAll(r) {
+  const box = $("#upBox");
+  box.innerHTML = `<p style="margin-top:14px">Uploading your files. Please keep this page open until they finish.</p>` +
+    files.map((x, i) => `<div class="up-row" id="up${i}"><span>${esc(x.f.name)}</span><b>Waiting</b><div class="prog"><i></i></div></div>`).join("");
+  let failed = 0;
+  for (let i = 0; i < files.length; i++) {
+    const row = $("#up" + i), tag = row.querySelector("b");
+    tag.textContent = "Uploading";
+    const problem = await uploadOne(r, files[i], row);
+    tag.textContent = problem ? problem : "Done"; tag.className = problem ? "bad" : "ok";
+    if (problem) failed++; else row.querySelector("i").style.width = "100%";
+  }
+  box.querySelector("p").textContent = failed
+    ? `${files.length - failed} of ${files.length} files sent. You can email or text us the rest, with your request number ${r.ref}.`
+    : `All ${files.length} file${files.length > 1 ? "s" : ""} sent. You can close this page.`;
+}
+
+/* ---------- start ---------- */
+function fill() {
+  $("#f").reset(); files.forEach(x => URL.revokeObjectURL(x.url)); files = []; drawFiles();
+  const s = { design: "theme", top: "picture", countdown: "no", wall: "none", extras: [] };
+  for (const k of ["evType", "evTitle", "evGuests", "evPlace", "cName", "cEmail", "cPhone"]) if (s[k] !== undefined) $("#" + k).value = s[k];
+  $("#evDate").value = "";
+  for (const g of ["design", "top", "countdown", "wall"]) document.querySelector(`input[name=${g}][value=${s[g]}]`).checked = true;
+  s.extras.forEach(x => document.querySelector(`input[name=extras][value=${x}]`).checked = true);
+  document.querySelectorAll(".f.bad").forEach(f => f.classList.remove("bad"));
+  document.querySelectorAll(".f .err").forEach(e => e.hidden = true);
+  code = null; $("#code").value = ""; $("#codeMsg").hidden = true;
+  lastIds = new Set(); draw(); show(0);
+}
+$("#evDate").min = iso(today);
+$("#invNo").textContent = "EPS-" + today.getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+$("#invDate").textContent = today.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+fill(null);
+}
+
+fetch(API + "/eps/config").then(r => r.json()).then(c => {
+  BASE = c.base; GROUPS = c.groups; EVENT_TYPES = c.event_types;
+  PRICES = { rush: c.rush_fee, rushDays: c.rush_days };
+  $("#loading").hidden = true; $("#app").hidden = false;
+  boot();
+}).catch(() => {
+  $("#loading").innerHTML = `We couldn't load our prices right now. Refresh the page, or <a href="/?topic=eps#contact" style="color:var(--rose)">send us a message</a> instead.`;
+});
+</script>
+</body>
+</html>

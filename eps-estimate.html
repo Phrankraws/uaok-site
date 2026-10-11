@@ -201,6 +201,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .up-row b{font-weight:600}.up-row b.ok{color:#8FD3AE}.up-row b.bad{color:#F2A0A0}
 .up-row .prog{grid-column:1/-1}
 .file-msg{font-size:.82rem;color:var(--bad);margin-top:8px}
+
+/* who's bringing what */
+.bring{margin-top:18px;background:var(--card);border:1.5px solid var(--rose);border-radius:10px;padding:18px;box-shadow:0 0 0 3px var(--rose-soft);animation:in .35s ease}
+.bring h3{font-size:1.15rem;font-weight:450;color:var(--ink)}
+.bring .hint{font-size:.86rem;color:var(--soft);margin:4px 0 12px}
+.bring-head,.bring-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 34px;gap:8px;align-items:center}
+.bring-head{font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink);margin-bottom:4px}
+.bring-rows{display:grid;gap:8px}
+.bring-row input{width:100%;min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.6em .7em;font-size:.92rem}
+.bring-row input:focus{border-color:var(--rose);outline:none;box-shadow:0 0 0 3px var(--rose-soft)}
+.bring-row .x{padding:.4em;font-size:1.1rem;line-height:1}
+.bring-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.bring-foot small{font-size:.78rem;color:var(--soft)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 footer{background:#07111c;color:var(--cream);padding-inline:16px}
 footer .in{max-width:1180px;margin:0 auto;padding-block:28px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.84rem;color:var(--cream-mute)}
@@ -273,6 +286,13 @@ footer a{color:var(--cream-mute);text-decoration:none;margin-left:16px}footer a:
         <h2>Extras</h2>
         <p class="lead">Add as many as you like. Leave them all off and that's fine too.</p>
         <div class="opts" data-group="extras"></div>
+        <div class="bring" id="bringBox" hidden>
+          <h3>What should guests bring?</h3>
+          <p class="hint">List the things you need, and how many. Guests will pick what they're bringing on your invitation. You can change this list later.</p>
+          <div class="bring-head" aria-hidden="true"><span>Item</span><span>How many</span><span></span></div>
+          <div class="bring-rows" id="bringRows"></div>
+          <div class="bring-foot"><button type="button" class="btn btn-line" id="bringAdd">+ Add another item</button><small id="bringCount"></small></div>
+        </div>
       </section>
 
       <!-- 5 -->
@@ -431,6 +451,7 @@ function lines() {
   return out;
 }
 function draw() {
+  drawBring();
   const ls = lines(), total = ls.reduce((a, l) => a + l.p, 0);
   $("#lines").innerHTML = ls.map(l => `<li class="${l.p ? "" : "inc"} ${l.rush ? "rush" : ""} ${l.disc ? "disc" : ""} ${lastIds.size && !lastIds.has(l.id) ? "new" : ""}"><span>${l.t}${l.s ? `<small>${l.s}</small>` : ""}</span><span class="amt">${l.p < 0 ? "−" + money(-l.p) : l.p ? money(l.p) : "Included"}</span></li>`).join("");
   lastIds = new Set(ls.map(l => l.id));
@@ -473,6 +494,41 @@ $("#f").addEventListener("change", e => {
   draw();
 });
 $("#f").addEventListener("input", draw);
+
+/* ---------- who's bringing what ---------- */
+const BRING_MAX = 40, BRING_IDEAS = ["Paper plates and cups", "Chips and snacks", "Drinks", "Dessert", "Ice"];
+function bringRow(item = "", qty = "") {
+  const rows = $("#bringRows");
+  if (rows.children.length >= BRING_MAX) return;
+  const n = rows.children.length, row = document.createElement("div");
+  row.className = "bring-row";
+  row.innerHTML = `<input type="text" class="b-item" maxlength="80" aria-label="Item" placeholder="e.g. ${BRING_IDEAS[n % BRING_IDEAS.length]}">
+    <input type="number" class="b-qty" min="1" max="999" inputmode="numeric" aria-label="How many" placeholder="1">
+    <button type="button" class="x" aria-label="Remove this item" title="Remove">×</button>`;
+  row.querySelector(".b-item").value = item; row.querySelector(".b-qty").value = qty;
+  row.querySelector(".x").onclick = () => { row.remove(); if (!rows.children.length) bringRow(); bringFoot(); };
+  row.querySelector(".b-item").addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); if (row === rows.lastElementChild) bringRow(); rows.lastElementChild.querySelector(".b-item").focus(); }
+  });
+  rows.appendChild(row); bringFoot();
+}
+function bringFoot() {
+  const n = bring().length, full = $("#bringRows").children.length >= BRING_MAX;
+  $("#bringAdd").disabled = full;
+  $("#bringCount").textContent = full ? `That's the most we can take here (${BRING_MAX}). Add the rest in your notes.` : n ? `${n} item${n > 1 ? "s" : ""} listed` : "";
+}
+function bring() {
+  return [...document.querySelectorAll(".bring-row")].map(r => ({
+    item: r.querySelector(".b-item").value.trim(), qty: Math.max(1, parseInt(r.querySelector(".b-qty").value, 10) || 1),
+  })).filter(b => b.item);
+}
+function drawBring() {
+  const on = state().extras.includes("signup"), box = $("#bringBox");
+  if (on && box.hidden && !$("#bringRows").children.length) for (let i = 0; i < 3; i++) bringRow();
+  box.hidden = !on;
+}
+$("#bringAdd").onclick = () => { bringRow(); $("#bringRows").lastElementChild.querySelector(".b-item").focus(); };
+$("#bringRows").addEventListener("input", bringFoot);
 
 /* ---------- countdown preview ---------- */
 let cdTimer;
@@ -533,6 +589,7 @@ function drawRecap() {
     ["Contact", [$("#cName").value, $("#cEmail").value, $("#cPhone").value].filter(Boolean).join(" · ")],
     ["Top of invitation", s.top ? label("top", s.top).t : "Picture"],
     ["Features", lines().filter(l => l.id !== "base" && !l.rush && !l.disc).map(l => l.s || l.t).join(", ") || "Just the invitation website"],
+    ...(s.extras.includes("signup") ? [["Guests bring", bring().map(b => `${b.item} (${b.qty})`).join(", ") || "No items listed yet. You can send them later."]] : []),
     ["Discount code", code ? `${code.code} (${code.label})` : "None"],
     ["Files", files.length ? files.map(x => `${x.f.name} (${x.use})`).join(", ") : "None yet. You can send them later."],
   ];
@@ -548,6 +605,7 @@ async function send() {
     event_type: $("#evType").value, title: $("#evTitle").value.trim(), date: $("#evDate").value,
     guests: $("#evGuests").value, place: $("#evPlace").value.trim(), notes: $("#notes").value.trim(),
     code: code ? code.code : "", website: $("#hp").value, ...s,
+    bring: s.extras.includes("signup") ? bring() : [],
   };
   let r;
   try {
@@ -602,7 +660,7 @@ async function uploadAll(r) {
 
 /* ---------- start ---------- */
 function fill() {
-  $("#f").reset(); files.forEach(x => URL.revokeObjectURL(x.url)); files = []; drawFiles();
+  $("#f").reset(); $("#bringRows").innerHTML = ""; files.forEach(x => URL.revokeObjectURL(x.url)); files = []; drawFiles();
   const s = { design: "theme", top: "picture", countdown: "no", wall: "none", extras: [] };
   for (const k of ["evType", "evTitle", "evGuests", "evPlace", "cName", "cEmail", "cPhone"]) if (s[k] !== undefined) $("#" + k).value = s[k];
   $("#evDate").value = "";

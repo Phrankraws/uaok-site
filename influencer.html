@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>BatMaineInfluencer — AI Content Studio for Creators | UAOK</title>
+<meta name="description" content="BatMaineInfluencer turns one selfie into new looks, talking videos in your voice, and captioned posts. An AI content studio for creators from UAOK Intellectual Property LLC." />
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="BatMaineInfluencer — One selfie in. A month of content out." />
+<meta property="og:description" content="Your face in any outfit, your voice on any script, captions already on. Made on your Mac in an afternoon." />
+<meta property="og:image" content="https://www.uaok.org/influencer-media/2_suit.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a recording-studio sales page. Left-aligned editorial column, a selfie -> looks -> talking-video strip as the hero image, REC-red used only for live/recording cues and the main buttons. */
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --ink:#141A2A; --muted:#566079; --line:#D5DBE6;
+  --rec:#E0313A; --rec-ink:#FFFFFF; --cobalt:#2F45E0; --soft:#E3E8F2;
+  --display:"Syne", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D111C; --surface:#161C2B; --ink:#ECEFF7; --muted:#9AA4BD; --line:#2A3247;
+  --rec:#FF4F57; --rec-ink:#14070A; --cobalt:#8FA0FF; --soft:#1C2335; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D111C; --surface:#161C2B; --ink:#ECEFF7; --muted:#9AA4BD; --line:#2A3247;
+  --rec:#FF4F57; --rec-ink:#14070A; --cobalt:#8FA0FF; --soft:#1C2335; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{color-scheme:light}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(56px,8vw,104px)}
+h1,h2,h3{font-family:var(--display);line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,6.4vw,4.9rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;letter-spacing:-.015em}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+a{color:var(--cobalt)}
+.label{font:700 .75rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--muted);max-width:34ch}
+.btn{display:inline-flex;align-items:center;gap:.6em;font:700 1rem/1 var(--body);text-decoration:none;padding:1em 1.4em;border-radius:999px;border:2px solid transparent;cursor:pointer}
+.btn-rec{background:var(--rec);color:var(--rec-ink)}
+.btn-rec:hover{filter:brightness(1.07)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.dot{width:.6em;height:.6em;border-radius:50%;background:currentColor;display:inline-block}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
+.brand{font:800 1.15rem/1 var(--display);letter-spacing:-.01em}
+.brand b{color:var(--rec)}
+.brand-wrap{display:grid;gap:6px}
+.back{font:600 .8rem/1 var(--body);color:var(--muted);text-decoration:none}
+.back:hover{color:var(--ink)}
+.top .btn{padding:.7em 1.1em;font-size:.9rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px);padding-block:clamp(32px,6vw,72px) clamp(56px,8vw,96px)}
+.hero > div{min-width:0}
+.hero-copy{display:grid;grid-template-columns:1.3fr .7fr;gap:16px 48px;align-items:end}
+.hero-copy > *{min-width:0}
+.hero-copy .left{display:grid;gap:20px}
+.hero-copy .right{display:grid;gap:18px;justify-items:start}
+.hero h1 em{font-style:normal;color:var(--rec)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.fine{font-size:.9rem;color:var(--muted)}
+
+.reel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,20px);position:relative}
+.frame{margin:0;display:grid;gap:10px;align-content:start;min-width:0}
+.shot{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:20px;overflow:hidden;background:var(--soft);box-shadow:0 24px 50px -30px rgba(10,14,30,.6)}
+.shot img,.shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.frame figcaption{display:grid;gap:4px}
+.frame figcaption b{font:700 1rem/1.25 var(--body)}
+.step-chip{position:absolute;top:10px;left:10px;font:700 .68rem/1 var(--mono);letter-spacing:.1em;color:#fff;background:rgba(10,14,26,.62);padding:6px 8px;border-radius:999px;backdrop-filter:blur(4px)}
+.f-video .shot{outline:3px solid var(--rec);outline-offset:3px}
+.f-video .step-chip{display:flex;align-items:center;gap:6px;background:var(--rec);color:#fff}
+.f-video .step-chip .dot{animation:blink 1.2s steps(2,start) infinite}
+.sound{position:absolute;right:10px;bottom:10px;font:700 .78rem/1 var(--body);color:#141A2A;background:#fff;border:0;border-radius:999px;padding:9px 12px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.sound:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.arrow{position:absolute;top:calc(50% - 40px);width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:700 1rem/1 var(--mono);z-index:2;transform:translateX(-50%)}
+.a1{left:25%}.a2{left:75%}
+.disclose{font-size:.85rem;color:var(--muted);max-width:70ch}
+.ticker{overflow:hidden;border-block:1px solid var(--line);background:var(--ink);color:var(--bg);padding-block:14px}
+.ticker .track{display:flex;gap:40px;width:max-content;animation:slide 38s linear infinite;font:800 1.15rem/1 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.ticker .track span::after{content:"●";color:var(--rec);margin-left:40px;font-size:.6em;vertical-align:middle}
+@keyframes blink{to{visibility:hidden}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.f-video .step-chip .dot,.ticker .track{animation:none}}
+
+/* makes */
+.band{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:grid;gap:14px;max-width:46rem;margin-bottom:40px}
+.makes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.make{background:var(--surface);padding:26px 22px;display:grid;gap:10px;align-content:start;min-width:0}
+.make .cost{font:700 .8rem/1 var(--mono);color:var(--rec)}
+.make p{color:var(--muted);font-size:.98rem}
+
+/* steps */
+.steps{display:grid;gap:0;counter-reset:s;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:120px 1fr 1.2fr;gap:24px;padding-block:28px;border-bottom:1px solid var(--line);align-items:baseline}
+.step > *{min-width:0}
+.step .n{font:700 .85rem/1 var(--mono);color:var(--muted)}
+.step .n b{display:block;font:800 2.4rem/1 var(--display);color:var(--ink);margin-top:6px}
+.step p{color:var(--muted)}
+
+/* voice */
+.voice{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.vcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;gap:14px;align-content:start}
+.vcard.pro{border:2px solid var(--ink)}
+.vcard dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:.95rem}
+.vcard dt{font:700 .72rem/1.9 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.vcard dd{margin:0}
+.note{margin-top:20px;color:var(--muted);font-size:.95rem;max-width:60ch}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px 26px;display:grid;gap:18px;grid-template-rows:auto auto auto 1fr auto}
+.tier.pick{border:2px solid var(--rec);position:relative}
+.tier.pick .tag{position:absolute;top:-13px;left:24px;background:var(--rec);color:var(--rec-ink);font:700 .7rem/1 var(--mono);letter-spacing:.12em;padding:7px 10px;border-radius:999px}
+.price{font:800 3rem/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price small{font:500 1rem var(--body);color:var(--muted);letter-spacing:0}
+.was{font:500 .85rem/1.3 var(--mono);color:var(--muted)}
+.tier ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:.98rem}
+.tier li{display:grid;grid-template-columns:18px 1fr;gap:10px}
+.tier li::before{content:"";width:8px;height:8px;margin-top:.55em;border-radius:50%;background:var(--rec)}
+.tier .btn{justify-content:center}
+.addon{margin-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px;border:1px dashed var(--muted);border-radius:18px}
+.addon p{color:var(--muted);max-width:52ch}
+.addon strong{color:var(--ink)}
+
+/* costs table */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:.97rem}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.opt{font:700 .68rem/1 var(--mono);letter-spacing:.1em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 7px;margin-left:6px;white-space:nowrap}
+
+/* trust + faq */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px)}
+.two > *{min-width:0}
+.rules{display:grid;gap:18px;margin-top:28px}
+.rule{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.rule .dot{color:var(--rec);margin-top:.5em}
+.rule p{color:var(--muted)}
+.rule strong{color:var(--ink);display:block}
+details{border-bottom:1px solid var(--line);padding-block:18px}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:700 1.2rem/1 var(--mono);color:var(--rec)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted)}
+
+/* order */
+.order{background:var(--ink);color:var(--bg)}
+.order .label{color:var(--bg);opacity:.7}
+.order .inner{display:grid;gap:22px;max-width:44rem}
+.order .lede{color:var(--bg);opacity:.8;max-width:44ch}
+.placeholder{font:600 .95rem/1.5 var(--mono);border:2px dashed currentColor;border-radius:14px;padding:16px 18px;opacity:.85}
+footer{padding-block:32px;color:var(--muted);font-size:.88rem}
+footer .wrap{display:grid;gap:8px}
+
+@media (max-width:900px){
+  .hero-copy{grid-template-columns:1fr}
+  .reel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .arrow{display:none}
+  .makes{grid-template-columns:repeat(2,1fr)}
+  .tiers{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr;gap:8px}
+  .two{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .makes{grid-template-columns:1fr}
+  .voice{grid-template-columns:1fr}
+  .top .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <div class="brand-wrap"><a class="back" href="/#ip">← UAOK Intellectual Property</a><div class="brand">BatMaine<b>Influencer</b></div></div>
+  <a class="btn btn-rec" href="#pricing"><span class="dot"></span>Get the kit</a>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="left">
+        <span class="label">AI content studio for creators · Mac</span>
+        <h1>One selfie in. <em>A month of content</em> out.</h1>
+      </div>
+      <div class="right">
+        <p class="lede">Your face in any outfit, your voice on any script, captions already on. Made on your Mac in an afternoon.</p>
+        <div class="ctas">
+          <a class="btn btn-rec" href="#pricing"><span class="dot"></span>See pricing</a>
+          <a class="btn btn-ghost" href="#how">How it works</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel">
+      <span class="arrow a1" aria-hidden="true">→</span>
+      <span class="arrow a2" aria-hidden="true">→</span>
+      <figure class="frame">
+        <div class="shot"><img src="influencer-media/1_selfie.jpg" alt="A casual phone selfie of a smiling woman in a beige sweater at home"><span class="step-chip">1 · THE SELFIE</span></div>
+        <figcaption><b>One everyday selfie</b><span class="fine">Taken on a phone. That's all the studio needs.</span></figcaption>
+      </figure>
+      <figure class="frame">
+        <div class="shot"><img src="influencer-media/2_suit.jpg" alt="The same woman in a navy suit in a bright office"><span class="step-chip">2 · NEW LOOK</span></div>
+        <figcaption><b>Boss mode</b><span class="fine">Same face, now in a navy suit in a city office.</span></figcaption>
+      </figure>
+      <figure class="frame">
+        <div class="shot"><img src="influencer-media/3_chef.jpg" alt="The same woman in a white chef's coat in a restaurant kitchen"><span class="step-chip">2 · NEW LOOK</span></div>
+        <figcaption><b>Chef mode</b><span class="fine">Any outfit, any setting, any niche.</span></figcaption>
+      </figure>
+      <figure class="frame f-video">
+        <div class="shot">
+          <video id="demo-video" src="influencer-media/4_talk.mp4" poster="influencer-media/2_suit.jpg" autoplay muted loop playsinline preload="auto" aria-label="The suit look talking to camera with captions"></video>
+          <span class="step-chip"><span class="dot"></span>3 · SHE TALKS</span>
+          <button class="sound" id="sound-btn" type="button" aria-pressed="false">🔊 Tap for sound</button>
+        </div>
+        <figcaption><b>Talking video, captions on</b><span class="fine">A voice, a script, burned-in captions. Ready to post.</span></figcaption>
+      </figure>
+    </div>
+    <p class="disclose">The creator in this demo is AI-generated, so no real person's face was used. Every picture and the video above were made with the BatMaineInfluencer studio.</p>
+  </div>
+
+  <div class="ticker" aria-hidden="true"><div class="track">
+    <span>Fitness</span><span>Beauty</span><span>Food</span><span>Travel</span><span>Money</span><span>Comedy</span><span>Parenting</span><span>Faith</span><span>Fashion</span><span>Wellness</span>
+    <span>Fitness</span><span>Beauty</span><span>Food</span><span>Travel</span><span>Money</span><span>Comedy</span><span>Parenting</span><span>Faith</span><span>Fashion</span><span>Wellness</span>
+  </div></div>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">What it makes</span>
+        <h2>Four kinds of posts, all starring you</h2>
+      </div>
+      <div class="makes">
+        <div class="make"><span class="cost">≈ 8¢ each</span><h3>Picture posts</h3><p>AI photos of you in any scene or outfit, made from 3 to 5 of your real photos.</p></div>
+        <div class="make"><span class="cost">≈ 38¢ each</span><h3>Short videos</h3><p>8-second vertical clips with your hook line big on screen. Made for Reels and TikTok.</p></div>
+        <div class="make"><span class="cost">from ≈ 4¢ a clip</span><h3>Talking videos</h3><p>Your photo speaks a 30-second script in your cloned voice, with captions burned in.</p></div>
+        <div class="make"><span class="cost">≈ 1¢ per 10</span><h3>Captions + calendar</h3><p>Captions written in how you talk, plus a posting calendar for a week or a whole month.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">How it works</span>
+        <h2>Set up once. Then type one word.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">Step<b>1</b></div><h3>Guided setup, about 45 minutes</h3><p>Claude makes your two Desktop folders, a locked note for your keys, and walks you through each account (ElevenLabs, kie.ai, Higgsfield and more) like you've never done it before.</p></div>
+        <div class="step"><div class="n">Step<b>2</b></div><h3>Your creator profile</h3><p>Ten quick questions: your niche, your followers, how you talk, your catchphrases, what to never say. Run more than one brand? Each one gets its own saved project.</p></div>
+        <div class="step"><div class="n">Step<b>3</b></div><h3>Clone your voice</h3><p>Claude writes a reading script made for you, then helps you record and upload it. Or pick a ready-made voice instead.</p></div>
+        <div class="step"><div class="n">Step<b>4</b></div><h3>Preview, approve, build</h3><p>You see post 1 and the full price first. Nothing is spent until you say "confirm." Finished posts land in your Output folder.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Your voice</span>
+        <h2>Pick how close to you it sounds</h2>
+      </div>
+      <div class="voice">
+        <div class="vcard pro">
+          <h3>Professional clone</h3>
+          <dl>
+            <dt>You read</dt><dd>A 60-minute script written for your niche, in 6 parts. Split it over a few days.</dd>
+            <dt>Sounds</dt><dd>The most like you</dd>
+            <dt>Ready</dt><dd>A few hours after upload</dd>
+            <dt>Needs</dt><dd>ElevenLabs Creator plan, about $22/month</dd>
+          </dl>
+        </div>
+        <div class="vcard">
+          <h3>Quick clone</h3>
+          <dl>
+            <dt>You read</dt><dd>A 2-minute script</dd>
+            <dt>Sounds</dt><dd>Close, not perfect</dd>
+            <dt>Ready</dt><dd>In about a minute</dd>
+            <dt>Needs</dt><dd>ElevenLabs Starter plan, about $5/month</dd>
+          </dl>
+        </div>
+      </div>
+      <p class="note">Rather not record? Choose one of ElevenLabs' ready-made voices. You can only clone your own voice, or a voice you have written permission to use.</p>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Pricing</span>
+        <h2>Choose how much help you want</h2>
+        <p class="lede">One-time price. You keep the studio for good.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <h3>Do it yourself</h3>
+          <div><div class="price">$97</div><div class="was">Founding price $67 for the first 10 buyers</div></div>
+          <p class="fine">For creators who like to follow steps on their own.</p>
+          <ul>
+            <li>The full BatMaineInfluencer kit</li>
+            <li>Claude walks you through setup, step by step</li>
+            <li>Unlimited projects and creator profiles</li>
+            <li>Voice clone scripts written for you</li>
+          </ul>
+          <a class="btn btn-ghost" href="#order">Get the kit</a>
+        </div>
+        <div class="tier pick">
+          <span class="tag">MOST PICKED</span>
+          <h3>Setup help</h3>
+          <div><div class="price">$247</div><div class="was">Kit + a live setup call</div></div>
+          <p class="fine">For creators who want a real person on the call while it gets set up.</p>
+          <ul>
+            <li>Everything in Do it yourself</li>
+            <li>1-hour video call: we set it up together</li>
+            <li>Your first batch of posts made on the call</li>
+            <li>30 days of help by message</li>
+          </ul>
+          <a class="btn btn-rec" href="#order"><span class="dot"></span>Book setup help</a>
+        </div>
+        <div class="tier">
+          <h3>Done for you</h3>
+          <div><div class="price">$697</div><div class="was">We handle all of it</div></div>
+          <p class="fine">For busy creators and small brands who just want the posts.</p>
+          <ul>
+            <li>Everything in Setup help</li>
+            <li>We build your profile and voice clone with you</li>
+            <li>Your first 30 posts, ready to upload</li>
+            <li>A 30-day posting calendar</li>
+          </ul>
+          <a class="btn btn-ghost" href="#order">Start done for you</a>
+        </div>
+      </div>
+      <div class="addon">
+        <p><strong>Monthly care, $29/month (optional).</strong> When the websites change their buttons, we update your kit. Includes fixes and a monthly check-in.</p>
+        <a class="btn btn-ghost" href="#order">Add monthly care</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">What the AI services cost</span>
+        <h2>You pay the services directly, no markup</h2>
+        <p class="lede">Most creators spend about $25 to $50 a month, depending on how much they make.</p>
+      </div>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>Service</th><th>What it does</th><th>About</th></tr></thead>
+          <tbody>
+            <tr><td>ElevenLabs</td><td>Your voice clone</td><td class="num">$5 or $22 / month</td></tr>
+            <tr><td>kie.ai</td><td>Pictures, videos, talking clips</td><td class="num">$10 to start</td></tr>
+            <tr><td>OpenRouter</td><td>Writes your captions and scripts</td><td class="num">$5 to start</td></tr>
+            <tr><td>Higgsfield <span class="opt">OPTIONAL</span></td><td>Photo shoots and cinematic video inside Claude</td><td class="num">Their plans</td></tr>
+            <tr><td>fal.ai <span class="opt">OPTIONAL</span></td><td>Extra talking-video makers</td><td class="num">$5 to start</td></tr>
+            <tr><td>Zernio <span class="opt">OPTIONAL</span></td><td>Sends posts to your apps as drafts</td><td class="num">Their plans</td></tr>
+            <tr><td>Claude</td><td>Runs the studio (Pro plan or higher)</td><td class="num">Your Claude plan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Prices are set by each service and can change. Check their sites before you sign up.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <div>
+        <span class="label">Built to be safe</span>
+        <h2>You stay in control</h2>
+        <div class="rules">
+          <div class="rule"><span class="dot"></span><p><strong>Your keys stay on your Mac.</strong>They go in a locked note and the studio's own file, never into a chat.</p></div>
+          <div class="rule"><span class="dot"></span><p><strong>Nothing posts by itself.</strong>Posts are saved to your folder. They only go out if you set up auto-send and choose it.</p></div>
+          <div class="rule"><span class="dot"></span><p><strong>You see the price first.</strong>Every batch shows its cost and a sample before any credits are spent.</p></div>
+          <div class="rule"><span class="dot"></span><p><strong>Only your face, only your voice.</strong>The studio won't clone other people or pretend to be someone else.</p></div>
+        </div>
+      </div>
+      <div>
+        <span class="label">Questions</span>
+        <h2>Before you buy</h2>
+        <div style="margin-top:28px">
+          <details><summary>Do I need to know anything about tech?</summary><p>No. Claude explains every word before using it and waits for you to say "done" before the next step. If you get stuck, it can look at your browser with you and point to the right button.</p></details>
+          <details><summary>What do I need before I start?</summary><p>A Mac, Claude Code on a paid Claude plan (Pro or higher), Google Chrome, and about 45 minutes for the first setup.</p></details>
+          <details><summary>Does it work on Windows?</summary><p>Not yet. It's Mac only for now. A Windows version is coming.</p></details>
+          <details><summary>Will it post for me?</summary><p>Only if you want it to. By default your posts and captions are saved in your Output folder for you to upload. With the optional Zernio service, they arrive as drafts you approve.</p></details>
+          <details><summary>Can I run more than one brand?</summary><p>Yes. Each brand or persona is its own saved project, with its own photos, profile, voice and output folder.</p></details>
+          <details><summary>How real does my voice sound?</summary><p>The Professional clone, made from about 60 minutes of reading, sounds the most like you. The Quick clone is close, but not perfect. You hear a sample video before you pay for a full batch.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <div class="wrap inner">
+      <span class="label">Order</span>
+      <h2>Ready to make a month of content?</h2>
+      <p class="lede">Send us a message with the level you want. We'll reply with your kit, your setup instructions, and how to pay. Online checkout is coming soon.</p>
+      <div class="ctas"><a class="btn btn-rec" href="/?topic=influencer#contact"><span class="dot"></span>Message us to order</a></div>
+      <p class="fine" style="color:var(--bg);opacity:.75">Or email info@uaok.org</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>BatMaineInfluencer is a product of <a href="/#ip">UAOK Intellectual Property LLC</a>.</p>
+    <p>Not affiliated with Anthropic, ElevenLabs, kie.ai, Higgsfield, fal.ai, OpenRouter or Zernio. Results depend on your photos, recordings and the services you choose.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var v = document.getElementById("demo-video"), b = document.getElementById("sound-btn");
+  if (!v || !b) return;
+  b.addEventListener("click", function(){
+    v.muted = !v.muted;
+    if (!v.muted) { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+    b.textContent = v.muted ? "🔊 Tap for sound" : "🔇 Mute";
+    b.setAttribute("aria-pressed", String(!v.muted));
+  });
+})();
+</script>
+</body>
+</html>

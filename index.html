@@ -1117,7 +1117,7 @@ const NAV={
 function setNav(entity,id){
   const cfg=NAV[entity]||NAV.portal;
   navLinks.innerHTML=cfg.links.map(([h,l])=>h==='#ip'
-    ?`<span class="nav-dd"><a href="${h}" data-nav>${l}<span class="dd-caret" aria-hidden="true"></span></a><span class="dd-menu"><a href="eps.html">Event Planning Services</a></span></span>`
+    ?`<span class="nav-dd"><a href="${h}" data-nav>${l}<span class="dd-caret" aria-hidden="true"></span></a><span class="dd-menu"><a href="eps.html">Event Planning Services</a><a href="influencer.html">BatMaineInfluencer</a></span></span>`
     :`<a href="${h}" data-nav>${l}</a>`).join('');
   navCta.innerHTML=cfg.cta;
   const active=(entity==='ministry')?('#'+id):('#'+id);

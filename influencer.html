@@ -94,6 +94,23 @@ a{color:var(--cobalt)}
 @media (prefers-reduced-motion: reduce){.f-video .step-chip .dot,.ticker .track{animation:none}}
 
 /* makes */
+/* face optional */
+.stars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px}
+.star{border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:6px;align-content:start;background:var(--surface);min-width:0}
+.star .n{font:700 .7rem/1 var(--mono);letter-spacing:.12em;color:var(--rec)}
+.star p{color:var(--muted);font-size:.93rem}
+.ways{display:grid;gap:20px}
+.way{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:clamp(18px,3vw,36px);align-items:center;padding-top:20px;border-top:1px solid var(--line)}
+.way > *{min-width:0}
+.way p{color:var(--muted)}
+.way .tag{font:700 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--rec)}
+.pics{display:flex;gap:clamp(8px,1.4vw,16px);align-items:flex-start}
+.pics figure{margin:0;display:grid;gap:8px;flex:0 1 230px;min-width:0}
+.pics figure.wide{flex:0 1 327px}
+.pics img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;display:block;background:var(--soft)}
+.pics figure.wide img{aspect-ratio:4/5}
+.pics figcaption{font:700 .68rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.styles{margin-top:28px}
 .band{background:var(--surface);border-block:1px solid var(--line)}
 .head{display:grid;gap:14px;max-width:46rem;margin-bottom:40px}
 .makes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
@@ -176,10 +193,13 @@ footer .wrap{display:grid;gap:8px}
   .tiers{grid-template-columns:1fr}
   .step{grid-template-columns:1fr;gap:8px}
   .two{grid-template-columns:1fr}
+  .stars{grid-template-columns:repeat(2,1fr)}
+  .way{grid-template-columns:1fr}
 }
 @media (max-width:560px){
   .makes{grid-template-columns:1fr}
   .voice{grid-template-columns:1fr}
+  .stars{grid-template-columns:1fr}
   .top .btn{display:none}
 }
 </style>
@@ -204,6 +224,7 @@ footer .wrap{display:grid;gap:8px}
           <a class="btn btn-rec" href="#pricing"><span class="dot"></span>See pricing</a>
           <a class="btn btn-ghost" href="#how">How it works</a>
         </div>
+        <a class="fine" href="influencer-media/BatMaineInfluencer-Guide.pdf" download>↓ Download the free guide (PDF, 11 pages)</a>
       </div>
     </div>
 
@@ -243,14 +264,66 @@ footer .wrap{display:grid;gap:8px}
     <div class="wrap">
       <div class="head">
         <span class="label">What it makes</span>
-        <h2>Four kinds of posts, all starring you</h2>
+        <h2>Four kinds of posts, with or without your face</h2>
       </div>
       <div class="makes">
-        <div class="make"><span class="cost">≈ 8¢ each</span><h3>Picture posts</h3><p>AI photos of you in any scene or outfit, made from 3 to 5 of your real photos.</p></div>
+        <div class="make"><span class="cost">≈ 8¢ each</span><h3>Picture posts</h3><p>AI photos of you, a made-up AI person or a cartoon character, in any scene or outfit. Or no one at all.</p></div>
         <div class="make"><span class="cost">≈ 38¢ each</span><h3>Short videos</h3><p>8-second vertical clips with your hook line big on screen. Made for Reels and TikTok.</p></div>
         <div class="make"><span class="cost">from ≈ 4¢ a clip</span><h3>Talking videos</h3><p>Your photo speaks a 30-second script in your cloned voice, with captions burned in.</p></div>
         <div class="make"><span class="cost">≈ 1¢ per 10</span><h3>Captions + calendar</h3><p>Captions written in how you talk, plus a posting calendar for a week or a whole month.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section id="faceless">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Your face is optional</span>
+        <h2>Show your face, or don't</h2>
+        <p class="lede">Lots of big pages never show a real face. When you start a project, Claude asks who the star is.</p>
+      </div>
+      <div class="stars">
+        <div class="star"><span class="n">OPTION 1</span><h3>You</h3><p>From 3 to 5 everyday photos. Shown at the top of this page.</p></div>
+        <div class="star"><span class="n">OPTION 2</span><h3>A made-up AI person</h3><p>Describe them, pick from 3 options. The same face in every post. About 40¢ to create, once.</p></div>
+        <div class="star"><span class="n">OPTION 3</span><h3>A cartoon character</h3><p>Your own mascot in 3D movie, 2D cartoon, anime, clay or storybook style. It can talk.</p></div>
+        <div class="star"><span class="n">OPTION 4</span><h3>No one: faceless</h3><p>Scenes, hands, products and text do the talking. No photos needed.</p></div>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <div><span class="tag">Option 2 · AI person</span><h3>A made-up person</h3><p>Typed in: "friendly woman, early 30s, curly hair, green sweater, cozy home-cook vibe." She's nobody real, and the same face shows up in every post.</p></div>
+          <div class="pics">
+            <figure><img src="influencer-media/5_ai_person.jpg" alt="An AI-made woman with curly hair in a green sweater, smiling" loading="lazy"><figcaption>Her first picture</figcaption></figure>
+            <figure><img src="influencer-media/6_ai_person_post.jpg" alt="The same AI-made woman plating pasta in a bright kitchen" loading="lazy"><figcaption>Same face, in a post</figcaption></figure>
+          </div>
+        </div>
+        <div class="way">
+          <div><span class="tag">Option 3 · Character</span><h3>Your own mascot</h3><p>Typed in: "a cheerful coffee cup with a teal sleeve," 3D movie style. It stars in every post and talks in the voice you pick.</p></div>
+          <div class="pics">
+            <figure><img src="influencer-media/7_character.jpg" alt="A 3D cartoon coffee cup character with big eyes, waving" loading="lazy"><figcaption>The character</figcaption></figure>
+            <figure><img src="influencer-media/8_character_post.jpg" alt="The coffee cup character on a cafe table next to coins and a piggy bank" loading="lazy"><figcaption>Morning money tip post</figcaption></figure>
+          </div>
+        </div>
+        <div class="way">
+          <div><span class="tag">Option 4 · Faceless</span><h3>No one on camera</h3><p>Hands-only pictures for how-to posts, and swipe-through text slides. The studio writes the words and draws the slides.</p></div>
+          <div class="pics">
+            <figure><img src="influencer-media/9_hands.jpg" alt="Close-up of hands chopping basil and tomatoes on a cutting board" loading="lazy"><figcaption>Hands only</figcaption></figure>
+            <figure class="wide"><img src="influencer-media/10_slide1.jpg" alt="Text slide reading 5 money habits that changed my 20s" loading="lazy"><figcaption>Slide 1 · the hook</figcaption></figure>
+            <figure class="wide"><img src="influencer-media/11_slide2.jpg" alt="Text slide reading Pay yourself first, even $20 a week" loading="lazy"><figcaption>Slide 2 · a tip</figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="tablebox styles">
+        <table>
+          <thead><tr><th>Faceless style</th><th>What it is</th><th>About</th></tr></thead>
+          <tbody>
+            <tr><td>Voiceover video</td><td>3 scenes with a slow zoom, a voice reads the script, captions on screen</td><td class="num">≈ 24¢ each</td></tr>
+            <tr><td>Text slides</td><td>A swipe post: a bold hook, 3 or 4 tips, a call to action (Instagram + Facebook)</td><td class="num">≈ 8¢ each</td></tr>
+            <tr><td>Hands only</td><td>Close-ups of hands cooking, typing or holding a product. Never a face</td><td class="num">≈ 8¢ a picture</td></tr>
+            <tr><td>Cartoon scenes</td><td>Animated-looking scenes instead of photos, in your art style</td><td class="num">≈ 8¢ a picture</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Every picture in this section was made by the studio. A made-up star must be brand-new: never a real person, a celebrity, a lookalike, or someone else's character.</p>
     </div>
   </section>
 
@@ -262,8 +335,8 @@ footer .wrap{display:grid;gap:8px}
       </div>
       <div class="steps">
         <div class="step"><div class="n">Step<b>1</b></div><h3>Guided setup, about 45 minutes</h3><p>Claude makes your two Desktop folders, a locked note for your keys, and walks you through each AI service you need, one click at a time, like you've never done it before.</p></div>
-        <div class="step"><div class="n">Step<b>2</b></div><h3>Your creator profile</h3><p>Ten quick questions: your niche, your followers, how you talk, your catchphrases, what to never say. Run more than one brand? Each one gets its own saved project.</p></div>
-        <div class="step"><div class="n">Step<b>3</b></div><h3>Clone your voice</h3><p>Claude writes a reading script made for you, then helps you record and upload it. Or pick a ready-made voice instead.</p></div>
+        <div class="step"><div class="n">Step<b>2</b></div><h3>Your creator profile</h3><p>Quick questions: your niche, your followers, how you talk, what to never say, and who stars in your posts (you, an AI person, a cartoon, or no one). Run more than one brand? Each one gets its own saved project.</p></div>
+        <div class="step"><div class="n">Step<b>3</b></div><h3>Clone your voice</h3><p>Claude writes a reading script made for you, then helps you record and upload it. Or pick a ready-made voice, or no voice at all.</p></div>
         <div class="step"><div class="n">Step<b>4</b></div><h3>Preview, approve, build</h3><p>You see post 1 and the full price first. Nothing is spent until you say "confirm." Finished posts land in your Output folder.</p></div>
       </div>
     </div>
@@ -295,7 +368,7 @@ footer .wrap{display:grid;gap:8px}
           </dl>
         </div>
       </div>
-      <p class="note">Rather not record? Choose a ready-made AI voice instead. You can only clone your own voice, or a voice you have written permission to use.</p>
+      <p class="note">Rather not record? Choose a ready-made AI voice instead, or go music and captions only. You can only clone your own voice, or a voice you have written permission to use.</p>
     </div>
   </section>
 
@@ -406,7 +479,7 @@ footer .wrap{display:grid;gap:8px}
           <div class="rule"><span class="dot"></span><p><strong>Nothing posts by itself.</strong>Posts are saved to your folder. They only go out if you set up auto-send and choose it.</p></div>
           <div class="rule"><span class="dot"></span><p><strong>DM replies wait for you.</strong>AI can draft a reply, but nothing goes out until you read it and press Send.</p></div>
           <div class="rule"><span class="dot"></span><p><strong>You see the price first.</strong>Every batch shows its cost and a sample before any credits are spent.</p></div>
-          <div class="rule"><span class="dot"></span><p><strong>Only your face, only your voice.</strong>The studio won't clone other people or pretend to be someone else.</p></div>
+          <div class="rule"><span class="dot"></span><p><strong>Only your face, only your voice.</strong>The studio won't clone other people or pretend to be someone else. A made-up AI person or character has to be brand-new.</p></div>
         </div>
       </div>
       <div>
@@ -415,6 +488,7 @@ footer .wrap{display:grid;gap:8px}
         <div style="margin-top:28px">
           <details><summary>Do I need to know anything about tech?</summary><p>No. Claude explains every word before using it and waits for you to say "done" before the next step. If you get stuck, it can look at your browser with you and point to the right button.</p></details>
           <details><summary>What do I need before I start?</summary><p>A Mac, Claude Code on a paid Claude plan (Pro or higher), Google Chrome, and about 45 minutes for the first setup.</p></details>
+          <details><summary>Do I have to show my face?</summary><p>No. You can use a made-up AI person, a cartoon character, or go fully faceless with voiceover videos, text slides and hands-only pictures. Claude asks which one you want when you start a project.</p></details>
           <details><summary>Does it work on Windows?</summary><p>Not yet. It's Mac only for now. A Windows version is coming.</p></details>
           <details><summary>Will it post for me?</summary><p>Only if you want it to. By default your posts and captions are saved in your Output folder for you to upload. With the optional auto-send service, they arrive as drafts you approve.</p></details>
           <details><summary>What's the CRM, and does it cost extra?</summary><p>It's your private notebook for the business side: brand deals, what you're owed, due dates, contacts and your Instagram and Facebook DMs. It's included in every plan. Free on your Mac, or about $5/month for hosting if you want it online on your phone. Reading DMs needs the optional auto-send service.</p></details>
@@ -431,7 +505,7 @@ footer .wrap{display:grid;gap:8px}
       <h2>Ready to make a month of content?</h2>
       <p class="lede">Send us a message with the level you want. We'll reply with your kit, your setup instructions, and how to pay. Online checkout is coming soon.</p>
       <div class="ctas"><a class="btn btn-rec" href="/?topic=influencer#contact"><span class="dot"></span>Message us to order</a></div>
-      <p class="fine" style="color:var(--bg);opacity:.75">Or email info@uaok.org</p>
+      <p class="fine" style="color:var(--bg);opacity:.75">Or email info@uaok.org · <a href="influencer-media/BatMaineInfluencer-Guide.pdf" download style="color:inherit">Download the free guide (PDF)</a></p>
     </div>
   </section>
 </main>

@@ -93,6 +93,13 @@ a{color:var(--cobalt)}
 @keyframes slide{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion: reduce){.f-video .step-chip .dot,.ticker .track{animation:none}}
 
+/* commercial */
+.watch{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.watch > *{min-width:0}
+.watch .player{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 30px 60px -30px rgba(10,14,30,.7);outline:3px solid var(--rec);outline-offset:4px}
+.watch video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.watch .copy{display:grid;gap:18px;justify-items:start}
+
 /* makes */
 /* face optional */
 .stars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px}
@@ -195,6 +202,8 @@ footer .wrap{display:grid;gap:8px}
   .two{grid-template-columns:1fr}
   .stars{grid-template-columns:repeat(2,1fr)}
   .way{grid-template-columns:1fr}
+  .watch{grid-template-columns:1fr;justify-items:center}
+  .watch .player{width:min(100%,360px)}
 }
 @media (max-width:560px){
   .makes{grid-template-columns:1fr}
@@ -254,6 +263,23 @@ footer .wrap{display:grid;gap:8px}
     </div>
     <p class="disclose">The creator in this demo is AI-generated, so no real person's face was used. Every picture and the video above were made with the BatMaineInfluencer studio.</p>
   </div>
+
+  <section class="band" id="watch">
+    <div class="wrap watch">
+      <div class="player">
+        <video src="influencer-media/commercial.mp4" poster="influencer-media/commercial-poster.jpg" controls playsinline preload="metadata" aria-label="BatMaineInfluencer commercial, 32 seconds"></video>
+      </div>
+      <div class="copy">
+        <span class="label">Watch · 32 seconds</span>
+        <h2>Want to make money as an influencer?</h2>
+        <p class="lede">See the studio in action: your face, a made-up AI person, a cartoon, or no face at all. Press play with the sound on.</p>
+        <div class="ctas">
+          <a class="btn btn-rec" href="#pricing"><span class="dot"></span>See pricing</a>
+          <a class="btn btn-ghost" href="#faceless">Face optional</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="ticker" aria-hidden="true"><div class="track">
     <span>Fitness</span><span>Beauty</span><span>Food</span><span>Travel</span><span>Money</span><span>Comedy</span><span>Parenting</span><span>Faith</span><span>Fashion</span><span>Wellness</span>

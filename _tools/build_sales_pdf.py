@@ -9,6 +9,10 @@ exec(src.split("\ndef page(p):")[0], ns)
 PAGES = ns["PAGES"]
 esc = lambda s: html.escape(s, quote=True)
 OUT = pathlib.Path(sys.argv[1])
+SITE = HERE.parent.resolve()                      # uaok-site, where the screenshots live
+PDF_MAKES = {"dj.html": [0, 4, 5, 6]}             # 4 of the DJ page's 8 features fit on paper
+PDF_TIER_ITEMS = {"dj.html": 3}                  # DJ page is the fullest
+PDF_SKIP_PICS = {"kids-media/money-coins.jpg"}    # 2 game screens fit side by side
 
 def qr_svg(url, color):
     q = segno.make(url, error="m")
@@ -66,6 +70,15 @@ p{margin:0}
 .bub{padding:4px 9px;border-radius:11px;background:#EEF1F6;font-size:8.3pt;line-height:1.3;max-width:92%}
 .bub.me{background:var(--a);color:var(--ai);justify-self:end}
 .feat{display:grid;gap:7px}
+.pics{display:grid;gap:8px;grid-template-columns:repeat(3,1fr)}
+.pics-third{grid-template-columns:repeat(2,1fr)}
+.pics figure{margin:0;display:grid;gap:4px}
+.pics img{width:100%;display:block;border-radius:8px;border:1px solid #D5DBE6}
+.pics-phone img{aspect-ratio:390/700;object-fit:cover;object-position:top}
+.pics-portrait img{aspect-ratio:4/5;object-fit:cover;object-position:center 30%}
+.pics-third img{aspect-ratio:1.08;object-fit:cover;object-position:center 60%}
+.pics figcaption{font:700 6.3pt/1.3 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:#566079}
+.bottom .t b.demo{display:inline;font:700 9pt "Figtree",sans-serif;color:var(--a)}
 .feat div{font-size:9.2pt;color:#3B4560}
 .feat b{display:block;color:#141A2A;font-size:9.8pt}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
@@ -128,8 +141,14 @@ for p in PAGES:
     w(f'<section class="pg" style="--a:{a};--ai:{ai}">')
     w(f'<div class="band"><span class="mono">{esc(p["label"])}</span><h2>{p["h1"].replace("<em>","").replace("</em>","")}</h2><div class="name">{esc(n)}</div></div>')
     w(f'<div class="body"><p class="lede">{esc(p["lede"])}</p><div class="grid2">')
-    # left: example
-    if p.get("chat"):
+    # left: real screenshots when the page has them, else the example
+    if p.get("gallery"):
+        pics = [g for g in p["gallery"] if g[0] not in PDF_SKIP_PICS][:3]
+        w(f'<div class="box"><span class="mono">Real screens</span><div class="pics pics-{pics[0][3]}">')
+        for src, alt, cap, kind in pics:
+            w(f'<figure><img src="{(SITE / src).as_uri()}" alt="{esc(alt)}"><figcaption>{esc(cap)}</figcaption></figure>')
+        w('</div></div>')
+    elif p.get("chat"):
         w('<div class="box"><span class="mono">Example text</span><div class="chat">')
         for who_, msg in p["chat"]:
             w(f'<span class="bub{" me" if who_=="me" else ""}">{esc(msg).replace(chr(10),"<br>")}</span>')
@@ -141,7 +160,7 @@ for p in PAGES:
         w('</div>')
     # right: features
     w(f'<div class="box"><span class="mono">{esc(p["makes_label"])}</span><div class="feat">')
-    for h, d in p["makes"]:
+    for h, d in [p["makes"][i] for i in PDF_MAKES.get(p["file"], range(4))]:
         w(f'<div><b>{esc(h)}</b>{esc(d)}</div>')
     w('</div></div></div>')
     # steps
@@ -154,12 +173,15 @@ for p in PAGES:
     for t in p["tiers"]:
         w(f'<div class="tier{" pick" if t.get("pick") else ""}">' + ('<span class="tag">MOST PICKED</span>' if t.get("pick") else ""))
         w(f'<h3>{esc(t["name"])}</h3><div class="price">{t["price"]}</div><div class="was">{esc(t["was"])}</div><ul>')
-        for it in t["items"][:4]:
+        for it in t["items"][:PDF_TIER_ITEMS.get(p["file"], 4)]:
             w(f'<li>{esc(it)}</li>')
         w('</ul></div>')
     w('</div></div>')
     # bottom
-    w(f'<div class="bottom">{qr_svg(url, a)}<div class="t"><b>Scan to see it and buy</b>{esc(url.replace("https://",""))}<br>Pay online by card. We reach out within 1 business day.</div>')
+    demo = p.get("live_demo")
+    demo_line = (f'<br><b class="demo">Try the live demo:</b> {esc(demo["url"].replace("https://", ""))} · login {esc(demo["user"])} / {esc(demo["password"])}'
+                 if demo else "")
+    w(f'<div class="bottom">{qr_svg(url, a)}<div class="t"><b>Scan to see it and buy</b>{esc(url.replace("https://",""))}<br>Pay online by card. We reach out within 1 business day.{demo_line}</div>')
     if p.get("addon"):
         s, d = p["addon"]
         w(f'<div class="addon"><b>{esc(s)}</b> {esc(d)}</div>')
@@ -175,7 +197,7 @@ for p in PAGES:
     w(f'<tr style="--a:{p["accent"][0]}"><td class="n"><span class="sw"></span>{esc(n)}</td><td>{esc(who)}</td><td>{esc(line)}</td><td class="n">{start}</td></tr>')
 w('</tbody></table>')
 w('<div class="how"><div><b>1. Pick</b>Scan a product\'s code or go to uaok.org → Intellectual Property.</div><div><b>2. Pay</b>Choose your plan and pay online by card. Monthly plans cancel any time.</div><div><b>3. We start</b>We reach out within 1 business day and set it all up with you.</div></div>')
-w(f'<div class="contact">{qr_svg("https://uaok.org/#contact", "#0D111C")}<div><h3>Questions first?</h3><p>Email <b>info@uaok.org</b> or send a message at <b>uaok.org</b>. Ask about a free DJ App demo with your name on it.</p></div></div>')
+w(f'<div class="contact">{qr_svg("https://uaok.org/#contact", "#0D111C")}<div><h3>Questions first?</h3><p>Email <b>info@uaok.org</b> or send a message at <b>uaok.org</b>. Try the live CRM demo at uaok.org/crm, or ask about a free DJ App demo with your name on it.</p></div></div>')
 w('<p class="mission">BatMaine products are made by Ultimate Advancement of Knowledge (UAOK), a nonprofit that trains and employs young people. Every sale supports that work. Prices are starting prices and can change. Not affiliated with Anthropic or any of the services the products connect to.</p>')
 w('</section></body></html>')
 

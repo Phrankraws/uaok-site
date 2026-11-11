@@ -228,25 +228,26 @@ dict(
         ("We build + connect","Your own website and accounts, with tips paid to you."),
         ("Go live","You get a How It Works guide in your colors and a walk-through call.")],
  tiers=[
-   dict(name="Free demo", price="$0", was="See it first", fit="For DJs who want to see it with their name on it.",
-        items=["A sample app with your name","Pretend tips you can try","Try it at your next party"], btn="Ask for a demo"),
-   dict(name="Party App", price="$497", was="One time", fit="For DJs who already have a website.",
-        items=["Requests, votes and tips","Shout-outs","Photo booth","Guest photos on the big screen","Tips paid straight to you"], btn="Get the Party App"),
-   dict(name="Full Pro", price="$997", was="One time", fit="For DJs who want the whole business in one place.", pick=True,
-        items=["Everything in Party App","Your own website","Invites, RSVP, QR tickets and check-in","Booking form + customer book","Instagram “comment PARTY” codes","How It Works guide in your colors"], btn="Go Full Pro"),
+   dict(name="Starter", price="$199", was="Setup, then $49/month", fit="For DJs who want the party app running fast. We host it for you.",
+        items=["Your own website with a booking form","Song requests, votes, tips and paid line-jumps","Shout-outs + guest photos on the big screen","Invites, RSVP, QR tickets and door check-in","iPad photo booth","Instagram “comment PARTY” codes","Hosting included"], btn="Start Starter"),
+   dict(name="Pro", price="$497", was="Setup, then $69/month", fit="For DJs who book private events and want to get paid up front.", pick=True,
+        items=["Everything in Starter","Gig contracts your clients sign on their phone","Deposits paid by card when they sign","Balance reminders before the party","Runs on your own accounts","How It Works guide in your colors"], btn="Go Pro"),
+   dict(name="Premium", price="$997", was="Setup, then $69/month", fit="For DJs who want a full custom website, too.",
+        items=["Everything in Pro","A custom website built around your brand","Extra pages: services, gallery, reviews","Connected to your own web address (like djname.com)","A walk-through call"], btn="Go Premium"),
  ],
- addon=("Monthly care, $49/month (optional).", "We keep it running, fix anything that breaks, and set up new party themes for you."),
- extra_note="Tips and payments go to your own account. Card services take their usual small fee per payment. Hosting is billed to you directly, usually $5 to $20 a month.",
+ addon=("Not sure yet? Get a free demo.", "We make a sample of your app with your name and pretend tips, so you can try it before you buy.", "Ask for a demo"),
+ extra_note="Tips, line-jumps, VIP and deposits go into your own account. Card services take their usual small fee per payment. On Pro and Premium, hosting is billed to you directly, usually $5 to $20 a month. Our sample contract is a starting point, not legal advice.",
  rules=[("Tips go straight to you.","Payments go into your own account, not through us."),
         ("Your name, your brand.","Your colors, your logo, your web address."),
         ("You control the screen.","Guest photos and shout-outs wait for your OK before they show on the big screen."),
         ("Your guest list is yours.","RSVPs and bookings belong to you.")],
  faq=[("Do guests need to download an app?","No. They scan a QR code and it opens in their phone's browser."),
-      ("Do I need my own website?","No. Full Pro comes with one. If you already have one, the Party App links from it."),
+      ("Do I need my own website?","No. Every plan comes with one. Premium adds a custom website on your own web address."),
+      ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due."),
       ("Can I try it before I pay?","Yes. Ask for the free demo and we'll make one with your name on it."),
       ("What do I need at the party?","Your phone. Add an iPad for the photo booth and a TV or projector for the big screen if you want.")],
  order_h="Ready to run the party from your phone?",
- hint="BatMaine DJ App: free demo, Party App or Full Pro? Your DJ name and your Instagram?",
+ hint="BatMaine DJ App: free demo, Starter, Pro or Premium? Your DJ name and your Instagram?",
  menu="BatMaine DJ App",
  card="A DJ's own party app: requests with votes, tips, QR tickets, photo booth and the big screen.",
 ),
@@ -314,9 +315,12 @@ LINKS = {
  ("text-scheduling.html","Starter"):"https://buy.stripe.com/cNi7sL4gU4SRa5CcnS1440g",
  ("text-scheduling.html","Pro"):"https://buy.stripe.com/6oU28rcNq4SRelS87C1440h",
  ("text-scheduling.html","addon"):"https://buy.stripe.com/00w00jdRufxvgu05Zu1440i",
- ("dj.html","Party App"):"https://buy.stripe.com/6oU3cv3cQ99791ybjO1440j",
- ("dj.html","Full Pro"):"https://buy.stripe.com/8x25kDcNq2KJ2Da2Ni1440k",
- ("dj.html","addon"):"https://buy.stripe.com/7sY6oH28M5WV91y1Je1440l",
+ # DJ plans (2026-11-11): each link = setup (one time) + monthly subscription.
+ # Old one-time links no longer on the page: Party App $497 6oU3cv3cQ99791ybjO1440j,
+ # Full Pro $997 8x25kDcNq2KJ2Da2Ni1440k, care $49/mo 7sY6oH28M5WV91y1Je1440l.
+ ("dj.html","Starter"):"https://buy.stripe.com/28E6oH8xaclj1z60Fa1440p",
+ ("dj.html","Pro"):"https://buy.stripe.com/28E3cv9Beclj1z60Fa1440q",
+ ("dj.html","Premium"):"https://buy.stripe.com/9B63cv28M4SRelSdrW1440r",
  ("kids-game.html","One child"):"https://buy.stripe.com/6oUeVd14I0CB4Li9bG1440m",
  ("kids-game.html","Each extra child"):"https://buy.stripe.com/aFa8wP4gU0CB2DaafK1440n",
  ("kids-game.html","addon"):"https://buy.stripe.com/4gM6oH9Beetr4LiafK1440o",
@@ -463,8 +467,9 @@ def page(p):
         w(f'          <a class="{btn_cls}" href="{href}">{dot}{esc(t["btn"])}</a>\n        </div>\n')
     w('      </div>\n')
     if p.get("addon"):
-        s, d = p["addon"]
-        w(f'      <div class="addon">\n        <p><strong>{esc(s)}</strong> {esc(d)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p['file'],'addon'), contact)}">Add it</a>\n      </div>\n')
+        s, d = p["addon"][:2]
+        label = p["addon"][2] if len(p["addon"]) > 2 else "Add it"
+        w(f'      <div class="addon">\n        <p><strong>{esc(s)}</strong> {esc(d)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p['file'],'addon'), contact)}">{esc(label)}</a>\n      </div>\n')
     if p.get("extra_note"):
         w(f'      <p class="note">{p["extra_note"]}</p>\n')
     w('    </div>\n  </section>\n\n')

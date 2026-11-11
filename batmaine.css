@@ -32,6 +32,9 @@ a{color:var(--cobalt)}
 .btn-rec{background:var(--rec);color:var(--rec-ink)}
 .btn-rec:hover{filter:brightness(1.07)}
 .btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn-blink{animation:blink 1.1s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--rec)}50%{opacity:.45;box-shadow:0 0 0 10px transparent}}
+@media (prefers-reduced-motion: reduce){.btn-blink{animation:none;box-shadow:0 0 0 4px var(--rec)}}
 .btn:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
 .dot{width:.6em;height:.6em;border-radius:50%;background:currentColor;display:inline-block}
 .fine{font-size:.9rem;color:var(--muted)}

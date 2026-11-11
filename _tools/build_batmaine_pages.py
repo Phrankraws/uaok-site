@@ -327,7 +327,7 @@ def live_demo_html(p):
     d = p.get("live_demo")
     if not d:
         return ""
-    return (f'\n      <a class="btn btn-ghost" href="{d["url"]}" target="_blank" rel="noopener">▶ Try the live demo</a>'
+    return (f'\n      <a class="btn btn-rec btn-blink" href="{d["url"]}" target="_blank" rel="noopener">▶ Try the live demo</a>'
             f'\n      <p class="fine">A real website + CRM for a made-up business. Log in with <b>{esc(d["user"])}</b> / '
             f'<b>{esc(d["password"])}</b>. Click anything; it resets every night.</p>')
 

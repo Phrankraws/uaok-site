@@ -11,7 +11,7 @@ esc = lambda s: html.escape(s, quote=True)
 OUT = pathlib.Path(sys.argv[1])
 SITE = HERE.parent.resolve()                      # uaok-site, where the screenshots live
 PDF_MAKES = {"dj.html": [0, 4, 5, 6]}             # 4 of the DJ page's 8 features fit on paper
-PDF_TIER_ITEMS = {"dj.html": 3}                  # DJ page is the fullest
+PDF_TIER_ITEMS = {"dj.html": 2}                  # DJ page is the fullest
 PDF_SKIP_PICS = {"kids-media/money-coins.jpg"}    # 2 game screens fit side by side
 
 def qr_svg(url, color):
@@ -183,7 +183,7 @@ for p in PAGES:
                  if demo else "")
     w(f'<div class="bottom">{qr_svg(url, a)}<div class="t"><b>Scan to see it and buy</b>{esc(url.replace("https://",""))}<br>Pay online by card. We reach out within 1 business day.{demo_line}</div>')
     if p.get("addon"):
-        s, d = p["addon"]
+        s, d = p["addon"][:2]
         w(f'<div class="addon"><b>{esc(s)}</b> {esc(d)}</div>')
     w('</div></section>')
 

@@ -346,9 +346,9 @@ def lang_html(p):
 
 
 def cta_html(p):
-    """Top-right button. cta_url (a live demo) opens it in a new tab and blinks."""
+    """Top-right button. cta_url (a live demo) opens it in a new tab."""
     if p.get("cta_url"):
-        return (f'<a class="btn btn-rec btn-blink" href="{p["cta_url"]}" target="_blank" rel="noopener">'
+        return (f'<a class="btn btn-rec" href="{p["cta_url"]}" target="_blank" rel="noopener">'
                 f'<span class="dot"></span>{esc(p["cta"])}</a>')
     return f'<a class="btn btn-rec" href="#pricing"><span class="dot"></span>{esc(p["cta"])}</a>'
 

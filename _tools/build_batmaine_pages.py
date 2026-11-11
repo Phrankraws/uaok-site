@@ -203,6 +203,7 @@ dict(
  h1="Your crowd requests. <em>You run the party.</em>",
  lede="Your own party app and website: song requests with votes, tips, shout-outs, invites with QR tickets, a photo booth and guest photos on the big screen. In your colors, with your name on it.",
  cta="See a free demo",
+ lang_pair=("dj.html", "dj-es.html"),
  cta_url="https://web-production-02dc467d.up.railway.app/try",
  live_demo=dict(url="https://web-production-02dc467d.up.railway.app/try", user="demo", password="TryIt-2026",
                 what="A real DJ party app with a sample party going on. Be a guest on your phone, then be the DJ."),
@@ -245,6 +246,7 @@ dict(
         ("You control the screen.","Guest photos and shout-outs wait for your OK before they show on the big screen."),
         ("Your guest list is yours.","RSVPs and bookings belong to you.")],
  faq=[("Do guests need to download an app?","No. They scan a QR code and it opens in their phone's browser."),
+      ("Does it come in Spanish?","Yes. Every page has an EN | ES button, and the sample contract comes in Spanish too."),
       ("Do I need my own website?","No. Every plan comes with one. Premium adds a custom website on your own web address."),
       ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due."),
       ("Can I try it before I pay?","Yes. Ask for the free demo and we'll make one with your name on it."),
@@ -330,6 +332,19 @@ LINKS = {
 }
 
 
+def lang_html(p):
+    """EN | ES switch for pages that have both languages (lang_pair = (english file, spanish file))."""
+    pair = p.get("lang_pair")
+    if not pair:
+        return ""
+    es = p.get("lang") == "es"
+    on = 'style="padding:7px 11px;background:var(--ink);color:var(--bg);text-decoration:none"'
+    off = 'style="padding:7px 11px;color:var(--ink);text-decoration:none"'
+    return (f'<nav aria-label="Language" style="display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;'
+            f'font:700 .75rem/1 var(--mono)"><a href="{pair[0].replace(".html", "")}" hreflang="en" lang="en" {off if es else on}>EN</a>'
+            f'<a href="{pair[1].replace(".html", "")}" hreflang="es" lang="es" {on if es else off}>ES</a></nav>')
+
+
 def cta_html(p):
     """Top-right button. cta_url (a live demo) opens it in a new tab and blinks."""
     if p.get("cta_url"):
@@ -378,7 +393,7 @@ def page(p):
 
 <header class="wrap top">
   <div class="brand-wrap"><a class="back" href="/#ip">← UAOK Intellectual Property</a><div class="brand">{p["brand"][0]}<b>{p["brand"][1]}</b></div></div>
-  {cta_html(p)}
+  <div style="display:flex;gap:10px;align-items:center">{lang_html(p)}{cta_html(p)}</div>
 </header>
 
 <main>
@@ -475,13 +490,13 @@ def page(p):
         w('          </ul>\n')
         btn_cls = "btn btn-rec" if pick else "btn btn-ghost"
         dot = '<span class="dot"></span>' if pick else ""
-        href = LINKS.get((p["file"], t["name"]), contact)
+        href = LINKS.get((p.get("links_file", p["file"]), t["name"]), contact)
         w(f'          <a class="{btn_cls}" href="{href}">{dot}{esc(t["btn"])}</a>\n        </div>\n')
     w('      </div>\n')
     if p.get("addon"):
         s, d = p["addon"][:2]
         label = p["addon"][2] if len(p["addon"]) > 2 else "Add it"
-        w(f'      <div class="addon">\n        <p><strong>{esc(s)}</strong> {esc(d)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p['file'],'addon'), contact)}">{esc(label)}</a>\n      </div>\n')
+        w(f'      <div class="addon">\n        <p><strong>{esc(s)}</strong> {esc(d)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p.get('links_file', p['file']),'addon'), contact)}">{esc(label)}</a>\n      </div>\n')
     if p.get("extra_note"):
         w(f'      <p class="note">{p["extra_note"]}</p>\n')
     w('    </div>\n  </section>\n\n')
@@ -532,6 +547,16 @@ def page(p):
 
 for p in PAGES:
     (OUT / p["file"]).write_text(page(p))
+    print("wrote", p["file"])
+
+# Spanish pages (_tools/pages_es.py): same layout, Spanish words
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from pages_es import CHROME_ES, PAGES_ES  # noqa: E402
+for p in PAGES_ES:
+    html_out = page(p)
+    for en_txt, es_txt in CHROME_ES:
+        html_out = html_out.replace(en_txt, es_txt)
+    (OUT / p["file"]).write_text(html_out)
     print("wrote", p["file"])
 
 # menu + card + hint data for index.html

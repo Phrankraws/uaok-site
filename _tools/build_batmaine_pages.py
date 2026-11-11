@@ -341,8 +341,8 @@ def lang_html(p):
     on = 'style="padding:7px 11px;background:var(--ink);color:var(--bg);text-decoration:none"'
     off = 'style="padding:7px 11px;color:var(--ink);text-decoration:none"'
     return (f'<nav aria-label="Language" style="display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;'
-            f'font:700 .75rem/1 var(--mono)"><a href="{pair[0].replace(".html", "")}" hreflang="en" lang="en" {off if es else on}>EN</a>'
-            f'<a href="{pair[1].replace(".html", "")}" hreflang="es" lang="es" {on if es else off}>ES</a></nav>')
+            f'font:700 .75rem/1 var(--mono)"><a href="{pair[0]}" hreflang="en" lang="en" {off if es else on}>EN</a>'
+            f'<a href="{pair[1]}" hreflang="es" lang="es" {on if es else off}>ES</a></nav>')
 
 
 def cta_html(p):

@@ -203,6 +203,9 @@ dict(
  h1="Your crowd requests. <em>You run the party.</em>",
  lede="Your own party app and website: song requests with votes, tips, shout-outs, invites with QR tickets, a photo booth and guest photos on the big screen. In your colors, with your name on it.",
  cta="See a free demo",
+ cta_url="https://web-production-02dc467d.up.railway.app/try",
+ live_demo=dict(url="https://web-production-02dc467d.up.railway.app/try", user="demo", password="TryIt-2026",
+                what="A real DJ party app with a sample party going on. Be a guest on your phone, then be the DJ."),
  demo=[("Request","“Before I Let Go” — ▲ <b>14 votes</b>"),
        ("Tip","<b>$20</b> line-jump → moved to #1"),
        ("Shout-out","“Happy 40th, Tasha!” on the big screen"),
@@ -327,12 +330,21 @@ LINKS = {
 }
 
 
+def cta_html(p):
+    """Top-right button. cta_url (a live demo) opens it in a new tab and blinks."""
+    if p.get("cta_url"):
+        return (f'<a class="btn btn-rec btn-blink" href="{p["cta_url"]}" target="_blank" rel="noopener">'
+                f'<span class="dot"></span>{esc(p["cta"])}</a>')
+    return f'<a class="btn btn-rec" href="#pricing"><span class="dot"></span>{esc(p["cta"])}</a>'
+
+
 def live_demo_html(p):
     d = p.get("live_demo")
     if not d:
         return ""
+    what = d.get("what", "A real website + CRM for a made-up business.")
     return (f'\n      <a class="btn btn-rec btn-blink" href="{d["url"]}" target="_blank" rel="noopener">▶ Try the live demo</a>'
-            f'\n      <p class="fine">A real website + CRM for a made-up business. Log in with <b>{esc(d["user"])}</b> / '
+            f'\n      <p class="fine">{esc(what)} Log in with <b>{esc(d["user"])}</b> / '
             f'<b>{esc(d["password"])}</b>. Click anything; it resets every night.</p>')
 
 
@@ -366,7 +378,7 @@ def page(p):
 
 <header class="wrap top">
   <div class="brand-wrap"><a class="back" href="/#ip">← UAOK Intellectual Property</a><div class="brand">{p["brand"][0]}<b>{p["brand"][1]}</b></div></div>
-  <a class="btn btn-rec" href="#pricing"><span class="dot"></span>{esc(p["cta"])}</a>
+  {cta_html(p)}
 </header>
 
 <main>

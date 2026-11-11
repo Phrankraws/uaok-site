@@ -149,7 +149,10 @@ dict(
  card="A business website plus a private customer book: leads, bookings, payments and a live dashboard.",
 ),
 dict(
- file="text-scheduling.html", topic="text-scheduling", brand=("BatMaine", "TextScheduling"),
+ file="text-scheduling.html", topic="text-scheduling",
+ chat_video=dict(src="text-media/haircut-ugc.mp4", poster="text-media/haircut-ugc.jpg",
+                 alt="A barber explains that his clients text HAIRCUT, pick a time and reply YES to get booked, while the texts appear on a phone",
+                 caption="15 seconds: how a client books by text"), brand=("BatMaine", "TextScheduling"),
  accent=("#17803F", "#FFFFFF", "#5EDB8E", "#04170B"),
  title="BatMaine Text Scheduling — Clients Text a Word and Get Booked",
  desc="Clients send one word by text, Instagram DM or Facebook message, pick a time by number, reply YES, and they're on your calendar. For barbers and nail salons.",
@@ -414,11 +417,26 @@ def page(p):
   <div class="wrap" style="padding-bottom:clamp(48px,7vw,88px)">
 ''')
     if p.get("chat"):
-        w('    <div class="demo" style="max-width:520px">\n      <span class="label">Example text</span>\n      <div class="chat">\n')
+        cv = p.get("chat_video")
+        if cv:   # example texts + a 9:16 video side by side (stacks on phones)
+            w('    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,40px);align-items:center">\n')
+        w('    <div class="demo" style="max-width:520px;flex:1 1 320px">\n      <span class="label">Example text</span>\n      <div class="chat">\n')
         for who, msg in p["chat"]:
             cls = "bubble me" if who == "me" else "bubble"
             w(f'        <span class="{cls}">{esc(msg).replace(chr(10), "<br>")}</span>\n')
         w('      </div>\n    </div>\n')
+        if cv:
+            w(f'''    <figure style="margin:0;flex:0 1 320px;max-width:340px;position:relative">
+      <video id="ugc" src="{cv["src"]}" poster="{cv["poster"]}" autoplay muted loop playsinline preload="metadata"
+        style="width:100%;aspect-ratio:9/16;border-radius:22px;display:block;background:#111;box-shadow:0 24px 50px -30px rgba(10,14,30,.6)"
+        aria-label="{esc(cv["alt"])}"></video>
+      <button type="button" id="ugc-snd" style="position:absolute;right:12px;bottom:44px;border:0;border-radius:999px;padding:9px 14px;font:700 .8rem var(--body);background:rgba(0,0,0,.65);color:#fff;cursor:pointer">🔊 Tap for sound</button>
+      <figcaption class="fine" style="margin-top:8px;text-align:center">{esc(cv["caption"])}</figcaption>
+      <script>(function(){{var v=document.getElementById("ugc"),b=document.getElementById("ugc-snd");
+        b.addEventListener("click",function(){{v.muted=!v.muted;if(!v.muted){{v.currentTime=0;v.play();}}b.textContent=v.muted?"🔊 Tap for sound":"🔇 Mute";}});}})();</script>
+    </figure>
+    </div>
+''')
     else:
         w('    <div class="demo">\n      <span class="label">Example</span>\n')
         for k, v in p["demo"]:

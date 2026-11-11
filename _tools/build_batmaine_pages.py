@@ -105,7 +105,7 @@ dict(
 ),
 dict(
  file="crm.html", topic="crm", brand=("BatMaine", "CRM"),
- live_demo=dict(url="https://web-production-9e4b9.up.railway.app", user="demo", password="TryIt-2026"),
+ live_demo=dict(url="https://web-production-9e4b9.up.railway.app/admin/login", user="demo", password="TryIt-2026"),
  accent=("#2F45E0", "#FFFFFF", "#8FA0FF", "#0A0F33"),
  title="BatMaineCRM — Your Business Website and Customer Book in One",
  desc="A real website for your business plus a private dashboard: every lead, booking, order and payment in one place, on your phone.",

@@ -427,13 +427,15 @@ def page(p):
         w('      </div>\n    </div>\n')
         if cv:
             w(f'''    <figure style="margin:0;flex:0 1 320px;max-width:340px;position:relative">
-      <video id="ugc" src="{cv["src"]}" poster="{cv["poster"]}" autoplay muted loop playsinline preload="metadata"
+      <video id="ugc" src="{cv["src"]}" poster="{cv["poster"]}" controls playsinline preload="metadata"
         style="width:100%;aspect-ratio:9/16;border-radius:22px;display:block;background:#111;box-shadow:0 24px 50px -30px rgba(10,14,30,.6)"
         aria-label="{esc(cv["alt"])}"></video>
-      <button type="button" id="ugc-snd" style="position:absolute;right:12px;bottom:44px;border:0;border-radius:999px;padding:9px 14px;font:700 .8rem var(--body);background:rgba(0,0,0,.65);color:#fff;cursor:pointer">🔊 Tap for sound</button>
+      <button type="button" id="ugc-play" aria-label="Play video with sound" style="position:absolute;left:50%;top:calc(50% - 16px);transform:translate(-50%,-50%);border:0;border-radius:999px;padding:16px 26px;font:800 1rem var(--body);background:rgba(0,0,0,.72);color:#fff;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35)">▶ Play with sound</button>
       <figcaption class="fine" style="margin-top:8px;text-align:center">{esc(cv["caption"])}</figcaption>
-      <script>(function(){{var v=document.getElementById("ugc"),b=document.getElementById("ugc-snd");
-        b.addEventListener("click",function(){{v.muted=!v.muted;if(!v.muted){{v.currentTime=0;v.play();}}b.textContent=v.muted?"🔊 Tap for sound":"🔇 Mute";}});}})();</script>
+      <script>(function(){{var v=document.getElementById("ugc"),b=document.getElementById("ugc-play");
+        b.addEventListener("click",function(){{v.muted=false;v.volume=1;if(v.ended)v.currentTime=0;v.play();}});
+        v.addEventListener("play",function(){{b.style.display="none";}});
+        v.addEventListener("ended",function(){{b.textContent="↻ Play again";b.style.display="";}});}})();</script>
     </figure>
     </div>
 ''')

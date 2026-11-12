@@ -66,6 +66,7 @@ DJ_ES = dict(
       ("¿Necesito mi propio sitio web?", "No. Todos los planes incluyen uno. Premium agrega un sitio a la medida con tu propia dirección web."),
       ("¿Cómo funcionan los contratos?", "En Pro y Premium mandas un enlace. Tu cliente lo lee, firma con el dedo y paga el depósito ahí mismo. La fecha queda asegurada cuando paga, y recibe recordatorios antes de que venza el saldo."),
       ("¿Puedo probarla antes de pagar?", "Sí. Toca “Ver la demo gratis” arriba, o pídenos una demo con tu nombre."),
+      ("¿Puedo cancelar?", "Sí, cuando quieras. Usa el enlace \"administra o cancela tu plan\" en esta página y escribe el correo con el que pagaste. Tu app sigue funcionando hasta el final del mes que ya pagaste, y no se te cobra otra vez."),
       ("¿Qué necesito en la fiesta?", "Tu teléfono. Agrega un iPad para la cabina de fotos y una TV o proyector para la pantalla grande si quieres.")],
  order_h="¿Listo para manejar la fiesta desde tu teléfono?",
  hint="BatMaine DJ App (español): ¿demo gratis, Starter, Pro o Premium? ¿Tu nombre de DJ y tu Instagram?",

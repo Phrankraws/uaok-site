@@ -5,6 +5,9 @@ OUT = pathlib.Path(sys.argv[1])
 
 def esc(s): return html.escape(s, quote=True)
 
+# Billing portal: buyers log in with their email to cancel or update a monthly plan.
+CANCEL_URL = "https://billing.stripe.com/p/login/6oUfZh00E4SR5Pmew014400"
+
 PAGES = [
 dict(
  file="researcher.html", topic="researcher", brand=("BatMaine", "Researcher"),
@@ -55,6 +58,7 @@ dict(
  faq=[("Is this a person or AI?","It's an AI research team run with Claude, set up and checked by UAOK before it reaches you."),
       ("Is this legal or medical advice?","No. It's research to help you decide and to ask better questions. For legal, tax or medical decisions, take the report to a professional."),
       ("What if there's no clear answer?","Then the report says so, tells you what's still unknown, and how you could find out."),
+      ("Can I cancel Monthly Watch?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your last report still comes, and you won't be charged again."),
       ("Can you research a person?","Only for business reasons, like checking a contractor or a business partner, using public information.")],
  order_h="Got a big question?",
  hint="BatMaineResearcher order: which one (Fact Check, Quick Report or Deep Dive), and what's your question?",
@@ -107,6 +111,7 @@ dict(
  faq=[("Do I need to show my face?","No. We can use a made-up spokesperson, a cartoon mascot, or no person at all."),
       ("Which apps can you post to?","Instagram, TikTok, Facebook and LinkedIn. Tell us which ones you use."),
       ("Can I change a post?","Yes. Ask for changes before you approve. Each post gets one free round of changes."),
+      ("Can I cancel the monthly plan?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Posts already scheduled for the month you paid for still go out, and you won't be charged again."),
       ("How is this different from BatMaineInfluencer?","BatMaineAvatar is done for you: we make and schedule the posts. BatMaineInfluencer is a kit you run yourself on your Mac.")],
  order_h="Ready for a month of posts?",
  hint="BatMaineAvatar order: which plan (Launch Pack, Monthly or Growth), your website, and which apps you post on?",
@@ -152,6 +157,7 @@ dict(
  faq=[("Do I need to know anything about tech?","No. We set it all up and show you how to use it on a call."),
       ("I don't have a web address. Is that OK?","Yes. We help you pick and buy one. It costs about $12 a year."),
       ("Can I see it before I buy?","Yes. Try the live demo at the top of this page: a sample website and the CRM behind it, filled with made-up customers. Send a message on the sample site and watch it show up in the CRM."),
+      ("Can I cancel Monthly care?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your website and CRM are still yours and keep running. You won't be charged again."),
       ("What happens if something breaks?","With Monthly care, we fix it. Without it, we fix it at our hourly rate.")],
  order_h="Ready for your own website and CRM?",
  hint="BatMaineCRM order: which plan (Starter or Business), your business name, and what you sell?",
@@ -200,6 +206,7 @@ dict(
         ("Cards only by your rules.","A no-show fee is only charged under the rules you set.")],
  faq=[("Do my clients need an app?","No. They use the texting, Instagram or Facebook they already have."),
       ("What if a client wants to cancel?","They reply CANCEL. The time opens back up on your calendar."),
+      ("Can I cancel Monthly care?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Care runs to the end of the month you already paid for, and you won't be charged again."),
       ("Can I still book people myself?","Yes. Anything you add to your calendar is blocked out for the bot."),
       ("What if someone texts something else?","The message comes to you like normal, so you can answer it yourself.")],
  order_h="Ready to stop the phone tag?",
@@ -263,6 +270,7 @@ dict(
       ("Do I need my own website?","No. Every plan comes with one. Premium adds a custom website on your own web address."),
       ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due."),
       ("Can I try it before I pay?","Yes. Ask for the free demo and we'll make one with your name on it."),
+      ("Can I cancel?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your app keeps working until the end of the month you already paid for, and you won't be charged again."),
       ("What do I need at the party?","Your phone. Add an iPad for the photo booth and a TV or projector for the big screen if you want.")],
  order_h="Ready to run the party from your phone?",
  hint="BatMaine DJ App: free demo, Starter, Pro or Premium? Your DJ name and your Instagram?",
@@ -312,6 +320,7 @@ dict(
  faq=[("What ages is it for?","About 3 to 8. Lessons start easy and get harder as they go."),
       ("Do I have to use my child's photo?","No. Pick a made-up cartoon kid instead."),
       ("What does my child need to play?","A tablet, phone or computer with internet. Nothing to download."),
+      ("Can I cancel the $9 a month?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. The game stays online until the end of the month you already paid for, and you won't be charged again."),
       ("Can grandparents play along?","Yes. Invite family to races from the parent portal.")],
  order_h="Ready to make your child the star?",
  hint="Kids Learning Game order: your child's first name and age, the theme (race cars, castle, space or jungle), and how many children?",
@@ -545,6 +554,10 @@ def page(p):
         w(f'      <div class="addon">\n        <p><strong>{esc(s)}</strong> {esc(d)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p.get('links_file', p['file']),'addon'), contact)}">{esc(label)}</a>\n      </div>\n')
     if p.get("extra_note"):
         w(f'      <p class="note">{p["extra_note"]}</p>\n')
+    if p.get("lang") == "es":
+        w(f'      <p class="note">¿Tienes un plan mensual? Cancela cuando quieras: <a href="{CANCEL_URL}">administra o cancela tu plan aquí</a>.</p>\n')
+    else:
+        w(f'      <p class="note">On a monthly plan? Cancel any time: <a href="{CANCEL_URL}">manage or cancel your plan here</a>.</p>\n')
     w('    </div>\n  </section>\n\n')
 
     w('''  <section>

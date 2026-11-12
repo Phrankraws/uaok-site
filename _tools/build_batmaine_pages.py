@@ -30,7 +30,17 @@ dict(
         ("The team digs in","The Scout gathers sources and sorts them: official and expert sources first, opinions last."),
         ("We try to prove it wrong","Before anything is written, the Red Team looks for the facts that would change the answer. Most research skips this step."),
         ("You get the report","A plain-English PDF: the answer up top, how sure we are, the reasons, and every source with a link.")],
+ compare_h="Why not just ask a free AI app or Google?",
+ compare_lede="Free AI apps hand you an answer. We hand you an answer that's been checked and challenged.",
+ compare=[("Answers whatever you typed, even a vague question","We talk with you first, so the question fits the decision you're making"),
+          ("Lists sources but rarely checks them. Three articles copying one report look like three sources","A checker traces every number back to where it really came from and drops what can't be proven"),
+          ("Tends to agree with you","A Red Team step tries to prove the answer wrong before you spend money on it"),
+          ("Sounds just as sure when it's guessing","Every finding is marked High, Medium or Low confidence, with the reason"),
+          ("A chat answer you still have to sort through","A finished PDF you can hand to a partner, a bank or a grant reviewer"),
+          ("You do the work and check it yourself","We do the work, check it, and answer your follow-up question")],
  tiers=[
+   dict(name="Fact Check", price="$49", was="One claim or small question · about 2 business days", fit="For checking one thing before you trust it, share it or pay for it.",
+        items=["One claim or one narrow question","A 1 to 2 page plain-English answer","True, false or unclear, with the reason","Every source listed with a link"], btn="Order a Fact Check"),
    dict(name="Quick Report", price="$149", was="One question · about 3 business days", fit="For one clear decision you need to make soon.",
         items=["One question, fully researched","A 4 to 6 page plain-English report","Every source listed with a link","Confidence marked on each finding","One follow-up question by message"], btn="Order a Quick Report"),
    dict(name="Deep Dive", price="$397", was="Up to 3 related questions · about 7 business days", fit="For big money decisions, new ventures and grant applications.", pick=True,
@@ -47,7 +57,7 @@ dict(
       ("What if there's no clear answer?","Then the report says so, tells you what's still unknown, and how you could find out."),
       ("Can you research a person?","Only for business reasons, like checking a contractor or a business partner, using public information.")],
  order_h="Got a big question?",
- hint="BatMaineResearcher order: which one (Quick Report or Deep Dive), and what's your question?",
+ hint="BatMaineResearcher order: which one (Fact Check, Quick Report or Deep Dive), and what's your question?",
  menu="BatMaineResearcher",
  card="An AI research team: sources found, checked, and challenged before a plain-English report.",
 ),
@@ -311,6 +321,7 @@ dict(
 ]
 
 LINKS = {
+ ("researcher.html","Fact Check"):"https://buy.stripe.com/6oU00j00E9976Tq73y1440s",
  ("researcher.html","Quick Report"):"https://buy.stripe.com/8x27sL28Mclj0v2gE814407",
  ("researcher.html","Deep Dive"):"https://buy.stripe.com/5kQ7sLcNqgBz3He73y14408",
  ("researcher.html","addon"):"https://buy.stripe.com/dRmdR9fZCgBz5Pm4Vq14409",
@@ -486,6 +497,21 @@ def page(p):
     for i, (h, d) in enumerate(p["steps"], 1):
         w(f'        <div class="step"><div class="n">Step<b>{i}</b></div><h3>{esc(h)}</h3><p>{esc(d)}</p></div>\n')
     w('      </div>\n    </div>\n  </section>\n\n')
+
+    if p.get("compare"):
+        w(f'''  <section class="band" id="compare">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Why pay for research?</span>
+        <h2>{esc(p["compare_h"])}</h2>
+        <p class="lede">{esc(p["compare_lede"])}</p>
+      </div>
+      <div class="compare" role="table" aria-label="Free AI apps compared with our research team">
+        <div class="c-row c-head" role="row"><div role="columnheader">Free AI apps + Google</div><div role="columnheader">Our research team</div></div>
+''')
+        for a, b in p["compare"]:
+            w(f'        <div class="c-row" role="row"><div class="c-free" role="cell">{esc(a)}</div><div class="c-us" role="cell">{esc(b)}</div></div>\n')
+        w('      </div>\n    </div>\n  </section>\n\n')
 
     tiers_cls = "tiers" if len(p["tiers"]) == 3 else "tiers two-up"
     w(f'''  <section class="band" id="pricing">

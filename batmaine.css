@@ -165,3 +165,15 @@ footer .wrap{display:grid;gap:8px}
   .gallery .g-phone,.gallery .g-square,.gallery .g-portrait{grid-column:span 1}
   .top .btn{display:none}
 }
+
+/* Free AI vs. our team comparison (Researcher page) */
+.compare{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line);display:grid;gap:1px}
+.c-row{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.c-row>div{background:var(--surface);padding:16px 20px;font-size:.98rem}
+.c-head>div{font:700 .8rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;background:var(--soft)}
+.c-head>div:last-child{color:var(--rec)}
+.c-free{color:var(--muted)}
+.c-free::before{content:"✕ ";color:var(--muted);font-weight:700}
+.c-us{font-weight:600}
+.c-us::before{content:"✓ ";color:var(--rec);font-weight:800}
+@media (max-width:640px){.c-row>div{padding:12px 14px;font-size:.92rem}}

@@ -11,7 +11,7 @@ esc = lambda s: html.escape(s, quote=True)
 OUT = pathlib.Path(sys.argv[1])
 SITE = HERE.parent.resolve()                      # uaok-site, where the screenshots live
 PDF_MAKES = {"dj.html": [0, 4, 5, 6]}             # 4 of the DJ page's 8 features fit on paper
-PDF_TIER_ITEMS = {"dj.html": 2}                  # DJ page is the fullest
+PDF_TIER_ITEMS = {"dj.html": 2, "researcher.html": 2}                 # DJ page is the fullest
 PDF_SKIP_PICS = {"kids-media/money-coins.jpg"}    # 2 game screens fit side by side
 
 def qr_svg(url, color):

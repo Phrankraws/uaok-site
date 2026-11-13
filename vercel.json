@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/researcher", "destination": "/consultation", "permanent": true },
+    { "source": "/researcher.html", "destination": "/consultation", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

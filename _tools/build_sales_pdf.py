@@ -11,7 +11,7 @@ esc = lambda s: html.escape(s, quote=True)
 OUT = pathlib.Path(sys.argv[1])
 SITE = HERE.parent.resolve()                      # uaok-site, where the screenshots live
 PDF_MAKES = {"dj.html": [0, 4, 5, 6]}             # 4 of the DJ page's 8 features fit on paper
-PDF_TIER_ITEMS = {"dj.html": 2, "researcher.html": 2}                 # DJ page is the fullest
+PDF_TIER_ITEMS = {"dj.html": 2, "consultation.html": 2}                 # DJ page is the fullest
 PDF_SKIP_PICS = {"kids-media/money-coins.jpg"}    # 2 game screens fit side by side
 
 def qr_svg(url, color):
@@ -22,7 +22,7 @@ def qr_svg(url, color):
     return b.getvalue().decode()
 
 SHORT = {
- "researcher.html": ("BatMaineResearcher", "Big questions answered with proof", "Business owners making a big decision"),
+ "consultation.html": ("BatMaine Business Consultation", "A business plan you can follow", "New and growing business owners"),
  "avatar.html": ("BatMaineAvatar", "Social posts made and scheduled for you", "Businesses too busy to post"),
  "crm.html": ("BatMaineCRM", "Website + customer book in one", "Businesses with no real website yet"),
  "text-scheduling.html": ("BatMaine Text Scheduling", "Clients text a word and get booked", "Barbers, nail techs, salons"),

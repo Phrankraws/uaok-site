@@ -10,60 +10,59 @@ CANCEL_URL = "https://billing.stripe.com/p/login/6oUfZh00E4SR5Pmew014400"
 
 PAGES = [
 dict(
- file="researcher.html", topic="researcher", brand=("BatMaine", "Researcher"),
+ file="consultation.html", topic="consultation", brand=("BatMaine", "Consultant"),
  accent=("#0B7369", "#FFFFFF", "#4FD1C0", "#04211D"),
- title="BatMaineResearcher — An AI Research Team for Your Big Questions",
- desc="Four AI researchers work your question: one finds sources, one checks them, one tries to prove it wrong, one writes it up. A plain-English report with every source listed.",
- label="AI research team · Done for you",
- h1="Questions in. <em>Proven answers</em> out.",
- lede="Four AI researchers work your question. One finds sources, one checks them, one tries to prove it wrong, and one writes it up in plain English, with every source listed.",
- cta="Get a report",
- demo=[("You ask", "“Should my food truck take catering orders in Oakland?”"),
-       ("Scout", "Finds <b>38 sources</b> and ranks them by how trustworthy they are"),
-       ("Verifier", "Double-checks the <b>12 facts</b> the answer depends on"),
-       ("Red Team", "Tries to prove the answer wrong and finds <b>3 risks</b>"),
-       ("Your report", "“Yes, with a catering permit.” The cost, the steps, and what to watch, each marked <b>High</b>, <b>Medium</b> or <b>Low</b> confidence")],
- ticker=["Small businesses","Nonprofits","Grant writers","Ministries","Food trucks","Students","Big purchases","New ideas"],
- makes_label="What we research", makes_h="Big decisions, checked from every side",
- makes=[("Market research","Who your customers are, what they pay, and who you're up against."),
-        ("Check before you sign","Look into a company, vendor or person before you hand over money."),
-        ("Rules + permits","What licenses, permits and rules apply to your idea, in your city."),
-        ("Will it work?","Pros, cons, costs and risks of a new idea before you put money in.")],
- steps=[("Tell us the question","Send a message or hop on a 15-minute call. We help you sharpen the question so the answer is useful."),
-        ("The team digs in","The Scout gathers sources and sorts them: official and expert sources first, opinions last."),
-        ("We try to prove it wrong","Before anything is written, the Red Team looks for the facts that would change the answer. Most research skips this step."),
-        ("You get the report","A plain-English PDF: the answer up top, how sure we are, the reasons, and every source with a link.")],
- compare_h="Why not just ask a free AI app or Google?",
- compare_lede="Free AI apps hand you an answer. We hand you an answer that's been checked and challenged.",
- compare=[("Answers whatever you typed, even a vague question","We talk with you first, so the question fits the decision you're making"),
-          ("Lists sources but rarely checks them. Three articles copying one report look like three sources","A checker traces every number back to where it really came from and drops what can't be proven"),
-          ("Tends to agree with you","A Red Team step tries to prove the answer wrong before you spend money on it"),
-          ("Sounds just as sure when it's guessing","Every finding is marked High, Medium or Low confidence, with the reason"),
-          ("A chat answer you still have to sort through","A finished PDF you can hand to a partner, a bank or a grant reviewer"),
+ title="BatMaine Business Consultation — A Real Business Plan, Researched and Tested",
+ desc="Tell us your business idea. Our AI consulting team researches your market, competitors, startup costs, funding, business credit, staff and permits, then tries to find what could sink it. You get a plain-English business plan with step-by-step actions.",
+ label="Business consulting · Done for you",
+ h1="Your business idea in. <em>A plan you can follow</em> out.",
+ lede="Tell us your idea. Our consulting team researches your customers, competitors, costs, funding, business credit, staff and permits, then tries to find what could sink it. You get a plain-English business plan and the exact steps to carry it out.",
+ cta="Get my plan",
+ demo=[("You tell us", "“I want to start a food truck in Oakland. I have $8,000 and a 700 credit score.”"),
+       ("Market + competitors", "Sizes up <b>your city's</b> customers and checks <b>12 nearby competitors</b>: prices, reviews and where they fall short"),
+       ("Money + credit", "Startup costs, break-even, loans and grants that fit <b>your credit</b>, and a business credit plan"),
+       ("Red Team", "Assumes the business fails and finds the <b>5 biggest hurdles</b>, each with a fix"),
+       ("Your plan", "A straight answer: <b>Go</b>, <b>Go with changes</b>, <b>Not yet</b> or <b>No</b>. Then your #1 focus and the steps, week by week")],
+ ticker=["New businesses","Side hustles","Food trucks","Salons + barbers","Home services","Nonprofits","Ministries","Growing a business"],
+ makes_label="What we cover", makes_h="Everything a new business has to figure out",
+ makes=[("Customers + competitors","Who will buy, what they pay now, and the gap nobody nearby is filling."),
+        ("Money + funding","Startup costs, monthly bills, pricing, break-even, and where the money can come from: savings, loans, grants."),
+        ("Business credit","How to build credit in the business's own name, step by step, and the scams to avoid."),
+        ("Staff, permits + hurdles","Who to hire and when, the licenses your city requires, and what could stop you, with a fix for each.")],
+ steps=[("Answer a few questions","A short interview by message or a 15-minute call: your idea, city, money, credit, time and goal."),
+        ("The team researches","Researchers dig into your market, competitors, costs, funding, credit, staff and permits, using official and expert sources first."),
+        ("We try to sink it","A checker re-checks every number, and a Red Team looks for the ways your business could fail. Most plans skip this."),
+        ("You get your plan","A straight verdict, your #1 focus for the next 90 days, and step-by-step actions with dates and costs.")],
+ compare_label="Why pay for a plan?", compare_cols=("Free AI apps + templates", "Our consulting team"),
+ compare_h="Why not just use a free AI app or a business plan template?",
+ compare_lede="A template gives you blanks to fill in. We give you a plan built on real research about your city, your money and your goal.",
+ compare=[("A template asks you to guess your own numbers","We research real local prices, costs, wages and permit fees for you"),
+          ("Free AI apps tend to cheer your idea on","A Red Team step tries to find why it would fail, so you fix it before you spend money"),
+          ("Funding and credit advice is one-size-fits-all","Loans, grants and credit steps picked for your credit score and your cash"),
+          ("Sounds just as sure when it's guessing","Every number marked as proven, likely or a guess, with sources listed"),
+          ("A plan with no next steps","A dated action checklist: what to do, who does it, what it costs and when it's done"),
           ("You do the work and check it yourself","We do the work, check it, and answer your follow-up question")],
  tiers=[
-   dict(name="Fact Check", price="$49", was="One claim or small question · about 2 business days", fit="For checking one thing before you trust it, share it or pay for it.",
-        items=["One claim or one narrow question","A 1 to 2 page plain-English answer","True, false or unclear, with the reason","Every source listed with a link"], btn="Order a Fact Check"),
-   dict(name="Quick Report", price="$149", was="One question · about 3 business days", fit="For one clear decision you need to make soon.",
-        items=["One question, fully researched","A 4 to 6 page plain-English report","Every source listed with a link","Confidence marked on each finding","One follow-up question by message"], btn="Order a Quick Report"),
-   dict(name="Deep Dive", price="$397", was="Up to 3 related questions · about 7 business days", fit="For big money decisions, new ventures and grant applications.", pick=True,
-        items=["Everything in the Quick Report","Up to 3 related questions in one report","A 15 to 20 page report with a one-page summary","A 30-minute call to walk through it","Two weeks of follow-up questions"], btn="Order a Deep Dive"),
+   dict(name="Starter", price="$49", was="A starting plan · about 3 business days", fit="For testing an idea before you put money in.",
+        items=["Short interview about your idea","Market, competitors and startup costs researched","A straight verdict: Go, Go with changes, Not yet or No","Your top hurdles, each with a fix","Your #1 focus and first steps"], btn="Order a Starter plan"),
+   dict(name="Full Outline", price="$99", was="Full business plan · about 7 business days", fit="For starting or growing a business for real.", pick=True,
+        items=["Everything in Starter","A full plain-English business plan PDF","Marketing plan and your first 100 customers","Funding options and a business credit plan","Money spreadsheet: costs, pricing, break-even, 3-year forecast","Step-by-step action checklist with dates","A short pitch deck for partners or lenders"], btn="Order a Full Outline"),
  ],
- addon=("Monthly Watch, $99/month (optional).", "We re-check your topic every month and send you what changed: new rules, new competitors, new prices."),
- rules=[("Every claim has a source.","If we can't point to where it came from, it doesn't go in the report."),
-        ("We tell you how sure we are.","Each finding is marked High, Medium or Low confidence, with the reason."),
-        ("We try to prove ourselves wrong.","A whole step is spent looking for evidence against the answer."),
-        ("No made-up numbers.","If the facts aren't out there, the report says so instead of guessing."),
-        ("Your question stays private.","We don't share your question or your report with anyone.")],
- faq=[("Is this a person or AI?","It's an AI research team run with Claude, set up and checked by UAOK before it reaches you."),
-      ("Is this legal or medical advice?","No. It's research to help you decide and to ask better questions. For legal, tax or medical decisions, take the report to a professional."),
-      ("What if there's no clear answer?","Then the report says so, tells you what's still unknown, and how you could find out."),
-      ("Can I cancel Monthly Watch?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your last report still comes, and you won't be charged again."),
-      ("Can you research a person?","Only for business reasons, like checking a contractor or a business partner, using public information.")],
- order_h="Got a big question?",
- hint="BatMaineResearcher order: which one (Fact Check, Quick Report or Deep Dive), and what's your question?",
- menu="BatMaineResearcher",
- card="An AI research team: sources found, checked, and challenged before a plain-English report.",
+ addon=None, no_monthly=True,
+ rules=[("Every number has a source.","If we can't point to where it came from, the plan says it's a guess."),
+        ("We tell you the hard truth first.","If something could stop your business, it's on page one, not page nine."),
+        ("We try to prove the plan wrong.","A whole step is spent looking for the ways it could fail."),
+        ("Real steps, not advice.","Every step says what to do, what it costs, where to go and when it's done."),
+        ("Your idea stays private.","We don't share your idea or your plan with anyone.")],
+ faq=[("Is this a person or AI?","It's an AI consulting team run with Claude, set up and checked by UAOK before it reaches you."),
+      ("Is this legal, tax or financial advice?","No. It's research and a plan to help you decide. Before you sign a loan or a lease, take it to a CPA or a business attorney. The plan lists free local help."),
+      ("Will you get me a loan or a grant?","No, we're not a lender. The plan shows which loans and grants fit your credit and cash, and how to apply. We never charge a fee to find you money."),
+      ("What if the answer is No?","Then the plan says so, explains why, and suggests a nearby idea that could work instead. Better to know before you spend."),
+      ("Is this for an idea or a business I already run?","Both. For a running business, the plan focuses on growth: more customers, better prices, funding and hiring.")],
+ order_h="Got a business idea?",
+ hint="Business Consultation order: Starter or Full Outline, your business idea, and your city?",
+ menu="BatMaine Business Consultation",
+ card="An AI consulting team researches your market, money, credit and hurdles, then hands you a business plan with steps.",
 ),
 dict(
  file="avatar.html", topic="avatar", brand=("BatMaine", "Avatar"),
@@ -330,10 +329,10 @@ dict(
 ]
 
 LINKS = {
- ("researcher.html","Fact Check"):"https://buy.stripe.com/6oU00j00E9976Tq73y1440s",
- ("researcher.html","Quick Report"):"https://buy.stripe.com/8x27sL28Mclj0v2gE814407",
- ("researcher.html","Deep Dive"):"https://buy.stripe.com/5kQ7sLcNqgBz3He73y14408",
- ("researcher.html","addon"):"https://buy.stripe.com/dRmdR9fZCgBz5Pm4Vq14409",
+ # Old Researcher links (page retired 2026-11-12): Fact Check 6oU00j00E9976Tq73y1440s, Quick Report 8x27sL28Mclj0v2gE814407,
+ #   Deep Dive 5kQ7sLcNqgBz3He73y14408, Monthly Watch dRmdR9fZCgBz5Pm4Vq14409
+ ("consultation.html","Starter"):"https://buy.stripe.com/9B68wP7t670ZfpW4Vq1440t",
+ ("consultation.html","Full Outline"):"https://buy.stripe.com/dRm28raFi2KJ2Da87C1440u",
  ("avatar.html","Launch Pack"):"https://buy.stripe.com/14A9AT3cQ8537XubjO1440a",
  ("avatar.html","Monthly"):"https://buy.stripe.com/dRm3cv8xa0CB5Pm3Rm1440b",
  ("avatar.html","Growth"):"https://buy.stripe.com/4gM6oH00E9971z6gE81440c",
@@ -511,12 +510,12 @@ def page(p):
         w(f'''  <section class="band" id="compare">
     <div class="wrap">
       <div class="head">
-        <span class="label">Why pay for research?</span>
+        <span class="label">{esc(p.get("compare_label", "Why pay for research?"))}</span>
         <h2>{esc(p["compare_h"])}</h2>
         <p class="lede">{esc(p["compare_lede"])}</p>
       </div>
-      <div class="compare" role="table" aria-label="Free AI apps compared with our research team">
-        <div class="c-row c-head" role="row"><div role="columnheader">Free AI apps + Google</div><div role="columnheader">Our research team</div></div>
+      <div class="compare" role="table" aria-label="{esc(p.get("compare_cols", ("Free AI apps + Google", "Our research team"))[0])} compared with {esc(p.get("compare_cols", ("Free AI apps + Google", "Our research team"))[1])}">
+        <div class="c-row c-head" role="row"><div role="columnheader">{esc(p.get("compare_cols", ("Free AI apps + Google", "Our research team"))[0])}</div><div role="columnheader">{esc(p.get("compare_cols", ("Free AI apps + Google", "Our research team"))[1])}</div></div>
 ''')
         for a, b in p["compare"]:
             w(f'        <div class="c-row" role="row"><div class="c-free" role="cell">{esc(a)}</div><div class="c-us" role="cell">{esc(b)}</div></div>\n')
@@ -556,7 +555,7 @@ def page(p):
         w(f'      <p class="note">{p["extra_note"]}</p>\n')
     if p.get("lang") == "es":
         w(f'      <p class="note">¿Tienes un plan mensual? Cancela cuando quieras: <a href="{CANCEL_URL}">administra o cancela tu plan aquí</a>.</p>\n')
-    else:
+    elif not p.get("no_monthly"):
         w(f'      <p class="note">On a monthly plan? Cancel any time: <a href="{CANCEL_URL}">manage or cancel your plan here</a>.</p>\n')
     w('    </div>\n  </section>\n\n')
 

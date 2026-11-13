@@ -1,6 +1,6 @@
 Not published (see ../.vercelignore).
 
-build_batmaine_pages.py  rebuilds researcher/avatar/crm/text-scheduling/dj/kids-game.html
+build_batmaine_pages.py  rebuilds consultation/avatar/crm/text-scheduling/dj/kids-game.html
     python3 _tools/build_batmaine_pages.py .
     All words, prices, Stripe links (LINKS) and screenshots (gallery=) live in this one file.
 

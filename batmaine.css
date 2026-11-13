@@ -166,7 +166,7 @@ footer .wrap{display:grid;gap:8px}
   .top .btn{display:none}
 }
 
-/* Free AI vs. our team comparison (Researcher page) */
+/* Free AI vs. our team comparison (Business Consultation page) */
 .compare{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line);display:grid;gap:1px}
 .c-row{display:grid;grid-template-columns:1fr 1fr;gap:1px}
 .c-row>div{background:var(--surface);padding:16px 20px;font-size:.98rem}

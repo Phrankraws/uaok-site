@@ -253,21 +253,23 @@ dict(
  tiers=[
    dict(name="Starter", price="$199", was="Setup, then $49/month", fit="For DJs who want the party app running fast. We host it for you.",
         items=["Your own website with a booking form","Song requests, votes, tips and paid line-jumps","Shout-outs + guest photos on the big screen","Invites, RSVP, QR tickets and door check-in","iPad photo booth","Instagram “comment PARTY” codes","Hosting included"], btn="Start Starter"),
-   dict(name="Pro", price="$497", was="Setup, then $69/month", fit="For DJs who book private events and want to get paid up front.", pick=True,
-        items=["Everything in Starter","Gig contracts your clients sign on their phone","Deposits paid by card when they sign","Balance reminders before the party","Runs on your own accounts","How It Works guide in your colors"], btn="Go Pro"),
+   dict(name="Pro", price="$297", was="Setup, then $69/month · or $828/year with no setup fee", fit="For DJs who book private events and want to get paid up front.", pick=True,
+        items=["Everything in Starter","Gig contracts your clients sign on their phone","Ready-made contracts for parties, clubs, weddings and company events","Deposits paid by card when they sign","Balance reminders before the party","Runs on your own accounts","How It Works guide in your colors"], btn="Go Pro (monthly)",
+        alt=("Pro yearly", "Pay yearly, no setup fee")),
    dict(name="Premium", price="$997", was="Setup, then $69/month", fit="For DJs who want a full custom website, too.",
         items=["Everything in Pro","A custom website built around your brand","Extra pages: services, gallery, reviews","Connected to your own web address (like djname.com)","A walk-through call"], btn="Go Premium"),
  ],
  addon=("Not sure yet? Get a free demo.", "We make a sample of your app with your name and pretend tips, so you can try it before you buy.", "Ask for a demo"),
- extra_note="Tips, line-jumps, VIP and deposits go into your own account. Card services take their usual small fee per payment. On Pro and Premium, hosting is billed to you directly, usually $5 to $20 a month. Our sample contract is a starting point, not legal advice.",
+ extra_note="Tips, line-jumps, VIP and deposits go into your own account. Card services take their usual small fee per payment. On Pro and Premium, hosting is billed to you directly, usually $5 to $20 a month. Our sample contracts are a starting point, not legal advice.",
  rules=[("Tips go straight to you.","Payments go into your own account, not through us."),
         ("Your name, your brand.","Your colors, your logo, your web address."),
         ("You control the screen.","Guest photos and shout-outs wait for your OK before they show on the big screen."),
         ("Your guest list is yours.","RSVPs and bookings belong to you.")],
  faq=[("Do guests need to download an app?","No. They scan a QR code and it opens in their phone's browser."),
-      ("Does it come in Spanish?","Yes. Every page has an EN | ES button, and the sample contract comes in Spanish too."),
+      ("Does it come in Spanish?","Yes. Every page has an EN | ES button, and the sample contracts come in Spanish too."),
       ("Do I need my own website?","No. Every plan comes with one. Premium adds a custom website on your own web address."),
-      ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due."),
+      ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due. You start from a ready-made contract for a private party, a club night, a wedding or a company or school event, and change the wording any way you like."),
+      ("What's the yearly Pro plan?","Pay $828 once for the year and there's no setup fee. That's the same as 12 months of Pro, so you save the $297 setup. It renews each year, and you can cancel any time before it does."),
       ("Can I try it before I pay?","Yes. Ask for the free demo and we'll make one with your name on it."),
       ("Can I cancel?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your app keeps working until the end of the month you already paid for, and you won't be charged again."),
       ("What do I need at the party?","Your phone. Add an iPad for the photo booth and a TV or projector for the big screen if you want.")],
@@ -346,7 +348,9 @@ LINKS = {
  # Old one-time links no longer on the page: Party App $497 6oU3cv3cQ99791ybjO1440j,
  # Full Pro $997 8x25kDcNq2KJ2Da2Ni1440k, care $49/mo 7sY6oH28M5WV91y1Je1440l.
  ("dj.html","Starter"):"https://buy.stripe.com/28E6oH8xaclj1z60Fa1440p",
- ("dj.html","Pro"):"https://buy.stripe.com/28E3cv9Beclj1z60Fa1440q",
+ # Pro changed 2026-11-14: $297 setup + $69/mo, or $828/yr setup-free. Old $497 Pro link 28E3cv9Beclj1z60Fa1440q deactivated.
+ ("dj.html","Pro"):"https://buy.stripe.com/aFacN528M3ON1z6ew01440v",
+ ("dj.html","Pro yearly"):"https://buy.stripe.com/6oUaEX28M997fpWdrW1440w",
  ("dj.html","Premium"):"https://buy.stripe.com/9B63cv28M4SRelSdrW1440r",
  ("kids-game.html","One child"):"https://buy.stripe.com/6oUeVd14I0CB4Li9bG1440m",
  ("kids-game.html","Each extra child"):"https://buy.stripe.com/aFa8wP4gU0CB2DaafK1440n",
@@ -545,7 +549,12 @@ def page(p):
         btn_cls = "btn btn-rec" if pick else "btn btn-ghost"
         dot = '<span class="dot"></span>' if pick else ""
         href = LINKS.get((p.get("links_file", p["file"]), t["name"]), contact)
-        w(f'          <a class="{btn_cls}" href="{href}">{dot}{esc(t["btn"])}</a>\n        </div>\n')
+        w(f'          <a class="{btn_cls}" href="{href}">{dot}{esc(t["btn"])}</a>\n')
+        if t.get("alt"):
+            key, label = t["alt"]
+            ahref = LINKS.get((p.get("links_file", p["file"]), key), contact)
+            w(f'          <a class="btn btn-ghost" style="margin-top:8px" href="{ahref}">{esc(label)}</a>\n')
+        w('        </div>\n')
     w('      </div>\n')
     if p.get("addon"):
         s, d = p["addon"][:2]

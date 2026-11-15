@@ -82,6 +82,16 @@ section.band{padding:88px 0}
 .ben::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--app),var(--app-2));transform:scaleX(0);transform-origin:left;transition:.4s}
 .ben:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm)}.ben:hover::before{transform:scaleX(1)}
 .ben .bi{width:42px;height:42px;color:var(--app);margin-bottom:16px}
+.pk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.pk-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pk{background:var(--paper);border:1px solid var(--line-l);border-radius:10px;padding:26px 22px;position:relative}
+.pk h3{margin:0}.pk p{margin:10px 0 0;font-size:.92rem}
+.pk-p{font-family:var(--serif,Georgia,serif);font-size:2rem;color:var(--app);margin-top:6px}
+.pk-hot{border:2px solid var(--app);box-shadow:0 0 0 4px var(--app-soft)}
+.pk-tag{position:absolute;top:-11px;left:22px;background:var(--app);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 10px}
+.pk-money{margin-top:22px;background:var(--gold-soft);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;font-size:.98rem}
+@media(max-width:900px){.pk-grid{grid-template-columns:1fr 1fr}.pk-row{grid-template-columns:1fr}}
+@media(max-width:600px){.pk-grid{grid-template-columns:1fr}}
 .ben h3{font-size:1.2rem;color:var(--ink);margin-bottom:8px;font-family:var(--serif);font-weight:450}
 .ben p{font-size:.94rem;color:var(--text-soft)}
 
@@ -171,6 +181,7 @@ a.blink-link{animation:blinktxt 1.4s ease-in-out infinite}
     <div class="nav-r">
       <a href="#how" class="hide">How It Works</a>
       <a href="#samples" class="hide blink-link">Samples</a>
+      <a href="#pricing" class="hide">Pricing</a>
       <a href="eps-estimate.html">Get an Estimate</a>
     </div>
   </div>
@@ -245,7 +256,31 @@ a.blink-link{animation:blinktxt 1.4s ease-in-out infinite}
       <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="12" width="26" height="24" rx="3"/><path d="M32 20l10-6v20l-10-6"/></svg><b>Invitation video</b><span>A personal "come celebrate!" clip</span></div>
       <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 36V12l20-4v24"/><circle cx="14" cy="36" r="4"/><circle cx="34" cy="32" r="4"/></svg><b>Music &amp; sounds</b><span>Tap-to-play fun that fits the theme</span></div>
       <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h32v22H26l-9 7v-7H8z"/><path d="M17 22l4 4 8-8"/></svg><b>Thank-you page</b><span>Slideshow of every shout-out after</span></div>
+      <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="32" height="24" rx="3"/><circle cx="24" cy="26" r="7"/><path d="M18 14l3-5h6l3 5"/></svg><b>iPad photo booth</b><span>Themed backgrounds, photos by QR</span></div>
+      <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38V24M20 38V14M30 38V20M40 38V8"/></svg><b>Guest survey</b><span>Guests rate the party 1-10</span></div>
+      <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="6" width="24" height="36" rx="3"/><path d="M18 24l4 4 8-8"/></svg><b>Self check-in</b><span>Guests scan in at the door</span></div>
+      <div class="fchip" style="background:var(--ink)"><svg class="fi" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M24 8a16 16 0 0 1 0 32M10 18h28M10 30h28"/></svg><b>Custom design</b><span>A look made from your photo</span></div>
     </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="band" id="pricing">
+  <div class="wrap">
+    <div class="sec-head center"><span class="eyebrow center">Packages</span><h2>Simple prices. Add anything you like.</h2>
+      <p class="lead" style="margin:16px auto 0">Pick a package, then add extras in the <a href="eps-estimate.html" style="color:var(--app);text-decoration:underline">estimate builder</a>. Every package includes a ready-made theme, event details, RSVP, your private dashboard and a share link.</p></div>
+    <div class="pk-grid">
+      <div class="pk"><h3>Quick Invite</h3><div class="pk-p">$89</div><p>Countdown clock and add-to-calendar + directions. Fast and simple.</p></div>
+      <div class="pk"><h3>Simple</h3><div class="pk-p">$149</div><p>Quick Invite + photo shout-outs, wish list, music button, thank-you slideshow and a printable flier.</p></div>
+      <div class="pk pk-hot"><span class="pk-tag">Most popular</span><h3>Party</h3><div class="pk-p">$249</div><p>Simple + photo and video shout-outs, picture and video on top, who's bringing what, reminders and a guest survey.</p></div>
+      <div class="pk"><h3>Full Event</h3><div class="pk-p">$399</div><p>Party + custom design, QR tickets with door check-in, guest self check-in, VIP levels, paid tickets and printable tickets.</p></div>
+    </div>
+    <div class="pk-row">
+      <div class="pk pk-wide"><h3>Church / school yearly plan <span class="pk-p" style="display:inline;font-size:1.3rem;margin-left:8px">$499 a year</span></h3><p>Up to 6 invitations in 12 months, each with the Party features. Made for churches, schools, teams and groups with events all year.</p></div>
+      <div class="pk pk-wide"><h3>Add-ons</h3><p>iPad photo booth +$50 · Custom design +$50 · Rush (event in under 7 days) +$50 · Any other feature at its own price.</p></div>
+    </div>
+    <div class="pk-money"><b>Selling tickets? Keep the fees.</b> Big ticket sites can take about $2.70 to $4.50 a ticket. On 100 tickets at $25, that's $270 to $450 gone. With us, Cash App, Venmo, Zelle and pay-at-the-door tickets have <b>no platform fee</b>, and the money goes straight to you.</div>
+    <div style="text-align:center;margin-top:28px"><a href="eps-estimate.html" class="btn btn--gold">Build Your Estimate →</a></div>
   </div>
 </section>
 
@@ -283,7 +318,9 @@ a.blink-link{animation:blinktxt 1.4s ease-in-out infinite}
         <details class="qa"><summary>Who can see my guest list?</summary><p>Only you. Your dashboard is password-protected. Guests see only the invitation and the shout-outs, never other guests' contact details.</p></details>
         <details class="qa"><summary>Can I use my own photo or colors?</summary><p>Absolutely. Choose one of our ready-made themes, or send us a photo or artwork and we'll design a custom look with matching colors and fonts.</p></details>
         <details class="qa"><summary>How far ahead should I book?</summary><p>The earlier the better, so guests have time to RSVP. Reach out as soon as you have a date in mind and we'll work with your timeline.</p></details>
-        <details class="qa"><summary>How much does it cost?</summary><p>Pricing depends on the features you choose. Use our <a href="eps-estimate.html" style="color:var(--app);text-decoration:underline">estimate builder</a> to see your price as you pick, then send it to us. We confirm the final price before any work starts.</p></details>
+        <details class="qa"><summary>How much does it cost?</summary><p>Packages start at $89 (Quick Invite), then $149 (Simple), $249 (Party) and $399 (Full Event). Add any extra you like. Use our <a href="eps-estimate.html" style="color:var(--app);text-decoration:underline">estimate builder</a> to see your price as you pick, then send it to us. We confirm the final price before any work starts.</p></details>
+        <details class="qa"><summary>We have events all year. Is there a plan for that?</summary><p>Yes. The Church / School yearly plan is $499 a year for up to 6 invitations, each with the Party features. Pick it in the estimate builder, and we'll set up each invitation when you're ready.</p></details>
+        <details class="qa"><summary>Are there fees on ticket sales?</summary><p>Not from us. Cash App, Venmo, Zelle and pay-at-the-door tickets have no platform fee. If guests pay by card, the card company's normal fee (about 2.9% + 30¢) comes out of your own Stripe or PayPal account.</p></details>
       </div>
     </div>
   </div>
@@ -309,6 +346,7 @@ a.blink-link{animation:blinktxt 1.4s ease-in-out infinite}
       <div class="flinks">
         <a href="#how">How It Works</a>
         <a href="#samples">Samples</a>
+        <a href="#pricing">Pricing</a>
         <a href="eps-estimate.html">Get an Estimate</a>
         <a href="/?topic=eps#contact">Contact</a>
         <a href="/">UAOK.org</a>

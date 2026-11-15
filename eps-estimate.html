@@ -95,6 +95,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .opt:has(input:checked) .tick{background:var(--rose);border-color:var(--rose)}
 .opt:has(input:checked) .tick::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
 .opt .needs{font-size:.74rem;color:var(--warn)}
+.opt .tag{align-self:flex-start;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--rose);color:#fff;border-radius:999px;padding:2px 9px}
+.opts[data-group=package] .opt .p{font-size:1rem}
 .ill{height:58px;border-radius:6px;background:var(--paper-2);display:flex;gap:4px;padding:6px;margin-bottom:4px}
 .ill span{flex:1;border-radius:3px}
 .ill .pic{background:linear-gradient(135deg,#E9B8C6,#C49A47)}
@@ -259,6 +261,13 @@ footer a{color:var(--cream-mute);text-decoration:none;margin-left:16px}footer a:
         <p class="hint" id="rushHint" style="font-size:.85rem;color:var(--warn);margin-top:12px" hidden></p>
       </section>
 
+      <!-- 1b -->
+      <section class="step" data-title="Package">
+        <h2>Pick a package</h2>
+        <p class="lead">Each package is one price for a set of features. You can add more on the next pages. Not sure? Start with Quick Invite and add what you like.</p>
+        <div class="opts" data-group="package"></div>
+      </section>
+
       <!-- 2 -->
       <section class="step" data-title="Look">
         <h2>The look</h2>
@@ -351,12 +360,43 @@ footer a{color:var(--cream-mute);text-decoration:none;margin-left:16px}footer a:
 
 <script>
 const API = "https://mega-app-production-8fd8.up.railway.app";
-let BASE, PRICES, GROUPS, EVENT_TYPES, code = null;   // prices are loaded from the UAOK CRM
+let BASE, PRICES, GROUPS, EVENT_TYPES, PKG_DEFAULT, code = null;   // prices are loaded from the UAOK CRM
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
 const money = n => "$" + n.toLocaleString("en-US", Number.isInteger(n) ? {} : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const label = (g, id) => GROUPS[g].items.find(i => i.id === id);
+const DEFAULTS = { design: "theme", top: "picture", countdown: "no", wall: "none" };
+const RADIOS = ["design", "top", "countdown", "wall"];
+const pkgOf = id => GROUPS.package.items.find(p => p.id === id);
+/* what one pick costs on top of the package (same rule as the CRM) */
+function priceOf(pkg, g, id) {
+  const it = label(g, id); if (!it) return 0;
+  const inc = (pkg && pkg.inc) || {};
+  if (g === "extras") return (inc.extras || []).includes(id) ? 0 : it.p;
+  const cov = inc[g] && label(g, inc[g]);
+  return Math.max(0, it.p - (cov ? cov.p : 0));
+}
+function drawPrices(pkgId) {
+  const pkg = pkgOf(pkgId);
+  document.querySelectorAll("[data-p]").forEach(el => {
+    const [g, id] = el.dataset.p.split(":");
+    if (g === "package") { el.textContent = money(pkgOf(id).p); el.className = "p"; return; }
+    const n = priceOf(pkg, g, id);
+    el.textContent = n ? "+" + money(n) : "Included"; el.className = "p" + (n ? "" : " inc");
+  });
+}
+/* picking a package ticks what it includes; extras you added yourself stay */
+let prevPkg = null;
+function applyPackage(id) {
+  const old = pkgOf(prevPkg), pkg = pkgOf(id); prevPkg = id;
+  for (const g of RADIOS) document.querySelector(`input[name=${g}][value=${pkg.inc[g] || DEFAULTS[g]}]`).checked = true;
+  const oldX = (old && old.inc.extras) || [];
+  document.querySelectorAll("input[name=extras]").forEach(b => {
+    if ((pkg.inc.extras || []).includes(b.value)) b.checked = true;
+    else if (oldX.includes(b.value)) b.checked = false;
+  });
+}
 const today = new Date(); today.setHours(0, 0, 0, 0);
 const iso = d => d.toISOString().slice(0, 10);
 
@@ -369,7 +409,8 @@ document.querySelectorAll(".opts").forEach(box => {
     <label class="opt">
       <input type="${spec.type === "radio" ? "radio" : "checkbox"}" name="${g}" value="${it.id}">
       ${it.ill ? `<div class="ill">${it.ill.map(c => `<span class="${c}"></span>`).join("")}</div>` : ""}
-      <span class="row"><span class="t">${it.t}</span><span class="p ${it.p ? "" : "inc"}">${it.p ? "+" + money(it.p) : "Included"}</span></span>
+      ${it.tag ? `<span class="tag">${it.tag}</span>` : ""}
+      <span class="row"><span class="t">${it.t}</span><span class="p" data-p="${g}:${it.id}"></span></span>
       ${it.d ? `<span class="d">${it.d}</span>` : ""}
       ${it.needs ? `<span class="needs">Adds QR entry tickets too</span>` : ""}
       <span class="tick" aria-hidden="true"></span>
@@ -427,20 +468,21 @@ function validStep1() {
 let lastIds = new Set();
 function state() {
   const fd = new FormData($("#f"));
-  return { design: fd.get("design"), top: fd.get("top"), countdown: fd.get("countdown"), wall: fd.get("wall"), extras: fd.getAll("extras") };
+  return { package: fd.get("package"), design: fd.get("design"), top: fd.get("top"), countdown: fd.get("countdown"), wall: fd.get("wall"), extras: fd.getAll("extras") };
 }
 function daysAway() {
   const v = $("#evDate").value; if (!v) return null;
   return Math.round((new Date(v + "T00:00") - today) / 864e5);
 }
 function lines() {
-  const s = state(), out = [{ id: "base", t: BASE.t, s: BASE.s, p: BASE.p }];
+  const s = state(), pkg = pkgOf(s.package);
+  const out = [{ id: "pkg", t: pkg.t + " package", s: pkg.s || "", p: pkg.p }];
   for (const g of ["design", "top", "countdown", "wall"]) {
     const it = s[g] && label(g, s[g]);
     if (it && !(g === "countdown" && it.id === "no") && !(g === "wall" && it.id === "none"))
-      out.push({ id: g + it.id, t: { design: "Design", top: "Top of invitation", countdown: "Countdown clock", wall: "Shout-out wall" }[g], s: it.t, p: it.p });
+      out.push({ id: g + it.id, t: { design: "Design", top: "Top of invitation", countdown: "Countdown clock", wall: "Shout-out wall" }[g], s: it.t, p: priceOf(pkg, g, it.id) });
   }
-  s.extras.forEach(x => { const it = label("extras", x); out.push({ id: "x" + x, t: it.t, p: it.p }); });
+  s.extras.forEach(x => { const it = label("extras", x); out.push({ id: "x" + x, t: it.t, p: priceOf(pkg, "extras", x) }); });
   if (code) {
     const sub = out.reduce((a, l) => a + l.p, 0);
     const amt = Math.min(sub, code.kind === "percent" ? Math.round(sub * code.value) / 100 : code.value);
@@ -451,7 +493,7 @@ function lines() {
   return out;
 }
 function draw() {
-  drawBring();
+  drawBring(); drawPrices(state().package);
   const ls = lines(), total = ls.reduce((a, l) => a + l.p, 0);
   $("#lines").innerHTML = ls.map(l => `<li class="${l.p ? "" : "inc"} ${l.rush ? "rush" : ""} ${l.disc ? "disc" : ""} ${lastIds.size && !lastIds.has(l.id) ? "new" : ""}"><span>${l.t}${l.s ? `<small>${l.s}</small>` : ""}</span><span class="amt">${l.p < 0 ? "−" + money(-l.p) : l.p ? money(l.p) : "Included"}</span></li>`).join("");
   lastIds = new Set(ls.map(l => l.id));
@@ -485,6 +527,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 
 /* VIP / paid tickets need QR tickets */
 $("#f").addEventListener("change", e => {
+  if (e.target.name === "package") applyPackage(e.target.value);
   if (e.target.name === "extras") {
     const it = label("extras", e.target.value);
     if (e.target.checked && it.needs) document.querySelector(`input[name=extras][value=${it.needs}]`).checked = true;
@@ -587,8 +630,9 @@ function drawRecap() {
     ["Date", v ? new Date(v + "T00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }) : "Not set yet"],
     ["Guests", $("#evGuests").value || "Not sure yet"],
     ["Contact", [$("#cName").value, $("#cEmail").value, $("#cPhone").value].filter(Boolean).join(" · ")],
+    ["Package", pkgOf(s.package).t + " (" + money(pkgOf(s.package).p) + ")"],
     ["Top of invitation", s.top ? label("top", s.top).t : "Picture"],
-    ["Features", lines().filter(l => l.id !== "base" && !l.rush && !l.disc).map(l => l.s || l.t).join(", ") || "Just the invitation website"],
+    ["Features", lines().filter(l => l.id !== "pkg" && !l.rush && !l.disc).map(l => l.s || l.t).join(", ") || "Just the invitation website"],
     ...(s.extras.includes("signup") ? [["Guests bring", bring().map(b => `${b.item} (${b.qty})`).join(", ") || "No items listed yet. You can send them later."]] : []),
     ["Discount code", code ? `${code.code} (${code.label})` : "None"],
     ["Files", files.length ? files.map(x => `${x.f.name} (${x.use})`).join(", ") : "None yet. You can send them later."],
@@ -664,8 +708,8 @@ function fill() {
   const s = { design: "theme", top: "picture", countdown: "no", wall: "none", extras: [] };
   for (const k of ["evType", "evTitle", "evGuests", "evPlace", "cName", "cEmail", "cPhone"]) if (s[k] !== undefined) $("#" + k).value = s[k];
   $("#evDate").value = "";
-  for (const g of ["design", "top", "countdown", "wall"]) document.querySelector(`input[name=${g}][value=${s[g]}]`).checked = true;
-  s.extras.forEach(x => document.querySelector(`input[name=extras][value=${x}]`).checked = true);
+  document.querySelectorAll("input[name=extras]").forEach(b => b.checked = false);
+  prevPkg = null; document.querySelector(`input[name=package][value=${PKG_DEFAULT}]`).checked = true; applyPackage(PKG_DEFAULT);
   document.querySelectorAll(".f.bad").forEach(f => f.classList.remove("bad"));
   document.querySelectorAll(".f .err").forEach(e => e.hidden = true);
   code = null; $("#code").value = ""; $("#codeMsg").hidden = true;
@@ -679,6 +723,7 @@ fill(null);
 
 fetch(API + "/eps/config").then(r => r.json()).then(c => {
   BASE = c.base; GROUPS = c.groups; EVENT_TYPES = c.event_types;
+  GROUPS.package = { type: "radio", label: "Package", items: c.packages }; PKG_DEFAULT = c.package_default;
   PRICES = { rush: c.rush_fee, rushDays: c.rush_days };
   $("#loading").hidden = true; $("#app").hidden = false;
   boot();

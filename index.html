@@ -1111,10 +1111,10 @@ function startPortal(){if(!portalStarted){portalStarted=true;particles(document.
 const navLinks=document.getElementById('navLinks'), navCta=document.getElementById('navCta');
 const MINISTRY=['home','about','visit','giving','contact'];
 const ENTITY_OF={portal:'portal',home:'ministry',about:'ministry',visit:'ministry',giving:'ministry',contact:'ministry',ip:'ip',community:'community',property:'property'};
-const ENTITY_LINKS=[['#home','Ministry'],['#ip','Intellectual Property'],['#community','Community Dev'],['#property','Property']];
+const ENTITY_LINKS=[['#home','Ministry'],['#ip','Intellectual Property'],['#community','Community Dev'],['#property','Property'],['/book','Book']];
 const NAV={
   portal:{links:ENTITY_LINKS,cta:''},
-  ministry:{links:[['#home','Home'],['#about','About'],['#visit','Visit'],['#giving','Giving'],['#contact','Contact']],
+  ministry:{links:[['#home','Home'],['#about','About'],['#visit','Visit'],['#giving','Giving'],['#contact','Contact'],['/book','Book']],
     cta:'<a href="#" class="btn btn--ghost js-watch"><span class="live-dot"></span> Watch Live</a><a href="#giving" class="btn btn--gold" data-nav>Give</a>'},
   ip:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
   community:{links:ENTITY_LINKS,cta:'<a href="#contact" class="btn btn--gold" data-nav>Contact</a>'},
@@ -1124,7 +1124,7 @@ function setNav(entity,id){
   const cfg=NAV[entity]||NAV.portal;
   navLinks.innerHTML=cfg.links.map(([h,l])=>h==='#ip'
     ?`<span class="nav-dd"><a href="${h}" data-nav>${l}<span class="dd-caret" aria-hidden="true"></span></a><span class="dd-menu"><a href="eps.html">Event Planning Services</a><a href="influencer.html">BatMaineInfluencer</a><a href="consultation.html">BatMaine Business Consultation</a><a href="avatar.html">BatMaineAvatar</a><a href="crm.html">BatMaineCRM</a><a href="text-scheduling.html">BatMaine Text Scheduling</a><a href="dj.html">BatMaine DJ App</a><a href="kids-game.html">BatMaine Kids Learning Game</a></span></span>`
-    :`<a href="${h}" data-nav>${l}</a>`).join('');
+    :`<a href="${h}"${h[0]==='#'?' data-nav':''}>${l}</a>`).join('');
   navCta.innerHTML=cfg.cta;
   const active=(entity==='ministry')?('#'+id):('#'+id);
   navLinks.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')===active));

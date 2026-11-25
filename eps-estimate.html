@@ -664,14 +664,32 @@ async function send() {
   $("#reviewBox").hidden = true; $("#nav").hidden = true; $("#doneBox").hidden = false;
   const first = esc(body.name.split(" ")[0]);
   $("#doneBox").innerHTML = `<div class="done">
-    <div class="eyebrow">Request received</div>
+    <div class="eyebrow">Estimate ready</div>
     <h2 style="margin-top:8px">Thank you, ${first}!</h2>
-    <p>We got your request for <b>${esc(body.title || body.event_type)}</b> with an estimated total of <b>${money(r.total)}</b>. We'll look it over and reach out within 1–2 business days to confirm your final price. Your request number is <span class="ref">${esc(r.ref)}</span>.</p>
+    <p>Your <b>${esc(body.title || body.event_type)}</b> invitation comes to <b>${money(r.total)}</b>. Pay now to lock it in and we'll start building — your request number is <span class="ref">${esc(r.ref)}</span>.</p>
+    <button type="button" id="payNow" class="btn" style="margin-top:6px">Pay ${money(r.total)} now</button>
+    <div id="payErr" class="err" hidden style="margin-top:8px"></div>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:10px">Prefer to talk first? No problem — we'll reach out within 1–2 business days to confirm and collect payment.</p>
     <div id="upBox"></div>
   </div>`;
   $("#invNo").textContent = r.ref;
+  const payBtn = $("#payNow");
+  if (payBtn) payBtn.addEventListener("click", () => payNow(r.ref, r.token, payBtn));
   drawStepper();
   if (files.length) await uploadAll(r);
+}
+async function payNow(ref, token, btn) {
+  const pe = $("#payErr"); if (pe) pe.hidden = true;
+  btn.disabled = true; btn.textContent = "Starting secure checkout…";
+  try {
+    const res = await fetch(API + "/eps/pay", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ ref, token }) });
+    const j = await res.json();
+    if (j.ok && j.checkout_url) { location.href = j.checkout_url; return; }
+    throw new Error(j.error || "Couldn't start checkout.");
+  } catch (e) {
+    if (pe) { pe.hidden = false; pe.textContent = e.message || "Couldn't start checkout. Please try again."; }
+    btn.disabled = false; btn.textContent = "Pay now";
+  }
 }
 function uploadOne(r, x, row) {
   return new Promise(done => {
@@ -727,6 +745,19 @@ fetch(API + "/eps/config").then(r => r.json()).then(c => {
   PRICES = { rush: c.rush_fee, rushDays: c.rush_days };
   $("#loading").hidden = true; $("#app").hidden = false;
   boot();
+  // Returning from Stripe checkout?
+  try {
+    const qs = new URLSearchParams(location.search);
+    if (qs.get("paid")) {
+      $("#reviewBox").hidden = true; $("#nav").hidden = true; $("#doneBox").hidden = false;
+      $("#doneBox").innerHTML = `<div class="done"><div class="eyebrow">Payment received</div>
+        <h2 style="margin-top:8px">You're all set! 🎉</h2>
+        <p>Thanks — your payment went through for request <span class="ref">${esc(qs.get("paid"))}</span>. We'll start building your invitation and reach out with the next steps.</p></div>`;
+      history.replaceState({}, "", location.pathname);
+    } else if (qs.get("canceled")) {
+      history.replaceState({}, "", location.pathname);
+    }
+  } catch (e) {}
 }).catch(() => {
   $("#loading").innerHTML = `We couldn't load our prices right now. Refresh the page, or <a href="/?topic=eps#contact" style="color:var(--rose)">send us a message</a> instead.`;
 });

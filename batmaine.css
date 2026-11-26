@@ -93,6 +93,7 @@ a{color:var(--cobalt)}
 .gallery .g-phone{grid-column:span 2}
 .gallery .g-phone img{aspect-ratio:390/844;object-fit:cover;object-position:top}
 .gallery .g-wide{grid-column:span 3}
+.gallery .g-full{grid-column:1/-1}
 .gallery .g-square{grid-column:span 2}
 .gallery .g-square img{aspect-ratio:1;object-fit:cover}
 .gallery .g-third{grid-column:span 2}

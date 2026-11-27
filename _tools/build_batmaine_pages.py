@@ -266,6 +266,7 @@ dict(
    dict(name="Premium", price="$997", was="Setup, then $69/month", fit="For DJs who want a full custom website, too.",
         items=["Everything in Pro","A custom website built around your brand","Extra pages: services, gallery, reviews","Connected to your own web address (like djname.com)","A walk-through call"], btn="Go Premium"),
  ],
+ addon2=("glasses", "Meta glasses alerts, $75 one time (add to any plan).", "Paid requests, tips, shout-outs and photos waiting for your OK pop up in your Meta Ray-Ban Display glasses. Glasses not included.", "Add glasses alerts"),
  addon=("Not sure yet? Get a free demo.", "We make a sample of your app with your name and pretend tips, so you can try it before you buy.", "Ask for a demo"),
  extra_note="Tips, line-jumps, VIP and deposits go into your own account. Card services take their usual small fee per payment. On Pro and Premium, hosting is billed to you directly, usually $5 to $20 a month. Our sample contracts are a starting point, not legal advice.",
  rules=[("Tips go straight to you.","Payments go into your own account, not through us."),
@@ -281,7 +282,7 @@ dict(
       ("Can I charge for shout-outs?","Yes, if you want to. Keep them free, set one price, or set a minimum and let guests give more. Paid shout-outs only show after you confirm the payment."),
       ("How do contracts work?","On Pro and Premium, you send a link. Your client reads it, signs with their finger and pays the deposit right there. The date is locked once it's paid, and they get reminders before the balance is due. You start from a ready-made contract for a private party, a club night, a wedding or a company or school event, and change the wording any way you like."),
       ("What's the yearly Pro plan?","Pay $828 once for the year and there's no setup fee. That's the same as 12 months of Pro, so you save the $297 setup. It renews each year, and you can cancel any time before it does."),
-      ("Can I see requests in my glasses?","Yes, with the Meta glasses add-on: $75 one time, on any plan. Wear Meta Ray-Ban Display glasses and paid requests, tips, shout-outs and photos waiting for your OK pop up in your lens, with now playing and what's up next. You pick which alerts show. It only shows things; you still play, skip and approve from your booth. Glasses not included. Just tell us you want it when you order."),
+      ("Can I see requests in my glasses?","Yes, with the Meta glasses add-on: $75 one time, on any plan. Wear Meta Ray-Ban Display glasses and paid requests, tips, shout-outs and photos waiting for your OK pop up in your lens, with now playing and what's up next. You pick which alerts show. It only shows things; you still play, skip and approve from your booth. Glasses not included. Use the “Add glasses alerts” button under the plans, or tell us when you order."),
       ("Can I try it before I pay?","Yes. Ask for the free demo and we'll make one with your name on it."),
       ("Can I cancel?","Yes, any time. Use the \"manage or cancel your plan\" link on this page and enter the email you paid with. Your app keeps working until the end of the month you already paid for, and you won't be charged again."),
       ("What do I need at the party?","Your phone. Add an iPad for the photo booth and a TV or projector for the big screen if you want.")],
@@ -364,6 +365,8 @@ LINKS = {
  ("dj.html","Pro"):"https://buy.stripe.com/aFacN528M3ON1z6ew01440v",
  ("dj.html","Pro yearly"):"https://buy.stripe.com/6oUaEX28M997fpWdrW1440w",
  ("dj.html","Premium"):"https://buy.stripe.com/9B63cv28M4SRelSdrW1440r",
+ # Meta glasses alerts add-on, $75 one time (2026-11-26), collects names.
+ ("dj.html","glasses"):"https://buy.stripe.com/00wdR9aFi5WV5PmcnS1440x",
  ("kids-game.html","One child"):"https://buy.stripe.com/6oUeVd14I0CB4Li9bG1440m",
  ("kids-game.html","Each extra child"):"https://buy.stripe.com/aFa8wP4gU0CB2DaafK1440n",
  ("kids-game.html","addon"):"https://buy.stripe.com/4gM6oH9Beetr4LiafK1440o",
@@ -568,6 +571,9 @@ def page(p):
             w(f'          <a class="btn btn-ghost" style="margin-top:8px" href="{ahref}">{esc(label)}</a>\n')
         w('        </div>\n')
     w('      </div>\n')
+    if p.get("addon2"):   # a second add-on box with its own Stripe link: (key, title, text, button)
+        k2, s2, d2, l2 = p["addon2"]
+        w(f'      <div class="addon">\n        <p><strong>{esc(s2)}</strong> {esc(d2)}</p>\n        <a class="btn btn-ghost" href="{LINKS.get((p.get('links_file', p['file']), k2), contact)}">{esc(l2)}</a>\n      </div>\n')
     if p.get("addon"):
         s, d = p["addon"][:2]
         label = p["addon"][2] if len(p["addon"]) > 2 else "Add it"
